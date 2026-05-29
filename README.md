@@ -46,6 +46,12 @@ python -m unittest discover -s tests
 ## Demo
 
 ```bash
+./scripts/demo.sh
+```
+
+Or run the CLI directly:
+
+```bash
 PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md -o report.md
 ```
 
