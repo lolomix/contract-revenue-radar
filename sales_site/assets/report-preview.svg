@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="880" viewBox="0 0 1280 880" role="img" aria-labelledby="title desc">
+  <title id="title">Contract Revenue Radar sample report</title>
+  <desc id="desc">A report preview showing revenue risk score and findings for payment delay, renewal loss, and scope creep.</desc>
+  <rect width="1280" height="880" fill="#f7f8f5"/>
+  <rect x="70" y="56" width="1140" height="768" rx="18" fill="#ffffff" stroke="#cbd4ce" stroke-width="2"/>
+  <rect x="70" y="56" width="1140" height="74" rx="18" fill="#184d3a"/>
+  <text x="110" y="103" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Contract Revenue Radar Report</text>
+  <text x="1050" y="103" fill="#dfeee6" font-family="Inter, Arial, sans-serif" font-size="20" text-anchor="end">Qdrant local-memory</text>
+  <text x="110" y="184" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800">96/100</text>
+  <text x="110" y="222" fill="#5d665f" font-family="Inter, Arial, sans-serif" font-size="22">Revenue risk score</text>
+  <rect x="320" y="164" width="230" height="78" rx="12" fill="#edf2ef"/>
+  <text x="345" y="195" fill="#245f8f" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Sections searched</text>
+  <text x="345" y="226" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">5</text>
+  <rect x="580" y="164" width="300" height="78" rx="12" fill="#edf2ef"/>
+  <text x="605" y="195" fill="#245f8f" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Top issue</text>
+  <text x="605" y="226" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Net 90 + acceptance</text>
+  <rect x="910" y="164" width="240" height="78" rx="12" fill="#edf2ef"/>
+  <text x="935" y="195" fill="#245f8f" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Turnaround</text>
+  <text x="935" y="226" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">48 hours</text>
+  <g>
+    <rect x="110" y="292" width="1040" height="126" rx="14" fill="#fff8f6" stroke="#e5c8c2"/>
+    <text x="140" y="333" fill="#9e3f31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Payment delay - severity 5/5</text>
+    <text x="140" y="371" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="22">Net 90 terms after customer acceptance; acceptance may be delayed at customer discretion.</text>
+    <text x="140" y="400" fill="#5d665f" font-family="Inter, Arial, sans-serif" font-size="19">Move: ask for Net 15/30, milestone billing, or deemed acceptance.</text>
+  </g>
+  <g>
+    <rect x="110" y="446" width="1040" height="126" rx="14" fill="#f6f9ff" stroke="#c6d8ea"/>
+    <text x="140" y="487" fill="#245f8f" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Renewal loss - severity 4/5</text>
+    <text x="140" y="525" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="22">Month-to-month after launch; customer may terminate for convenience with 30 days notice.</text>
+    <text x="140" y="554" fill="#5d665f" font-family="Inter, Arial, sans-serif" font-size="19">Move: add annual renewal, longer notice, or success review before termination.</text>
+  </g>
+  <g>
+    <rect x="110" y="600" width="1040" height="126" rx="14" fill="#fffaf0" stroke="#e8d4ad"/>
+    <text x="140" y="641" fill="#b07a25" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Scope creep - severity 4/5</text>
+    <text x="140" y="679" fill="#151716" font-family="Inter, Arial, sans-serif" font-size="22">Additional support and reasonable requests are included at no charge.</text>
+    <text x="140" y="708" fill="#5d665f" font-family="Inter, Arial, sans-serif" font-size="19">Move: define change orders, support hours, revision limits, and out-of-scope rates.</text>
+  </g>
+</svg>
