@@ -48,9 +48,15 @@ Submission angle:
 
 ## Minimal Hosted MVP
 
-- FastAPI endpoint: `/audit`
+- HTTP endpoint: `/audit` from `scripts/serve_agent_api.py`
 - Input: contract text or uploaded Markdown.
 - Output: report plus agent brief.
 - Persistence: store approved fallback preferences by buyer/team.
 - Demo: use the included `samples/acme_services_agreement.md`.
 
+Local run:
+
+```bash
+.venv/bin/python scripts/serve_agent_api.py --port 8765
+curl -s http://127.0.0.1:8765/audit -H 'Content-Type: application/json' -d @samples/api_request.json
+```

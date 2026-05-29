@@ -63,6 +63,13 @@ Append an agent-style business brief for Google Cloud/Qwen-style agent demos:
 PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md --agent-brief -o agent_report.md
 ```
 
+Serve the local agent API:
+
+```bash
+.venv/bin/python scripts/serve_agent_api.py --port 8765
+curl -s http://127.0.0.1:8765/audit -H 'Content-Type: application/json' -d @samples/api_request.json
+```
+
 ## Qdrant Hackathon Fit
 
 Qdrant's 2026 virtual hackathon asks builders to go beyond chatbots with vector search. This project uses Qdrant local mode as the retrieval engine for structured contract risk discovery, not question-answering. The repo includes:

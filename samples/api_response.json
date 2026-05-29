@@ -1,0 +1,113 @@
+{
+  "backend": "qdrant-local-memory",
+  "risk_score": 96,
+  "searched_sections": 5,
+  "findings": [
+    {
+      "risk_type": "payment_delay",
+      "label": "Payment delay",
+      "severity": 5,
+      "score": 0.552,
+      "source": "acme_services_agreement.md",
+      "heading": "2. Payment Terms",
+      "excerpt": "Customer will pay invoices on Net 90 terms after acceptance by the Customer project owner. Acceptance may be delayed at Customer's sole discretion until all internal stakeholders approve the deliverables.",
+      "why": "Cash conversion risk: payment timing depends on buyer action or long terms.",
+      "action": "Ask for Net 15/30, milestone billing, or acceptance deemed after a fixed review window.",
+      "matched_terms": [
+        "net 90",
+        "after acceptance",
+        "sole discretion"
+      ]
+    },
+    {
+      "risk_type": "renewal_loss",
+      "label": "Renewal loss",
+      "severity": 4,
+      "score": 0.738,
+      "source": "acme_services_agreement.md",
+      "heading": "3. Renewals and Termination",
+      "excerpt": "The subscription is month-to-month after the initial launch. Customer may terminate for convenience without cause with 30 days notice.",
+      "why": "Retention risk: the customer can leave quickly or renewal is not protected.",
+      "action": "Add annual renewal, longer notice, migration fee, or success review before termination.",
+      "matched_terms": [
+        "terminate for convenience",
+        "30 days notice",
+        "without cause",
+        "month-to-month"
+      ]
+    },
+    {
+      "risk_type": "scope_creep",
+      "label": "Scope creep",
+      "severity": 4,
+      "score": 0.709,
+      "source": "acme_services_agreement.md",
+      "heading": "1. Services",
+      "excerpt": "Vendor will provide implementation support, training, and additional support as requested by Customer. Vendor agrees that reasonable requests connected to rollout are included at no charge.",
+      "why": "Margin risk: vague service language can expand work without expanding fees.",
+      "action": "Define change orders, revision limits, support hours, and out-of-scope rates.",
+      "matched_terms": [
+        "reasonable requests",
+        "as requested",
+        "additional support",
+        "included at no charge"
+      ]
+    },
+    {
+      "risk_type": "data_security",
+      "label": "Data/security blocker",
+      "severity": 3,
+      "score": 0.668,
+      "source": "acme_services_agreement.md",
+      "heading": "5. Data Handling",
+      "excerpt": "Vendor may process personal data and confidential information. Customer reserves audit rights and may require Vendor to delete all data within five business days after termination.",
+      "why": "Sales cycle risk: security or data terms can block signature if not answered quickly.",
+      "action": "Prepare a security appendix, DPA, incident process, and approved subprocessor list.",
+      "matched_terms": [
+        "personal data",
+        "confidential information",
+        "audit rights",
+        "delete all data"
+      ]
+    },
+    {
+      "risk_type": "refund_credit",
+      "label": "Refund or credit exposure",
+      "severity": 3,
+      "score": 0.476,
+      "source": "acme_services_agreement.md",
+      "heading": "4. Service Levels",
+      "excerpt": "... he service is unavailable for more than four hours in a calendar month, Customer may request service credits against future invoices.",
+      "why": "Revenue leakage risk: broad refund or credit language can erase earned revenue.",
+      "action": "Tie credits to measurable SLA misses and cap credits to monthly fees paid.",
+      "matched_terms": [
+        "service credits"
+      ]
+    }
+  ],
+  "agent_brief": {
+    "executive_summary": "The reviewed documents show a 96/100 revenue risk score. Highest-priority issues: payment delay, renewal loss, scope creep. Route these clauses through business review before legal markup.",
+    "priority_questions": [
+      "Can acme_services_agreement.md / 2. Payment Terms be changed so payment is due on a fixed date or milestone?",
+      "Who approves the termination or non-renewal language in acme_services_agreement.md / 3. Renewals and Termination?",
+      "Where is the change-order boundary for acme_services_agreement.md / 1. Services?",
+      "Who owns the security and data obligations in acme_services_agreement.md / 5. Data Handling?",
+      "Are credits or refunds capped in acme_services_agreement.md / 4. Service Levels?"
+    ],
+    "fallback_positions": [
+      "Replace open-ended acceptance with deemed acceptance after 5 business days. Use Net 15 or milestone billing for implementation work.",
+      "Move month-to-month service terms to annual renewal where possible. Use at least 60 days notice before non-renewal.",
+      "Add a written change-order requirement for work outside the SOW. Define included support hours, revision limits, and out-of-scope rates.",
+      "Route security terms to a standard security appendix, DPA, incident process, and approved subprocessor list.",
+      "Cap credits to fees paid for the affected month. Make credits the sole remedy for verified SLA misses."
+    ],
+    "sales_ops_checklist": [
+      "Confirm payment due date is not dependent on unilateral customer acceptance.",
+      "Confirm change requests require written approval before work begins.",
+      "Confirm renewals, non-renewals, and convenience termination have business owner approval.",
+      "Confirm credits, refunds, or SLA remedies are capped.",
+      "Confirm data/security obligations map to an approved appendix or review owner."
+    ]
+  },
+  "markdown_report": "# Contract Revenue Radar Report\n\n- Backend: qdrant-local-memory\n- Sections searched: 5\n- Revenue risk score: 96/100\n\n## Priority Actions\n- Ask for Net 15/30, milestone billing, or acceptance deemed after a fixed review window.\n- Add annual renewal, longer notice, migration fee, or success review before termination.\n- Define change orders, revision limits, support hours, and out-of-scope rates.\n- Prepare a security appendix, DPA, incident process, and approved subprocessor list.\n- Tie credits to measurable SLA misses and cap credits to monthly fees paid.\n\n## Findings\n\n### Payment delay - severity 5/5\n- Source: acme_services_agreement.md / 2. Payment Terms\n- Match score: 0.552\n- Matched terms: net 90, after acceptance, sole discretion\n- Why it matters: Cash conversion risk: payment timing depends on buyer action or long terms.\n- Recommended move: Ask for Net 15/30, milestone billing, or acceptance deemed after a fixed review window.\n\n> Customer will pay invoices on Net 90 terms after acceptance by the Customer project owner. Acceptance may be delayed at Customer's sole discretion until all internal stakeholders approve the deliverables.\n\n### Renewal loss - severity 4/5\n- Source: acme_services_agreement.md / 3. Renewals and Termination\n- Match score: 0.738\n- Matched terms: terminate for convenience, 30 days notice, without cause, month-to-month\n- Why it matters: Retention risk: the customer can leave quickly or renewal is not protected.\n- Recommended move: Add annual renewal, longer notice, migration fee, or success review before termination.\n\n> The subscription is month-to-month after the initial launch. Customer may terminate for convenience without cause with 30 days notice.\n\n### Scope creep - severity 4/5\n- Source: acme_services_agreement.md / 1. Services\n- Match score: 0.709\n- Matched terms: reasonable requests, as requested, additional support, included at no charge\n- Why it matters: Margin risk: vague service language can expand work without expanding fees.\n- Recommended move: Define change orders, revision limits, support hours, and out-of-scope rates.\n\n> Vendor will provide implementation support, training, and additional support as requested by Customer. Vendor agrees that reasonable requests connected to rollout are included at no charge.\n\n### Data/security blocker - severity 3/5\n- Source: acme_services_agreement.md / 5. Data Handling\n- Match score: 0.668\n- Matched terms: personal data, confidential information, audit rights, delete all data\n- Why it matters: Sales cycle risk: security or data terms can block signature if not answered quickly.\n- Recommended move: Prepare a security appendix, DPA, incident process, and approved subprocessor list.\n\n> Vendor may process personal data and confidential information. Customer reserves audit rights and may require Vendor to delete all data within five business days after termination.\n\n### Refund or credit exposure - severity 3/5\n- Source: acme_services_agreement.md / 4. Service Levels\n- Match score: 0.476\n- Matched terms: service credits\n- Why it matters: Revenue leakage risk: broad refund or credit language can erase earned revenue.\n- Recommended move: Tie credits to measurable SLA misses and cap credits to monthly fees paid.\n\n> ... he service is unavailable for more than four hours in a calendar month, Customer may request service credits against future invoices.\n"
+}
