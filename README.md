@@ -57,6 +57,12 @@ PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md -
 
 Expected result: a report with high-risk findings around Net 90 terms, acceptance delay, termination for convenience, service credits, and data/security review blockers.
 
+Append an agent-style business brief for Google Cloud/Qwen-style agent demos:
+
+```bash
+PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md --agent-brief -o agent_report.md
+```
+
 ## Qdrant Hackathon Fit
 
 Qdrant's 2026 virtual hackathon asks builders to go beyond chatbots with vector search. This project uses Qdrant local mode as the retrieval engine for structured contract risk discovery, not question-answering. The repo includes:
@@ -78,4 +84,3 @@ Submission checklist:
 ## Limitations
 
 This is not legal advice. The tool flags business and revenue risks for human review. A lawyer or qualified contract professional should approve final contract language.
-

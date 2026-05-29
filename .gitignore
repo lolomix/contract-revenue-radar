@@ -11,3 +11,4 @@ dist/
 .pytest_cache/
 .coverage
 *.zip
+demo_video/work/

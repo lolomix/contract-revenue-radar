@@ -4,6 +4,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from contract_radar.agent_workflow import build_agent_brief, render_agent_brief
 from contract_radar.core import ContractRadar, render_markdown
 
 
@@ -47,6 +48,17 @@ class ContractRadarTests(unittest.TestCase):
         self.assertIn("Revenue risk score", markdown)
         self.assertIn("acme_services_agreement.md", markdown)
         self.assertIn("Priority Actions", markdown)
+
+    def test_agent_brief_contains_fallback_positions(self):
+        radar = ContractRadar(prefer_qdrant=False)
+        report = radar.audit_paths([FIXTURES / "acme_services_agreement.md"])
+        brief = build_agent_brief(report)
+        markdown = render_agent_brief(brief)
+
+        self.assertIn("Revenue Terms Agent Brief", markdown)
+        self.assertIn("Fallback Positions", markdown)
+        self.assertIn("Sales/Ops Checklist", markdown)
+        self.assertGreater(len(brief.fallback_positions), 0)
 
 
 if __name__ == "__main__":

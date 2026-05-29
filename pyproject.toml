@@ -14,10 +14,10 @@ dependencies = []
 
 [project.optional-dependencies]
 qdrant = ["qdrant-client>=1.14.2"]
+demo = ["pillow>=12.0"]
 
 [project.scripts]
 contract-radar = "contract_radar.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

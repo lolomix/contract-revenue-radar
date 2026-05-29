@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 import sys
 
+from .agent_workflow import build_agent_brief, render_agent_brief
 from .core import ContractRadar, render_markdown
 
 
@@ -30,6 +31,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=2,
         help="Maximum findings to show for each risk class.",
     )
+    parser.add_argument(
+        "--agent-brief",
+        action="store_true",
+        help="Append an agent-style business brief with fallback positions and checklist.",
+    )
     return parser
 
 
@@ -44,6 +50,8 @@ def main(argv: list[str] | None = None) -> int:
     radar = ContractRadar(prefer_qdrant=not args.no_qdrant)
     report = radar.audit_paths(paths, limit_per_risk=args.limit_per_risk)
     markdown = render_markdown(report)
+    if args.agent_brief:
+        markdown += "\n" + render_agent_brief(build_agent_brief(report))
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(markdown, encoding="utf-8")
@@ -54,4 +62,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

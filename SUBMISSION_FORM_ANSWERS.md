@@ -37,6 +37,15 @@ pip install -e ".[qdrant]"
 ./scripts/demo.sh
 ```
 
+Generated video walkthrough:
+
+```bash
+.venv/bin/pip install pillow
+.venv/bin/python scripts/create_demo_video.py
+```
+
+Output: `demo_video/contract_revenue_radar_qdrant_demo.mp4`
+
 Fallback demo without Qdrant dependency:
 
 ```bash
