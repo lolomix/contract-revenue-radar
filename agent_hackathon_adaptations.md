@@ -22,12 +22,18 @@ Agent objective:
 PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md --agent-brief -o agent_report.md
 ```
 
+Tool-call demo:
+
+```bash
+.venv/bin/python scripts/mcp_contract_radar.py --call-once samples/mcp_tool_call.json
+```
+
 ## Google Cloud Rapid Agent Hackathon Fit
 
 Build a hosted agent using Gemini and Google Cloud Agent Builder:
 
 - Tool 1: upload or paste redacted contract text.
-- Tool 2: call the Contract Revenue Radar audit engine.
+- Tool 2: call `audit_contract_revenue_terms` through the MCP-style stdio tool or the `/audit` HTTP endpoint.
 - Tool 3: generate fallback positions and checklist.
 - Tool 4: send the brief to a CRM, Drive folder, or partner MCP destination.
 
@@ -59,4 +65,5 @@ Local run:
 ```bash
 .venv/bin/python scripts/serve_agent_api.py --port 8765
 curl -s http://127.0.0.1:8765/audit -H 'Content-Type: application/json' -d @samples/api_request.json
+.venv/bin/python scripts/mcp_contract_radar.py --call-once samples/mcp_tool_call.json
 ```

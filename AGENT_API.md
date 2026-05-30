@@ -52,3 +52,32 @@ samples/api_response.json
 - Qwen Cloud: use `/audit` as an Autopilot Agent tool, then let the model ask follow-up business questions and remember accepted fallback positions.
 
 This API is for redacted documents or templates. It is business-risk review, not legal advice.
+
+## MCP-Style Tool Server
+
+For agent builders that prefer tool calling over HTTP, the repository includes a minimal JSON-RPC stdio server with an MCP-compatible shape:
+
+```bash
+.venv/bin/python scripts/mcp_contract_radar.py --call-once samples/mcp_tool_call.json
+```
+
+Tool name:
+
+```text
+audit_contract_revenue_terms
+```
+
+Supported methods:
+
+- `initialize`
+- `tools/list`
+- `tools/call`
+
+The tool returns structured audit data, an agent brief, and a Markdown report. This is intentionally dependency-light so it can be wrapped by Google Cloud Agent Builder, a partner MCP server flow, or a Qwen-style Autopilot Agent without changing the core audit engine.
+
+## May 30 2026 Updates (Final Submission Session)
+- Now exposes 7 risk classes (added IP ownership trap + auto-renewal fee escalation).
+- New endpoints on the HTTP server: `/risk-classes` and `/capabilities` (see serve_agent_api.py).
+- DOCX export available via CLI (and flagged in API responses).
+- Enhanced scoring in fallback/Qdrant path.
+- Fresh samples + docs. Full Session Notes in main README.

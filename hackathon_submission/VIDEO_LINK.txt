@@ -1,0 +1,13 @@
+PLACEHOLDER — Upload the demo video before submission:
+
+demo_video/contract_revenue_radar_qdrant_demo.mp4  (3 min or less)
+
+Recommended hosts (public or unlisted):
+- Loom (easiest)
+- YouTube (unlisted)
+- Google Drive (anyone with link)
+
+After upload, replace this file content with the direct playable URL and also paste into the submission form.
+
+Video script outline is in HACKATHON_SUBMISSION.md and demo_video/README.md.
+Generated with scripts/create_demo_video.py (uses Pillow for slides + existing clips).

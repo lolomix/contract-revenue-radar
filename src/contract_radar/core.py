@@ -84,6 +84,41 @@ RISK_PATTERNS = {
         "why": "Sales cycle risk: security or data terms can block signature if not answered quickly.",
         "action": "Prepare a security appendix, DPA, incident process, and approved subprocessor list.",
     },
+    "ip_ownership": {
+        "severity": 4,
+        "label": "IP ownership trap",
+        "terms": [
+            "work made for hire",
+            "work for hire",
+            "all intellectual property",
+            "assigns to customer",
+            "assigns all rights",
+            "no rights retained",
+            "perpetual license",
+            "irrevocable assignment",
+            "client owns all work product",
+            "all deliverables become property",
+        ],
+        "why": "Revenue and reuse risk: broad IP assignment prevents the agency from reusing methodologies, code patterns, frameworks, or IP developed on the engagement in future client work, directly eroding future margins.",
+        "action": "Carve out pre-existing IP, tools, methodologies, and generic components; grant a limited non-exclusive license instead of full assignment; retain ownership of reusable assets.",
+    },
+    "renewal_fee_trap": {
+        "severity": 3,
+        "label": "Auto-renewal fee escalation",
+        "terms": [
+            "auto renew",
+            "automatically renews",
+            "renewal term",
+            "then-current rates",
+            "price increase",
+            "annual price adjustment",
+            "unless terminated",
+            "successive renewal periods",
+            "renewal at then current",
+        ],
+        "why": "Hidden cost and retention risk: automatic renewal at escalated 'then-current' rates or without price caps locks clients into compounding fees and removes leverage for renegotiation.",
+        "action": "Require explicit written renewal election, cap annual increases (e.g. CPI or 3%), provide easy 30-60 day opt-out, and keep renewal pricing fixed for initial term.",
+    },
 }
 
 
@@ -114,6 +149,22 @@ PROTECTIVE_PATTERNS = {
         "approved subprocessor",
         "security appendix",
         "incident process",
+    ],
+    "ip_ownership": [
+        "pre-existing ip",
+        "retains all rights",
+        "license only",
+        "methodologies remain vendor",
+        "vendor retains ownership",
+        "background ip",
+    ],
+    "renewal_fee_trap": [
+        "fixed pricing",
+        "no automatic increase",
+        "mutual renewal",
+        "price cap on renewal",
+        "renewal pricing fixed",
+        "capped at",
     ],
 }
 
@@ -426,12 +477,38 @@ class _QdrantBackend:
 
 
 def _keyword_boost(query: str, text: str) -> float:
+    """Improved keyword boost for better UX in fallback + Qdrant hybrid scoring.
+
+    - Term overlap with length normalization
+    - Bonus for exact multi-word phrase hits (e.g. "net 90", "work made for hire")
+    - Slight saturation to avoid over-boosting very long sections
+    """
     query_terms = set(_tokenize(query))
     text_terms = set(_tokenize(text))
     if not query_terms:
         return 0.0
+
     overlap = len(query_terms & text_terms) / len(query_terms)
-    return min(0.35, overlap * 0.35)
+    base = min(0.32, overlap * 0.38)
+
+    # Phrase bonus: look for 2+ word contiguous phrases from query
+    phrase_bonus = 0.0
+    q_lower = query.lower()
+    t_lower = text.lower()
+    for phrase in [p for p in q_lower.split() if len(p) > 3]:
+        # simple 2-gram style check on common risk phrases
+        if phrase in t_lower:
+            phrase_bonus += 0.04
+    # exact famous phrases
+    famous_phrases = ["net 90", "net 60", "work made for hire", "then-current", "auto renew", "sole discretion"]
+    for ph in famous_phrases:
+        if ph in q_lower and ph in t_lower:
+            phrase_bonus += 0.08
+
+    total = min(0.48, base + phrase_bonus)
+    # gentle length penalty so very long sections don't dominate
+    length_penalty = min(0.06, max(0.0, (len(text) - 1200) / 20000.0))
+    return max(0.0, total - length_penalty)
 
 
 def _build_backend(prefer_qdrant: bool):

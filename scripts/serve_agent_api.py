@@ -15,7 +15,8 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from contract_radar.agent_workflow import build_agent_brief  # noqa: E402
-from contract_radar.core import AuditFinding, ContractRadar, render_markdown  # noqa: E402
+from contract_radar.core import RISK_PATTERNS, AuditFinding, ContractRadar, render_markdown  # noqa: E402
+from contract_radar.export import has_docx_support  # noqa: E402
 
 
 def finding_to_dict(finding: AuditFinding) -> dict[str, Any]:
@@ -38,15 +39,54 @@ class AgentHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
-            self.write_json({"status": "ok", "service": "contract-revenue-radar"})
+            self.write_json({"status": "ok", "service": "contract-revenue-radar", "version": "0.2.0-hackathon-may30"})
+            return
+        if self.path == "/risk-classes":
+            classes = []
+            for key, val in RISK_PATTERNS.items():
+                classes.append({
+                    "risk_type": key,
+                    "label": val["label"],
+                    "severity": val["severity"],
+                    "example_terms": val["terms"][:3],
+                    "why": val["why"][:120] + "...",
+                })
+            self.write_json({
+                "risk_classes": classes,
+                "total": len(classes),
+                "docx_export_available": has_docx_support(),
+                "note": "Use POST /audit for full structured audit + agent brief. Supports ?format=docx via CLI."
+            })
+            return
+        if self.path == "/capabilities":
+            self.write_json({
+                "service": "Contract Revenue Radar Agent API (May 30 2026 final)",
+                "features": [
+                    "7 revenue risk detectors (payment, renewal, scope, credits, security, IP ownership, auto-renewal fees)",
+                    "Qdrant local-memory + robust local-hash fallback with improved keyword+phrase boosting",
+                    "Structured findings + Agent Brief with fallback positions and ops checklist",
+                    "Markdown and professional DOCX export (optional python-docx)",
+                    "MCP stdio tool compatible (scripts/mcp_contract_radar.py)"
+                ],
+                "endpoints": {
+                    "GET /health": "liveness",
+                    "GET /risk-classes": "list current detectors + export capability flag",
+                    "GET /capabilities": "this document",
+                    "POST /audit": "primary: {text, filename?, no_qdrant?} -> full report + brief"
+                },
+                "new_in_session": "IP ownership trap + auto-renewal fee escalation detectors; DOCX export; 2 new samples; enhanced vector scoring; hackathon_submission assets"
+            })
             return
         self.write_json(
             {
                 "service": "Contract Revenue Radar Agent API",
                 "routes": {
                     "GET /health": "health check",
-                    "POST /audit": "JSON body with text, filename, no_qdrant",
+                    "GET /risk-classes": "current revenue risk detectors (new May 30)",
+                    "GET /capabilities": "feature and endpoint summary",
+                    "POST /audit": "JSON body with text, filename, no_qdrant. Returns findings, agent_brief, markdown_report.",
                 },
+                "hint": "See AGENT_API.md and samples/api_request.json. New risk classes added during final submission prep.",
             }
         )
 

@@ -27,6 +27,14 @@ FALLBACK_POSITIONS = {
         "Route security terms to a standard security appendix, DPA, incident process, "
         "and approved subprocessor list."
     ),
+    "ip_ownership": (
+        "Carve out pre-existing IP, tools, methodologies, and generic components. "
+        "Grant limited license only; retain ownership of reusable IP and background assets."
+    ),
+    "renewal_fee_trap": (
+        "Require explicit written renewal election. Cap annual price increases at CPI or 3%. "
+        "Add easy 30-60 day opt-out without penalty and keep initial renewal pricing fixed."
+    ),
 }
 
 
@@ -68,6 +76,8 @@ def build_agent_brief(report: AuditReport) -> AgentBrief:
         "Confirm renewals, non-renewals, and convenience termination have business owner approval.",
         "Confirm credits, refunds, or SLA remedies are capped.",
         "Confirm data/security obligations map to an approved appendix or review owner.",
+        "Confirm IP clauses carve out pre-existing tools/methods and avoid full assignment of reusable work.",
+        "Confirm auto-renewal terms include explicit election, price caps, and easy opt-out.",
     )
     return AgentBrief(
         executive_summary=summary,
@@ -120,5 +130,9 @@ def _question_for(finding: AuditFinding) -> str:
         return f"Are credits or refunds capped in {finding.source} / {finding.heading}?"
     if finding.risk_type == "data_security":
         return f"Who owns the security and data obligations in {finding.source} / {finding.heading}?"
+    if finding.risk_type == "ip_ownership":
+        return f"Does {finding.source} / {finding.heading} carve out pre-existing IP and reusable methodologies for the vendor?"
+    if finding.risk_type == "renewal_fee_trap":
+        return f"Can {finding.source} / {finding.heading} add explicit renewal election and price caps instead of auto-escalation?"
     return f"Who owns the business decision for {finding.source} / {finding.heading}?"
 

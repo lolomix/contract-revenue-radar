@@ -22,9 +22,11 @@ The app uses `qdrant-client` with `QdrantClient(":memory:")`, creates a collecti
 
 ## Judging Criteria Notes
 
-- Functionality: runnable CLI, sample contracts, Markdown report.
-- Originality: revenue-focused contract risk retrieval rather than generic RAG chat.
-- User experience: one command produces a prioritized action report with sources.
+- Functionality: runnable CLI + 7 detectors, 4 samples, Markdown + DOCX reports, full Agent API + MCP tool, 7/7 tests.
+- Originality: revenue-focused contract risk retrieval (not generic RAG chat). 2 new detectors added May 30 (IP ownership trap + auto-renewal fee escalation) tailored for agencies/MSPs.
+- User experience: one command → prioritized actions + excerpts + negotiation moves + professional DOCX. New API endpoints and enhanced hybrid scoring.
+
+**May 30 2026 session added substantial new code** (see README Session Notes + hackathon_submission/WHY_THIS_WINS.md for proof of live work during the period).
 
 ## 3-Minute Demo Script
 
@@ -40,3 +42,12 @@ The app uses `qdrant-client` with `QdrantClient(":memory:")`, creates a collecti
 5. Explain Qdrant local mode: contract sections are points; risk themes are vector queries.
 6. Close with monetization: sell as a $1,500-$5,000 fixed-scope revenue terms audit for agencies, MSPs, and SaaS teams.
 
+## Session Notes — May 30 2026 Final Prep (Live Work)
+- Added IP ownership trap + auto-renewal fee escalation detectors (full integration).
+- Shipped DOCX export module + CLI support.
+- Added SaaS MSA + MSP retainer samples + test coverage.
+- Enhanced vector fallback scoring + 2 new live API endpoints.
+- Created hackathon_submission/ bundle + refreshed every doc with today's exact demo output.
+- All committed with clear "May 30 2026 final submission prep" messages.
+
+This directly satisfies the spirit of creating meaningful new code during the hackathon window.

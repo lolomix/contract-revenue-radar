@@ -7,6 +7,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from contract_radar.agent_workflow import build_agent_brief, render_agent_brief
 from contract_radar.core import ContractRadar, render_markdown
 
+SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+from mcp_contract_radar import handle_request  # noqa: E402
+
 
 FIXTURES = Path(__file__).resolve().parents[1] / "samples"
 
@@ -20,6 +25,22 @@ class ContractRadarTests(unittest.TestCase):
         self.assertIn("payment_delay", risk_types)
         self.assertIn("renewal_loss", risk_types)
         self.assertGreaterEqual(report.risk_score, 50)
+
+    def test_new_risk_detectors_ip_and_renewal_fee_on_new_samples(self):
+        radar = ContractRadar(prefer_qdrant=False)
+        saas = radar.audit_paths([FIXTURES / "saas_msa_example.md"])
+        msp = radar.audit_paths([FIXTURES / "msp_retainer_agreement.md"])
+
+        saas_risks = {f.risk_type for f in saas.findings}
+        msp_risks = {f.risk_type for f in msp.findings}
+        # SaaS sample contains work-for-hire IP trap + auto renewal at then-current
+        self.assertIn("ip_ownership", saas_risks)
+        self.assertIn("renewal_fee_trap", saas_risks)
+        # MSP sample contains similar plus audit over-reach
+        self.assertIn("ip_ownership", msp_risks)
+        self.assertIn("renewal_fee_trap", msp_risks)
+        self.assertGreaterEqual(saas.risk_score, 60)
+        self.assertGreaterEqual(msp.risk_score, 60)
 
     def test_cleaner_terms_score_lower_than_risky_terms(self):
         radar = ContractRadar(prefer_qdrant=False)
@@ -59,6 +80,29 @@ class ContractRadarTests(unittest.TestCase):
         self.assertIn("Fallback Positions", markdown)
         self.assertIn("Sales/Ops Checklist", markdown)
         self.assertGreater(len(brief.fallback_positions), 0)
+
+    def test_mcp_tool_call_returns_structured_audit(self):
+        payload = {
+            "jsonrpc": "2.0",
+            "id": 2,
+            "method": "tools/call",
+            "params": {
+                "name": "audit_contract_revenue_terms",
+                "arguments": {
+                    "text": "Payment is Net 90 after acceptance and may be withheld.",
+                    "filename": "sample.md",
+                    "no_qdrant": True,
+                },
+            },
+        }
+        response = handle_request(payload)
+
+        self.assertEqual(response["id"], 2)
+        self.assertFalse(response["result"]["isError"])
+        structured = response["result"]["structuredContent"]
+        self.assertIn("findings", structured)
+        self.assertIn("agent_brief", structured)
+        self.assertGreaterEqual(structured["risk_score"], 1)
 
 
 if __name__ == "__main__":

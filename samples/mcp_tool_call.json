@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "audit_contract_revenue_terms",
+    "arguments": {
+      "filename": "acme_services_agreement.md",
+      "no_qdrant": true,
+      "text": "# Payment Terms\nCustomer will pay Net 90 after acceptance. Customer may withhold payment in its sole discretion.\n\n# Support\nProvider will complete all necessary work and reasonable requests at no additional charge.\n\n# Termination\nCustomer may terminate for convenience without cause on 30 days notice."
+    }
+  }
+}
