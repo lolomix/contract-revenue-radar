@@ -5,7 +5,7 @@ Official page reviewed: https://try.qdrant.tech/hackathon-vsd
 ## Submission Links
 
 - Repository: https://github.com/lolomix/contract-revenue-radar
-- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release page: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 
 ## Requirement Check

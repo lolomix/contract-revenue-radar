@@ -7,7 +7,7 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 ## Demo Links
 
 - Public repository: https://github.com/lolomix/contract-revenue-radar
-- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 
 ## What It Does
@@ -126,7 +126,7 @@ docs/                      Supporting docs
 | Not a chatbot | Met | CLI/API/MCP audit workflow returns structured findings, not chat responses. |
 | GitHub repo | Met | https://github.com/lolomix/contract-revenue-radar |
 | README | Met | This file. |
-| Demo video <= 3 minutes | Met | `demo_video/contract_revenue_radar_qdrant_demo.mp4`; hosted in the release assets. |
+| Demo video <= 3 minutes | Met | `demo_video/contract_revenue_radar_qdrant_demo_final.mp4`; hosted in the release assets. |
 | Code comments/basic docs | Met | Typed modules, README, API guide, sample requests, and tests. |
 | Created during hackathon period | Evidence included | Git history in this repo starts May 29, 2026 and includes May 30-31 implementation commits. |
 | Judging criteria | Addressed | Functionality, originality, and UX described in `hackathon_submission/WHY_THIS_WINS.md`. |

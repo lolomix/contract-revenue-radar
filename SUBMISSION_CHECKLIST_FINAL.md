@@ -7,7 +7,7 @@ Official page: https://try.qdrant.tech/hackathon-vsd
 ## Public Assets
 
 - GitHub repo: https://github.com/lolomix/contract-revenue-radar
-- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release page: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 - Source archive: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract-revenue-radar-submission.zip
 
@@ -47,7 +47,7 @@ OK
 
 - Project name: `Contract Revenue Radar`
 - Repository URL: `https://github.com/lolomix/contract-revenue-radar`
-- Demo video URL: `https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4`
+- Demo video URL: `https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4`
 - Description/Qdrant usage: paste from `SUBMISSION_FORM_ANSWERS.md`
 
 ## Notes

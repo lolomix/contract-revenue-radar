@@ -45,7 +45,7 @@ Generated video walkthrough:
 .venv/bin/python scripts/create_demo_video.py
 ```
 
-Output: `demo_video/contract_revenue_radar_qdrant_demo.mp4`
+Output: `demo_video/contract_revenue_radar_qdrant_demo_final.mp4`
 
 Fallback demo without Qdrant dependency:
 

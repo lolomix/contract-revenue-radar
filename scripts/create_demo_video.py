@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "demo_video"
 WORK = OUT / "work"
-VIDEO = OUT / "contract_revenue_radar_qdrant_demo.mp4"
+VIDEO = OUT / "contract_revenue_radar_qdrant_demo_final.mp4"
 WIDTH = 1280
 HEIGHT = 720
 

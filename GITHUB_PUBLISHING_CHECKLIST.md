@@ -30,5 +30,5 @@ Use these in the Qdrant form:
 
 ```text
 https://github.com/lolomix/contract-revenue-radar
-https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 ```
