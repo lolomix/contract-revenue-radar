@@ -8,7 +8,7 @@
 - `WHY_THIS_WINS.md` — one-page brief for judges (strongest summary of criteria fit + live work proof)
 - `SUBMISSION_FORM_ANSWERS.md` — ready-to-paste answers
 - `VIDEO_LINK.txt` — placeholder for hosted demo video URL
-- `FINAL_CHECKLIST.md` — exact commands for GitHub push + form submit
+- `FINAL_SUMMARY_AND_CHECKLIST.md` — exact commands for GitHub push + form submit
 
 ## Quick Start (from repo root)
 ```bash
@@ -35,7 +35,7 @@ This submission is 100% reproducible offline with fallback.
 
 ## Contact / Links
 - Demo video: see VIDEO_LINK.txt (upload to Loom/YouTube before submit)
-- Full repo to be pushed to GitHub (see FINAL_CHECKLIST)
+- Full repo to be pushed to GitHub (see `FINAL_SUMMARY_AND_CHECKLIST.md` and `../GITHUB_PUBLISHING_CHECKLIST.md`)
 - Monetization: sell as $1.5k–$5k Revenue Terms Audits
 
 **This wins because it is useful, original, complete, and ships with real revenue potential.**

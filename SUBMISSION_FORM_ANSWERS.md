@@ -19,7 +19,7 @@ Contract Revenue Radar indexes SOWs, MSAs, proposals, and order forms in Qdrant 
 - Runs revenue-risk vector queries over the collection (now 7 classes).
 - Produces a report with excerpts, matched terms, severity, and recommended actions. Optional professional DOCX export.
 - Includes a deterministic fallback backend so tests and demos can run without network access.
-- New May 30 2026: IP ownership trap + auto-renewal fee escalation detectors; SaaS/MS P samples; Agent API improvements.
+- New May 30 2026: IP ownership trap + auto-renewal fee escalation detectors; SaaS/MSP samples; Agent API improvements.
 
 ## How It Uses Qdrant
 

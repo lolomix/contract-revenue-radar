@@ -1,6 +1,6 @@
 # Contract Revenue Radar — FINAL SUBMISSION PREP (May 30 2026)
 
-**Status:** Complete, tested, committed with dated messages, zip rebuilt. Ready for GitHub + video + form submit.
+**Status:** Complete, tested, committed with dated May 30 messages plus May 31 publishing-readiness polish. Zip and final submission bundle rebuilt. Ready for GitHub + video + form submit.
 
 ## 1. Exact Commands for User (Push to New GitHub + Submit)
 
@@ -64,7 +64,7 @@ curl -s http://127.0.0.1:8765/capabilities | python3 -c 'import sys,json; print(
 - **Minor:** Sales site email is placeholder (intentional for template).
 
 **Hackathon Rule Compliance ("code during period") — 10/10**
-- 3 explicit dated commits on May 30 2026 with "final submission prep".
+- 4 explicit dated commits on May 30 2026 with "final submission prep", plus May 31 publishing-readiness polish for LICENSE, final bundle, and checklist consistency.
 - Major additions: 2 new risk classes, full DOCX module+CLI, 2 samples, scoring boost, 2 API endpoints, hackathon_submission/, docs overhaul with Session Notes.
 - All verifiable in git log and "Session Notes" sections across files.
 - Zip rebuilt with everything.
@@ -103,8 +103,8 @@ curl -s http://127.0.0.1:8765/capabilities | python3 -c 'import sys,json; print(
 - sales_site now lists all 7 risks + export + May 30 note.
 
 **Git + Zip:**
-- 3 commits with exact required messages.
-- Rebuilt submission zip (2.05 MB) containing all new work.
+- 4 May 30 final-prep commits plus May 31 publishing-readiness commit.
+- Rebuilt submission zip and `qdrant_final_submission/` bundle containing all new work.
 - Git history proves timing.
 
 **No blockers found.** All tests green, demo works, DOCX renders, new samples trigger new detectors perfectly.
@@ -118,7 +118,7 @@ See section 1. Also:
 ```
 
 ## 5. Any Remaining Polish Notes for User
-- Replace "YOUR_EMAIL_HERE" and "YOUR_USERNAME" in sales_site/index.html and git remote before final push.
+- Replace `replace-with-sender-email@example.com` in `sales_site/index.html` and `YOUR_USERNAME` in git remote commands before final push/deployment.
 - Upload video and fill VIDEO_LINK.txt + form.
 - The project is now the strongest possible version for the June 1 deadline.
 

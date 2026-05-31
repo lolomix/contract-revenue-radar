@@ -15,10 +15,11 @@ Contract Revenue Radar indexes SOWs, MSAs, proposals, and order forms in Qdrant 
 ## What It Does
 
 - Splits Markdown/text contracts into sections.
-- Stores section vectors as Qdrant points.
-- Runs revenue-risk vector queries over the collection.
-- Produces a report with excerpts, matched terms, severity, and recommended actions.
+- Stores section vectors as Qdrant points (96-d hash embeddings + hybrid phrase-boosted scoring).
+- Runs revenue-risk vector queries over the collection (now 7 classes).
+- Produces a report with excerpts, matched terms, severity, and recommended actions. Optional professional DOCX export.
 - Includes a deterministic fallback backend so tests and demos can run without network access.
+- New May 30 2026: IP ownership trap + auto-renewal fee escalation detectors; SaaS/MSP samples; Agent API improvements.
 
 ## How It Uses Qdrant
 
@@ -65,3 +66,14 @@ Primary buyers: SaaS implementation firms, RevOps consultancies, MSPs, and custo
 ## Safety / Limits
 
 This is business-risk review, not legal advice. Final contract language should be approved by counsel. Redacted documents or template excerpts are enough for a sample audit.
+
+## Session Notes — May 30 2026 Live Work (for judges / organizers)
+Substantial new code added today to meet "created during hackathon period":
+- 2 new revenue risk detectors fully implemented and tested.
+- DOCX export capability (new module + CLI + optional dep).
+- 2 new sample contracts + test updates.
+- Vector search UX improvements + new API endpoints exposing live features.
+- Complete documentation refresh + hackathon_submission/ folder created.
+- All git-committed with dated messages. Fresh demo outputs captured with qdrant-local-memory backend.
+
+See README.md "Session Notes" section and hackathon_submission/WHY_THIS_WINS.md for full details. Project is stronger and fully compliant.

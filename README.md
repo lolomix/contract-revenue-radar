@@ -102,6 +102,7 @@ Qdrant's 2026 virtual hackathon asks builders to go beyond chatbots with vector 
 - sample contracts,
 - tests,
 - a README,
+- an MIT `LICENSE`,
 - a 3-minute demo script,
 - and a B2B monetization plan.
 

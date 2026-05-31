@@ -10,18 +10,22 @@ Official page: https://try.qdrant.tech/hackathon-vsd
 
 - Project directory: `/home/ubuntu/revenue_5000/qdrant-contract-radar`
 - Submission archive: `/home/ubuntu/revenue_5000/contract-revenue-radar-submission.zip` (re-prep after May 30 changes)
+- Canonical archive note: `/home/ubuntu/revenue_5000/CANONICAL_ARCHIVES.md`
 - Demo video: `/home/ubuntu/revenue_5000/qdrant-contract-radar/demo_video/contract_revenue_radar_qdrant_demo.mp4`
 - Form answers: `/home/ubuntu/revenue_5000/qdrant-contract-radar/SUBMISSION_FORM_ANSWERS.md`
 - Hackathon brief: `/home/ubuntu/revenue_5000/qdrant-contract-radar/HACKATHON_SUBMISSION.md`
 - API guide: `/home/ubuntu/revenue_5000/qdrant-contract-radar/AGENT_API.md`
 - Sample report: `/home/ubuntu/revenue_5000/qdrant-contract-radar/agent_report.md`
+- Sample DOCX note: `/home/ubuntu/revenue_5000/qdrant-contract-radar/SAMPLE_DOCX_NOTE.md`
+- License: `/home/ubuntu/revenue_5000/qdrant-contract-radar/LICENSE`
+- GitHub publishing checklist: `/home/ubuntu/revenue_5000/qdrant-contract-radar/GITHUB_PUBLISHING_CHECKLIST.md`
 - **New May 30:** `hackathon_submission/` folder (Why This Wins + final assets), DOCX export, 2 new samples, 7 risk detectors.
 
 ## Before Submitting
 
 1. Create a GitHub repository for the project.
 2. Push the contents of `/home/ubuntu/revenue_5000/qdrant-contract-radar`.
-3. Confirm the repository includes `README.md`, `AGENT_API.md`, `HACKATHON_SUBMISSION.md`, `src/`, `tests/`, `scripts/`, `samples/`, and the demo-video path or a hosted video link.
+3. Confirm the repository includes `README.md`, `LICENSE`, `AGENT_API.md`, `HACKATHON_SUBMISSION.md`, `src/`, `tests/`, `scripts/`, `samples/`, and the demo-video path or a hosted video link.
 4. Upload `demo_video/contract_revenue_radar_qdrant_demo.mp4` to Loom, YouTube, Google Drive, Dropbox, or another shareable host.
 5. Confirm the video link is publicly viewable or viewable by Qdrant organizers.
 6. Open `SUBMISSION_FORM_ANSWERS.md` and paste the answers into the Qdrant submission form.
@@ -60,4 +64,3 @@ Expected API result: `backend` should be `qdrant-local-memory`, the report shoul
 
 ## Session Notes (May 30 2026)
 This checklist + all docs were updated live today with substantial new code. See README.md "Session Notes" and hackathon_submission/ for details proving work performed during the final window.
-
