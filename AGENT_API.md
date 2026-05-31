@@ -1,6 +1,6 @@
 # Contract Revenue Radar Agent API
 
-This is a no-framework local API for Google Cloud/Qwen-style demos.
+This is a no-framework local API for Google Cloud/Qwen-style demos. The repo also includes a local MemoryAgent prototype for approved fallback recall.
 
 ## Run
 
@@ -50,6 +50,7 @@ samples/api_response.json
 
 - Google Cloud Rapid Agent: wrap `/audit` as the contract-audit tool in a Gemini/Agent Builder workflow.
 - Qwen Cloud: use `/audit` as an Autopilot Agent tool, then let the model ask follow-up business questions and remember accepted fallback positions.
+- MemoryAgent prototype: run `scripts/memory_agent_demo.py` with `samples/clause_memory.json` to show active memory recall by risk type and segment before wiring persistent cloud storage.
 
 This API is for redacted documents or templates. It is business-risk review, not legal advice.
 
@@ -81,3 +82,15 @@ The tool returns structured audit data, an agent brief, and a Markdown report. T
 - DOCX export available via CLI (and flagged in API responses).
 - Enhanced scoring in fallback/Qdrant path.
 - Fresh samples + docs. Full Session Notes in main README.
+
+## May 31 2026 MemoryAgent Prototype
+
+```bash
+.venv/bin/python scripts/memory_agent_demo.py samples/saas_msa_example.md \
+  --memory samples/clause_memory.json \
+  --segment "SaaS implementation" \
+  --no-qdrant \
+  -o memory_agent_report.md
+```
+
+This produces a review packet that combines the audit findings, the agent brief, and approved memories such as Net 15 payment fallback, background-IP carveout, and renewal fee cap. Inactive memories are ignored.

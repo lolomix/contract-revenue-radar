@@ -22,7 +22,7 @@ Two $2,500 packages or one $5,000 sprint meets the target.
 - Falls back to a deterministic local vector index so demos and tests still run without network access.
 - Searches for **7 revenue risk classes** (May 30 2026 additions: IP ownership trap + auto-renewal fee escalation in addition to payment delay, renewal loss, scope creep, refunds/credits, data/security blockers).
 - Produces a Markdown report (and optional professional .docx) with source section, excerpt, severity, why it matters, and negotiation action.
-- Includes HTTP Agent API + MCP stdio tool + DOCX export for professional deliverables.
+- Includes HTTP Agent API + MCP stdio tool + local MemoryAgent demo + DOCX export for professional deliverables.
 
 ## Install
 
@@ -87,6 +87,16 @@ Append an agent-style business brief for Google Cloud/Qwen-style agent demos:
 PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md --agent-brief -o agent_report.md
 ```
 
+Run the local MemoryAgent prototype, which recalls approved fallback positions by risk type and business segment:
+
+```bash
+.venv/bin/python scripts/memory_agent_demo.py samples/saas_msa_example.md \
+  --memory samples/clause_memory.json \
+  --segment "SaaS implementation" \
+  --no-qdrant \
+  -o memory_agent_report.md
+```
+
 Serve the local agent API:
 
 ```bash
@@ -133,6 +143,7 @@ This is not legal advice. The tool flags business and revenue risks for human re
 - Refreshed **all** docs (this README, HACKATHON_SUBMISSION.md, SUBMISSION_*, demo reports, AGENT_API.md, sales_site) with exact fresh `qdrant-local-memory` output from May 30 run + prominent Session Notes.
 - Git commits with explicit "May 30 2026 final submission prep" messages (new risk classes, docx export, fresh samples, docs).
 - Rebuilt submission assets and zip prep.
+- Added May 31 2026 local MemoryAgent prototype: `src/contract_radar/memory_agent.py`, `samples/clause_memory.json`, `scripts/memory_agent_demo.py`, `memory_agent_report.md`, and tests proving active/inactive memory recall.
 
 All changes are real, tested, and committed today. The project was already strong; this session made it submission-ready and substantially more complete.
 

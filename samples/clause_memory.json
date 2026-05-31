@@ -1,0 +1,42 @@
+[
+  {
+    "memory_id": "payment_delay_saas_net15",
+    "risk_type": "payment_delay",
+    "approved_fallback": "For SaaS implementation work, use Net 15 from invoice date with deemed acceptance after 5 business days.",
+    "approver_role": "Finance Director",
+    "applies_to_segment": "SaaS implementation",
+    "active": true,
+    "created_at": "2026-05-31",
+    "expires_at": "2026-12-31",
+    "source_decision": "Approved fallback from standard SaaS MSA markup"
+  },
+  {
+    "memory_id": "ip_ownership_background_ip",
+    "risk_type": "ip_ownership",
+    "approved_fallback": "Vendor retains all pre-existing IP, tools, frameworks, templates, methods, and reusable components; customer receives a limited license to project deliverables.",
+    "approver_role": "Legal Operations",
+    "applies_to_segment": "",
+    "active": true,
+    "created_at": "2026-05-31",
+    "source_decision": "Standard professional-services fallback"
+  },
+  {
+    "memory_id": "renewal_fee_cap_3pct",
+    "risk_type": "renewal_fee_trap",
+    "approved_fallback": "Renewal requires written election and any annual increase is capped at the lesser of CPI or 3%.",
+    "approver_role": "Revenue Operations",
+    "applies_to_segment": "",
+    "active": true,
+    "created_at": "2026-05-31",
+    "expires_at": "2026-12-31",
+    "source_decision": "Approved renewal clause playbook"
+  },
+  {
+    "memory_id": "inactive_refund_full_credit",
+    "risk_type": "refund_credit",
+    "approved_fallback": "Do not use this memory; it is retained only to prove inactive memories are ignored.",
+    "approver_role": "Finance Director",
+    "active": false,
+    "created_at": "2026-05-31"
+  }
+]

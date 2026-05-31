@@ -6,6 +6,12 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from contract_radar.agent_workflow import build_agent_brief, render_agent_brief
 from contract_radar.core import ContractRadar, render_markdown
+from contract_radar.memory_agent import (
+    load_memories,
+    recall_memories,
+    render_memory_agent_report,
+    build_memory_agent_result,
+)
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS) not in sys.path:
@@ -80,6 +86,31 @@ class ContractRadarTests(unittest.TestCase):
         self.assertIn("Fallback Positions", markdown)
         self.assertIn("Sales/Ops Checklist", markdown)
         self.assertGreater(len(brief.fallback_positions), 0)
+
+    def test_memory_agent_recalls_active_segment_memories(self):
+        radar = ContractRadar(prefer_qdrant=False)
+        report = radar.audit_paths([FIXTURES / "saas_msa_example.md"])
+        memories = load_memories(FIXTURES / "clause_memory.json")
+
+        recalled = recall_memories(report, memories, segment="SaaS implementation")
+        memory_ids = {memory.memory_id for memory in recalled}
+
+        self.assertIn("payment_delay_saas_net15", memory_ids)
+        self.assertIn("ip_ownership_background_ip", memory_ids)
+        self.assertIn("renewal_fee_cap_3pct", memory_ids)
+        self.assertNotIn("inactive_refund_full_credit", memory_ids)
+
+    def test_memory_agent_report_contains_recalled_fallback(self):
+        radar = ContractRadar(prefer_qdrant=False)
+        report = radar.audit_paths([FIXTURES / "saas_msa_example.md"])
+        memories = load_memories(FIXTURES / "clause_memory.json")
+        result = build_memory_agent_result(report, memories, segment="SaaS implementation")
+        markdown = render_memory_agent_report(result)
+
+        self.assertIn("Revenue Terms Memory Agent Report", markdown)
+        self.assertIn("payment_delay_saas_net15", markdown)
+        self.assertIn("Net 15 from invoice date", markdown)
+        self.assertIn("Revenue Terms Agent Brief", markdown)
 
     def test_mcp_tool_call_returns_structured_audit(self):
         payload = {
