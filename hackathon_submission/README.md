@@ -8,13 +8,13 @@
 - `WHY_THIS_WINS.md` — one-page brief for judges (strongest summary of criteria fit + live work proof)
 - `SUBMISSION_FORM_ANSWERS.md` — ready-to-paste answers
 - `VIDEO_LINK.txt` — placeholder for hosted demo video URL
-- `FINAL_SUMMARY_AND_CHECKLIST.md` — exact commands for GitHub push + form submit
+- `FINAL_SUMMARY_AND_CHECKLIST.md` — current public links, verification commands, and form checklist
 
 ## Quick Start (from repo root)
 ```bash
 .venv/bin/python -m unittest discover -s tests
 ./scripts/demo.sh
-.venv/bin/python -m contract_radar.cli samples/saas_msa_example.md --agent-brief --format docx -o /tmp/demo_report
+.venv/bin/python -m contract_radar.cli samples/saas_msa_example.md --agent-brief --format docx --docx-output /tmp/demo_report.docx
 ```
 
 New in this submission prep session (May 30):
@@ -26,7 +26,7 @@ New in this submission prep session (May 30):
 - Full docs refresh + this hackathon_submission/ bundle
 
 ## Repository Contents (all included)
-src/, tests/, scripts/, samples/ (4 contracts), sales_site/, demo_video/, AGENT_API.md, etc.
+src/, tests/, scripts/, samples/ (4 contracts), examples/reports/, demo_video/, AGENT_API.md, etc.
 
 ## Qdrant Usage
 Primary: qdrant-client with :memory: mode. Collection per audit, 96-d vectors from hash embedding + hybrid keyword boost. Full source in core.py:_QdrantBackend.

@@ -1,66 +1,55 @@
-# Qdrant Submission Checklist
-
-Current status: build package is ready locally. The remaining work requires external account actions: GitHub repository upload, demo-video hosting, and final form submission.
+# Qdrant Final Submission Checklist
 
 Deadline: June 1, 2026 at 11:59 PM Pacific Time.
 
 Official page: https://try.qdrant.tech/hackathon-vsd
 
-## Prepared Assets
+## Public Assets
 
-- Project directory: `/home/ubuntu/revenue_5000/qdrant-contract-radar`
-- Submission archive: `/home/ubuntu/revenue_5000/contract-revenue-radar-submission.zip` (re-prep after May 30 changes)
-- Canonical archive note: `/home/ubuntu/revenue_5000/CANONICAL_ARCHIVES.md`
-- Demo video: `/home/ubuntu/revenue_5000/qdrant-contract-radar/demo_video/contract_revenue_radar_qdrant_demo.mp4`
-- Form answers: `/home/ubuntu/revenue_5000/qdrant-contract-radar/SUBMISSION_FORM_ANSWERS.md`
-- Hackathon brief: `/home/ubuntu/revenue_5000/qdrant-contract-radar/HACKATHON_SUBMISSION.md`
-- API guide: `/home/ubuntu/revenue_5000/qdrant-contract-radar/AGENT_API.md`
-- Sample report: `/home/ubuntu/revenue_5000/qdrant-contract-radar/agent_report.md`
-- Sample DOCX note: `/home/ubuntu/revenue_5000/qdrant-contract-radar/SAMPLE_DOCX_NOTE.md`
-- License: `/home/ubuntu/revenue_5000/qdrant-contract-radar/LICENSE`
-- GitHub publishing checklist: `/home/ubuntu/revenue_5000/qdrant-contract-radar/GITHUB_PUBLISHING_CHECKLIST.md`
-- **New May 30:** `hackathon_submission/` folder (Why This Wins + final assets), DOCX export, 2 new samples, 7 risk detectors.
+- GitHub repo: https://github.com/lolomix/contract-revenue-radar
+- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+- Release page: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
+- Source archive: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract-revenue-radar-submission.zip
 
-## Before Submitting
+## Requirement Status
 
-1. Create a GitHub repository for the project.
-2. Push the contents of `/home/ubuntu/revenue_5000/qdrant-contract-radar`.
-3. Confirm the repository includes `README.md`, `LICENSE`, `AGENT_API.md`, `HACKATHON_SUBMISSION.md`, `src/`, `tests/`, `scripts/`, `samples/`, and the demo-video path or a hosted video link.
-4. Upload `demo_video/contract_revenue_radar_qdrant_demo.mp4` to Loom, YouTube, Google Drive, Dropbox, or another shareable host.
-5. Confirm the video link is publicly viewable or viewable by Qdrant organizers.
-6. Open `SUBMISSION_FORM_ANSWERS.md` and paste the answers into the Qdrant submission form.
-7. Submit before June 1, 2026 at 11:59 PM PT.
-
-## Required Submission Fields
-
-- Project name: Contract Revenue Radar
-- Repository URL: paste the GitHub repo URL after upload.
-- Demo video URL: paste the hosted video URL after upload.
-- Project description: use the concise description from `SUBMISSION_FORM_ANSWERS.md`.
-- Qdrant usage: explain that the app embeds contract clauses, stores them in a Qdrant local-memory collection, performs vector search over risk patterns, and returns business-risk findings plus an agent brief.
+- [x] Qdrant used as primary vector-search backend when installed.
+- [x] Project is not a chatbot.
+- [x] Public GitHub repository exists.
+- [x] README includes install and run instructions.
+- [x] Demo video exists and is under 3 minutes.
+- [x] MIT license included.
+- [x] Tests pass locally.
+- [x] Submission form answers prepared.
+- [ ] Final Qdrant form submitted.
+- [ ] Confirmation saved outside repo.
 
 ## Verification Commands
 
-Run these from `/home/ubuntu/revenue_5000/qdrant-contract-radar` before pushing (May 30 final):
-
 ```bash
-.venv/bin/python -m unittest discover -s tests   # now 7 tests, including new IP/renewal_fee on fresh samples
+python -m unittest discover -s tests
 ./scripts/demo.sh
-.venv/bin/python scripts/serve_agent_api.py --port 8765
+python scripts/memory_agent_demo.py samples/saas_msa_example.md \
+  --memory samples/clause_memory.json \
+  --segment "SaaS implementation" \
+  --no-qdrant \
+  -o examples/reports/memory_agent_report.md
 ```
 
-In a second terminal while the API server is running (new endpoints available):
+Expected:
 
-```bash
-curl -s http://127.0.0.1:8765/audit \
-  -H 'Content-Type: application/json' \
-  -d @samples/api_request.json
-
-curl -s http://127.0.0.1:8765/risk-classes   # shows all 7 detectors + docx flag
-curl -s http://127.0.0.1:8765/capabilities  # includes May 30 new-in-session note
+```text
+Ran 9 tests
+OK
 ```
 
-Expected API result: `backend` should be `qdrant-local-memory`, the report should include findings (5+ on original), new detectors on saas_msp samples, and the agent brief should include fallback positions plus a contract-ops checklist. DOCX support flag visible.
+## Submit These Fields
 
-## Session Notes (May 30 2026)
-This checklist + all docs were updated live today with substantial new code. See README.md "Session Notes" and hackathon_submission/ for details proving work performed during the final window.
+- Project name: `Contract Revenue Radar`
+- Repository URL: `https://github.com/lolomix/contract-revenue-radar`
+- Demo video URL: `https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4`
+- Description/Qdrant usage: paste from `SUBMISSION_FORM_ANSWERS.md`
+
+## Notes
+
+The repo was cleaned for judge review: core code, tests, samples, demo video, generated example reports, API/tool scripts, and submission docs remain. Non-Qdrant marketing and future-hackathon material was removed from the public repo.

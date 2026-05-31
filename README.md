@@ -1,155 +1,153 @@
 # Contract Revenue Radar
 
-Contract Revenue Radar is a non-chatbot vector-search tool for finding contract clauses that delay cash, weaken renewals, or leak revenue. It is designed for the Qdrant "Think Outside the Bot" hackathon and as a sellable 48-hour B2B audit package.
+Contract Revenue Radar is a Qdrant-powered vector-search tool for finding contract clauses that delay cash, weaken renewals, or leak implementation margin.
 
-## Why It Can Reach $5,000
+It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is intentionally not a chatbot: the user runs a structured audit and receives source-linked findings, severity, business impact, and fallback positions.
 
-The fastest monetization path is not waiting for ads or an audience. Sell a fixed-scope "Revenue Terms Audit" to agencies, consultants, MSPs, SaaS startups, and service businesses that already send proposals or MSAs.
+## Demo Links
 
-Offer:
-
-- $1,500 quick audit: 5 contracts, report, 30-minute review call.
-- $2,500 implementation: audit plus rewritten payment, renewal, change-order, and credit language for business review.
-- $5,000 sprint: audit 15-25 agreements, create a clause playbook, and build a lightweight intake workflow for future deals.
-
-Two $2,500 packages or one $5,000 sprint meets the target.
+- Public repository: https://github.com/lolomix/contract-revenue-radar
+- Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo.mp4
+- Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 
 ## What It Does
 
-- Splits text or Markdown contracts into sections.
-- Embeds sections into 96-dimensional vectors.
-- Uses Qdrant local in-memory mode when `qdrant-client` is installed.
-- Falls back to a deterministic local vector index so demos and tests still run without network access.
-- Searches for **7 revenue risk classes** (May 30 2026 additions: IP ownership trap + auto-renewal fee escalation in addition to payment delay, renewal loss, scope creep, refunds/credits, data/security blockers).
-- Produces a Markdown report (and optional professional .docx) with source section, excerpt, severity, why it matters, and negotiation action.
-- Includes HTTP Agent API + MCP stdio tool + local MemoryAgent demo + DOCX export for professional deliverables.
+- Splits Markdown/text contracts into sections.
+- Embeds each section into a deterministic 96-dimensional vector.
+- Uses Qdrant local in-memory mode (`QdrantClient(":memory:")`) as the primary vector-search backend.
+- Searches for 7 revenue-risk classes:
+  - payment delay,
+  - renewal loss,
+  - scope creep,
+  - refund or credit exposure,
+  - data/security blockers,
+  - IP ownership traps,
+  - auto-renewal fee escalation.
+- Produces Markdown and optional DOCX reports.
+- Generates an agent-style brief with priority questions and fallback positions.
+- Includes an HTTP Agent API, an MCP-style stdio tool, and a local MemoryAgent prototype for approved fallback recall.
 
-## Install
+## Why This Uses Qdrant
+
+Every audit indexes contract sections as Qdrant points and queries them by risk class. The tool creates a local in-memory Qdrant collection, upserts embedded sections, and retrieves the sections most relevant to each revenue-risk pattern.
+
+The deterministic fallback backend exists only so tests and offline demos still run if `qdrant-client` is unavailable.
+
+## Why It Is Not A Chatbot
+
+The workflow is not open-ended Q&A. It is a deterministic audit:
+
+1. Ingest contract files.
+2. Chunk and vectorize sections.
+3. Store/search sections in Qdrant.
+4. Score and deduplicate findings.
+5. Return a structured report and agent-ready brief.
+
+The output is an operational review packet for sales, finance, delivery, and legal review.
+
+## Quick Start
 
 ```bash
 python -m venv .venv
 . .venv/bin/activate
 pip install -e ".[qdrant]"
-```
-
-If you cannot install dependencies, the CLI still works with the built-in fallback:
-
-```bash
-PYTHONPATH=src python -m contract_radar.cli --no-qdrant samples/acme_services_agreement.md
-```
-
-Run tests with the standard library:
-
-```bash
 python -m unittest discover -s tests
-```
-
-## New in May 30 2026 Final Submission Prep Session
-- 2 new high-value detectors: **IP ownership trap** and **Auto-renewal fee escalation**.
-- Professional DOCX export: `pip install '.[export]'` then `--format docx` or `--docx-output`.
-- 2 new diverse samples: `samples/saas_msa_example.md` and `samples/msp_retainer_agreement.md`.
-- Enhanced fallback vector scoring with phrase bonuses.
-- Improved Agent API (`/risk-classes`, `/capabilities`).
-- `hackathon_submission/` folder with Why This Wins brief + final assets.
-- All docs refreshed with live demo output + Session Notes proving new code.
-
-See `hackathon_submission/WHY_THIS_WINS.md` for judging criteria alignment.
-
-## Demo
-
-```bash
 ./scripts/demo.sh
 ```
 
-Or run the CLI directly:
+Fallback mode without Qdrant dependency:
 
 ```bash
-PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md -o report.md
+PYTHONPATH=src python -m contract_radar.cli --no-qdrant samples/acme_services_agreement.md -o examples/reports/demo_report.md
 ```
 
-Expected result: a report with high-risk findings around Net 90 terms, acceptance delay, termination for convenience, service credits, and data/security review blockers.
+## CLI Examples
 
-**Fresh examples with new detectors (May 30):**
+Run a basic audit:
+
 ```bash
-PYTHONPATH=src python -m contract_radar.cli samples/saas_msa_example.md --agent-brief -o saas_report.md
-PYTHONPATH=src python -m contract_radar.cli samples/msp_retainer_agreement.md --no-qdrant -o msp_report.md
+PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md -o examples/reports/qdrant_demo_report.md
 ```
 
-Professional DOCX export (install optional dep first):
+Append an agent brief:
+
 ```bash
-pip install '.[export]'
-.venv/bin/python -m contract_radar.cli samples/saas_msa_example.md --format docx --docx-output /tmp/audit_report.docx
+PYTHONPATH=src python -m contract_radar.cli samples/saas_msa_example.md --agent-brief --no-qdrant -o examples/reports/agent_report.md
 ```
 
-Append an agent-style business brief for Google Cloud/Qwen-style agent demos:
+Export DOCX:
 
 ```bash
-PYTHONPATH=src python -m contract_radar.cli samples/acme_services_agreement.md --agent-brief -o agent_report.md
+pip install -e ".[export]"
+python -m contract_radar.cli samples/msp_retainer_agreement.md --format docx --docx-output examples/reports/report.docx --no-qdrant
 ```
 
-Run the local MemoryAgent prototype, which recalls approved fallback positions by risk type and business segment:
+Run the MemoryAgent prototype:
 
 ```bash
-.venv/bin/python scripts/memory_agent_demo.py samples/saas_msa_example.md \
+python scripts/memory_agent_demo.py samples/saas_msa_example.md \
   --memory samples/clause_memory.json \
   --segment "SaaS implementation" \
   --no-qdrant \
-  -o memory_agent_report.md
+  -o examples/reports/memory_agent_report.md
 ```
 
-Serve the local agent API:
+Serve the local Agent API:
 
 ```bash
-.venv/bin/python scripts/serve_agent_api.py --port 8765
+python scripts/serve_agent_api.py --port 8765
 curl -s http://127.0.0.1:8765/audit -H 'Content-Type: application/json' -d @samples/api_request.json
 ```
 
-## Qdrant Hackathon Fit
+Run the MCP-style tool call:
 
-Qdrant's 2026 virtual hackathon asks builders to go beyond chatbots with vector search. This project uses Qdrant local mode as the retrieval engine for structured contract risk discovery, not question-answering. The repo includes:
+```bash
+python scripts/mcp_contract_radar.py --call-once samples/mcp_tool_call.json
+```
 
-- code,
-- sample contracts,
-- tests,
-- a README,
-- an MIT `LICENSE`,
-- a 3-minute demo script,
-- and a B2B monetization plan.
+## Project Structure
 
-Submission checklist:
+```text
+src/contract_radar/        Core audit engine, Qdrant backend, exports, agent workflow
+scripts/                   CLI demo, HTTP API server, MCP-style tool, MemoryAgent demo
+samples/                   Redacted/sample contracts and JSON requests
+tests/                     Unit tests
+examples/reports/          Generated example reports
+demo_video/                MP4 demo and thumbnail
+hackathon_submission/      Submission notes and judging brief
+docs/                      Supporting docs
+```
 
-- GitHub repository with this code.
-- README with install and run instructions.
-- Demo video under 3 minutes.
-- Submit by June 1, 2026 at 11:59 PM Pacific Time.
+## Submission Compliance Review
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| Qdrant required | Met | `src/contract_radar/core.py` uses `qdrant-client` local memory mode when installed. |
+| Not a chatbot | Met | CLI/API/MCP audit workflow returns structured findings, not chat responses. |
+| GitHub repo | Met | https://github.com/lolomix/contract-revenue-radar |
+| README | Met | This file. |
+| Demo video <= 3 minutes | Met | `demo_video/contract_revenue_radar_qdrant_demo.mp4`; hosted in the release assets. |
+| Code comments/basic docs | Met | Typed modules, README, API guide, sample requests, and tests. |
+| Created during hackathon period | Evidence included | Git history in this repo starts May 29, 2026 and includes May 30-31 implementation commits. |
+| Judging criteria | Addressed | Functionality, originality, and UX described in `hackathon_submission/WHY_THIS_WINS.md`. |
+
+## Verification Snapshot
+
+Latest verified local test run:
+
+```text
+Ran 9 tests in ~1.1s
+OK
+```
+
+Latest publication commit before final cleanup:
+
+```text
+e9c7573 May 31 MemoryAgent prototype
+```
+
+Final cleanup commit keeps the repo focused on Qdrant submission essentials.
 
 ## Limitations
 
-This is not legal advice. The tool flags business and revenue risks for human review. A lawyer or qualified contract professional should approve final contract language.
-
----
-
-## Session Notes — Final Polish for Submission (May 30 2026)
-
-**Live work performed in this session (addresses "code created during hackathon period" rule):**
-
-- Added 2 new risk detectors (`ip_ownership`, `renewal_fee_trap`) with terms, protective patterns, why/action, agent fallbacks, and questions.
-- Implemented full `src/contract_radar/export.py` + DOCX rendering + CLI integration (`--format`, `--docx-output`).
-- Created 2 new realistic sample contracts exercising the new detectors (`saas_msa_example.md`, `msp_retainer_agreement.md`).
-- Enhanced `_keyword_boost` with phrase matching and length penalty for better fallback UX.
-- Extended Agent API with `/risk-classes` (exposes all 7 detectors + docx flag) and `/capabilities` (includes new-in-session note).
-- Updated tests (now 7 passing, including dedicated new-detector test).
-- Created `hackathon_submission/` with Why This Wins brief, video placeholder, final README.
-- Refreshed **all** docs (this README, HACKATHON_SUBMISSION.md, SUBMISSION_*, demo reports, AGENT_API.md, sales_site) with exact fresh `qdrant-local-memory` output from May 30 run + prominent Session Notes.
-- Git commits with explicit "May 30 2026 final submission prep" messages (new risk classes, docx export, fresh samples, docs).
-- Rebuilt submission assets and zip prep.
-- Added May 31 2026 local MemoryAgent prototype: `src/contract_radar/memory_agent.py`, `samples/clause_memory.json`, `scripts/memory_agent_demo.py`, `memory_agent_report.md`, and tests proving active/inactive memory recall.
-
-All changes are real, tested, and committed today. The project was already strong; this session made it submission-ready and substantially more complete.
-
-**Fresh demo run captured today:**
-- Backend: qdrant-local-memory
-- Risk score on acme sample: 96/100 (5 original findings)
-- New samples produce IP + renewal_fee_trap findings with high scores.
-
-Ready for GitHub push + video upload + form submit before June 1 deadline.
+This is business-risk review, not legal advice. A qualified lawyer or contract professional should approve final contract language.

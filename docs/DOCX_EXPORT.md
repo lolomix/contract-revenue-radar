@@ -1,6 +1,6 @@
 # Sample DOCX Deliverable
 
-`report.docx` is a generated example of the professional client deliverable created by Contract Revenue Radar.
+`examples/reports/report.docx` is a generated example of the professional client deliverable created by Contract Revenue Radar.
 
 Generate a fresh DOCX report with:
 
@@ -9,7 +9,7 @@ Generate a fresh DOCX report with:
   samples/saas_msa_example.md \
   --agent-brief \
   --format docx \
-  --docx-output report.docx
+  --docx-output examples/reports/report.docx
 ```
 
 The DOCX is useful for sales credibility and client demos. If the public GitHub repository should stay source-only, regenerate it during demos instead of committing the binary file.

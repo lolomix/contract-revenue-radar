@@ -90,7 +90,7 @@ The tool returns structured audit data, an agent brief, and a Markdown report. T
   --memory samples/clause_memory.json \
   --segment "SaaS implementation" \
   --no-qdrant \
-  -o memory_agent_report.md
+  -o examples/reports/memory_agent_report.md
 ```
 
 This produces a review packet that combines the audit findings, the agent brief, and approved memories such as Net 15 payment fallback, background-IP carveout, and renewal fee cap. Inactive memories are ignored.

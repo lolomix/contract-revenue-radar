@@ -7,7 +7,7 @@
 - Qdrant `:memory:` primary backend + rock-solid local hash-vector fallback (no network, tests pass offline).
 - Structured Markdown + professional DOCX export (new in session).
 - HTTP Agent API + MCP stdio tool server (ready for Gemini/Qwen/Agent Builder).
-- 4 diverse samples (original + 2 new SaaS MSA + MSP retainer) + full test suite (7/7 passing).
+- 4 diverse samples (original + 2 new SaaS MSA + MSP retainer) + full test suite (9/9 passing).
 - Real demo video + reproducible `./scripts/demo.sh`.
 
 ## 2. Originality (Beyond the Bot)
@@ -20,7 +20,7 @@
 - One-command audit → prioritized actions + excerpts + negotiation moves + agent brief.
 - New DOCX export produces client-ready professional report (headings, severity color, excerpts).
 - Live API surfaces new detectors + export capability flag (`/risk-classes`, `/capabilities`).
-- Sales site, agent brief, MCP tool, full docs, fresh May 30 2026 demo outputs.
+- Agent brief, MCP tool, full docs, fresh May 30 2026 demo outputs, and May 31 MemoryAgent prototype.
 
 ## 4. Hackathon Rule Compliance — "Code Created During Period"
 - **Major new work added May 30 2026 in this session:**
@@ -32,6 +32,7 @@
   - Complete docs refresh + `hackathon_submission/` folder + "Session Notes" proving live work.
 - All changes committed with "May 30 2026 final submission prep" messages.
 - Tests updated and passing.
+- May 31 MemoryAgent module, JSON memory fixture, demo runner, generated report, and tests added.
 
 ## 5. Business Impact & $5,000 Goal
 This is not a toy. The exact artifact sells today as a 48-hour B2B audit service. Two $2,500 packages or one $5k sprint hits the revenue target. Real agencies need exactly this: fast, source-linked, negotiation-ready intelligence on the clauses that quietly kill cash flow and margin.
