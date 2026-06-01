@@ -10,6 +10,8 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 - Public landing page: https://lolomix.github.io/contract-revenue-radar/
 - Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
+- Qdrant submission snapshot: https://github.com/lolomix/contract-revenue-radar/tree/qdrant-submission-final
+- Qdrant submission tag: https://github.com/lolomix/contract-revenue-radar/tree/qdrant-submission-final-2026
 - Request a redacted sample audit: https://github.com/lolomix/contract-revenue-radar/issues/new/choose
 
 ## What It Does
@@ -133,7 +135,7 @@ Do not post confidential contracts, personal data, credentials, or private clien
 
 ## Google Rapid Agent Adaptation
 
-This repo also includes deployable tool assets for a Google Cloud Rapid Agent submission:
+This repo also includes deployable tool assets for a separate Google Cloud Rapid Agent adaptation:
 
 ```text
 integrations/google_rapid_agent/
@@ -147,7 +149,9 @@ Contents:
 - MongoDB MCP memory schema for partner-track memory.
 - Local smoke test.
 
-The adaptation keeps Contract Revenue Radar as the audit tool, then lets Gemini/Agent Builder orchestrate audit, memory retrieval, human approval, and saved fallback preferences. See `integrations/google_rapid_agent/DEPLOYMENT_GUIDE.md`.
+These files are not required for the Qdrant hackathon submission. The Qdrant-focused submission is preserved at the `qdrant-submission-final` branch and `qdrant-submission-final-2026` tag.
+
+The Google adaptation keeps Contract Revenue Radar as the audit tool, then lets Gemini/Agent Builder orchestrate audit, memory retrieval, human approval, and saved fallback preferences. See `integrations/google_rapid_agent/DEPLOYMENT_GUIDE.md`.
 
 ## Submission Compliance Review
 
@@ -171,13 +175,13 @@ Ran 9 tests in ~1.1s
 OK
 ```
 
-Latest publication commit before final cleanup:
+Qdrant submission snapshot:
 
 ```text
-e9c7573 May 31 MemoryAgent prototype
+1e3033d Update submission docs for final demo video
 ```
 
-Final cleanup commit keeps the repo focused on Qdrant submission essentials.
+Current `main` may include post-submission business intake and Google Rapid Agent integration assets. The preserved branch/tag above keep the Qdrant submission review surface separate.
 
 ## Limitations
 
