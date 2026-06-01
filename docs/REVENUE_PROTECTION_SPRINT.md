@@ -52,6 +52,14 @@ Sample-audit issues automatically receive a 3-finding response with:
 - fallback positions,
 - next-step link for the full sprint.
 
+Sprint inquiry issues automatically receive a scope response with:
+
+- fixed-scope package details,
+- next steps before work can start,
+- approval language,
+- privacy and document-handling reminders,
+- payment/procurement information needed.
+
 ## Limit
 
 This is business-risk review, not legal advice. Client counsel approves final contract language.

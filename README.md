@@ -135,6 +135,8 @@ Do not post confidential contracts, personal data, credentials, or private clien
 
 Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the $5,000 Revenue Protection Sprint.
 
+Revenue Protection Sprint inquiry issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.
+
 ## Submission Compliance Review
 
 | Requirement | Status | Evidence |
