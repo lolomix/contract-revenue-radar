@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revenue Protection Sprint</title>
+    <meta
+      name="description"
+      content="Fixed-scope $5,000 review for teams with recurring SOWs, MSAs, order forms, managed-services terms, and implementation templates."
+    />
+    <style>
+      :root {
+        --ink: #16201b;
+        --muted: #617068;
+        --line: #d8e2dc;
+        --paper: #f6f8f3;
+        --panel: #ffffff;
+        --green: #16543e;
+        --mint: #e7f2ec;
+        --blue: #245f8d;
+        --gold: #9d6c1c;
+        --red: #9b4034;
+        --shadow: 0 22px 58px rgba(15, 44, 31, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.48;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      header {
+        border-bottom: 1px solid rgba(216, 226, 220, 0.88);
+        background: rgba(246, 248, 243, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav,
+      .hero,
+      .inner,
+      footer {
+        width: min(1120px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--green);
+      }
+
+      .mark svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .nav-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 14px;
+        border-radius: 7px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 850;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--green);
+      }
+
+      .hero {
+        padding: 46px 0 34px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 0 11px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--green);
+        font-size: 0.83rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 18px 0 14px;
+        font-size: clamp(2.35rem, 7vw, 5.2rem);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 0;
+        color: #37463e;
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .proof {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .proof img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+
+      .proof-body {
+        padding: 14px;
+      }
+
+      .proof-body strong {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--green);
+      }
+
+      .proof-body span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      main {
+        padding-bottom: 48px;
+      }
+
+      section {
+        padding: 28px 0;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 14px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.35rem, 2.6vw, 2.15rem);
+        letter-spacing: 0;
+      }
+
+      .muted {
+        max-width: 620px;
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .item,
+      .timeline,
+      .sample,
+      .quote {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .item {
+        min-height: 146px;
+        padding: 17px;
+      }
+
+      .item h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 14px;
+      }
+
+      .timeline {
+        padding: 18px;
+      }
+
+      .timeline ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .timeline li + li {
+        margin-top: 10px;
+      }
+
+      .sample {
+        overflow: hidden;
+      }
+
+      .sample-head {
+        padding: 13px 15px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .tag {
+        min-height: 26px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 8px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+
+      .finding {
+        padding: 15px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .finding:last-child {
+        border-bottom: 0;
+      }
+
+      .finding strong {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .finding em {
+        color: var(--red);
+        font-style: normal;
+      }
+
+      blockquote {
+        margin: 9px 0;
+        padding-left: 12px;
+        border-left: 3px solid var(--gold);
+        color: #38463f;
+      }
+
+      .finding p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .cta {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 22px;
+        border-radius: 8px;
+        background: #17372a;
+        color: #fff;
+      }
+
+      .cta p {
+        margin: 7px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .quote {
+        padding: 18px;
+        border-left: 5px solid var(--blue);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 0 36px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 860px) {
+        header {
+          position: static;
+        }
+
+        .hero,
+        .split,
+        .cta {
+          grid-template-columns: 1fr;
+        }
+
+        .proof {
+          max-width: 420px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          display: block;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-actions,
+        .hero-actions {
+          width: 100%;
+        }
+
+        .button {
+          flex: 1 1 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="./">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5V5a2 2 0 0 1 2-2h9l5 5v11.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5Z" />
+              <path d="M14 3v5h5" />
+              <path d="M8 13h8" />
+              <path d="M8 17h5" />
+            </svg>
+          </span>
+          Contract Revenue Radar
+        </a>
+        <div class="nav-actions">
+          <a class="button secondary" href="https://github.com/lolomix/contract-revenue-radar">GitHub</a>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new/choose">Open Intake</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Fixed-scope package - $5,000</span>
+        <h1>Revenue Protection Sprint</h1>
+        <p class="lead">
+          A five-day business-risk review for teams with recurring SOWs, MSAs, order forms, retainers, implementation templates, or managed-services terms.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=revenue-protection-sprint.yml">Ask About The Sprint</a>
+          <a class="button secondary" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml">Request 3-Finding Sample</a>
+        </div>
+      </div>
+      <aside class="proof" aria-label="Package summary">
+        <img src="assets/thumbnail.png" alt="Contract Revenue Radar demo thumbnail" />
+        <div class="proof-body">
+          <strong>15-25</strong>
+          <span>redacted templates or excerpts reviewed, with reusable fallback positions and a clause playbook.</span>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>Best fit</h2>
+            <p class="muted">Designed for teams where the same terms repeat across many sales, delivery, or managed-service deals.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="item">
+            <h3>Implementation partners</h3>
+            <p>CRM, ERP, RevOps, ServiceNow, data, or custom software teams with milestone SOWs and buyer acceptance gates.</p>
+          </article>
+          <article class="item">
+            <h3>Managed services</h3>
+            <p>MSPs and recurring service teams with SLAs, renewal terms, support scope, addenda, and credit exposure.</p>
+          </article>
+          <article class="item">
+            <h3>Revenue operations</h3>
+            <p>Teams selling monthly retainers, office hours, implementation packs, platform management, or ongoing optimization.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="split">
+          <div class="timeline">
+            <h2>Five-day scope</h2>
+            <ol>
+              <li><strong>Day 0:</strong> intake, document receipt, risk priorities, and review constraints.</li>
+              <li><strong>Days 1-2:</strong> scan and business-risk review of 15-25 redacted templates or excerpts.</li>
+              <li><strong>Days 3-4:</strong> fallback positions, clause playbook, and sales/ops checklist.</li>
+              <li><strong>Day 5:</strong> delivery packet and 60-minute review session.</li>
+            </ol>
+          </div>
+
+          <div class="sample">
+            <div class="sample-head">
+              <strong>Sample findings</strong>
+              <span class="tag">public-style excerpt</span>
+            </div>
+            <div class="finding">
+              <strong>Payment delay <em>5/5</em></strong>
+              <blockquote>Payment is Net 60 after acceptance of the monthly service summary.</blockquote>
+              <p>Fallback: Net 15/30 from invoice date, milestone billing, or deemed acceptance after a fixed review window.</p>
+            </div>
+            <div class="finding">
+              <strong>Scope creep <em>4/5</em></strong>
+              <blockquote>Managed-service requests are included as reasonably requested by Customer.</blockquote>
+              <p>Fallback: define included hours, change-order triggers, revision limits, and out-of-scope rates.</p>
+            </div>
+            <div class="finding">
+              <strong>Renewal loss <em>4/5</em></strong>
+              <blockquote>The engagement renews month-to-month and may be terminated with 15 days notice.</blockquote>
+              <p>Fallback: annual renewal, 60-90 day non-renewal notice, or a transition fee for early exit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>Deliverables</h2>
+            <p class="muted">The sprint turns scattered contract risk into operational artifacts a sales, finance, delivery, or legal-review workflow can use.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="item">
+            <h3>Prioritized risk report</h3>
+            <p>Exact excerpts, severity, risk class, business impact, and recommended move for each recurring issue.</p>
+          </article>
+          <article class="item">
+            <h3>Fallback positions</h3>
+            <p>Reusable business fallback language for payment, acceptance, scope, renewals, credits, security, and IP risks.</p>
+          </article>
+          <article class="item">
+            <h3>Sales/ops checklist</h3>
+            <p>A pre-legal review checklist for new SOWs, renewals, change requests, and managed-services addenda.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <article class="quote">
+          <h2>Boundary</h2>
+          <p class="muted">
+            This is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice. Counsel should approve final contract language.
+          </p>
+        </article>
+      </section>
+
+      <section>
+        <div class="cta">
+          <div>
+            <h2>Start with a redacted sample.</h2>
+            <p>Use GitHub Issues for a public-style or redacted excerpt only. Do not post confidential documents, personal data, credentials, or private client material.</p>
+          </div>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new/choose">Open Intake</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Contract Revenue Radar runs locally or via API and produces source-linked findings, fallback positions, and agent-ready review briefs.
+    </footer>
+  </body>
+</html>
