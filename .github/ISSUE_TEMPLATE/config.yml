@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Watch the demo video
+    url: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
+    about: View the Qdrant hackathon demo before opening an inquiry.
+  - name: Qdrant submission release
+    url: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
+    about: Download the demo video and source archive.

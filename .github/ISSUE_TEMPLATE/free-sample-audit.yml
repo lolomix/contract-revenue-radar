@@ -1,0 +1,70 @@
+name: Request a 3-Finding Sample Audit
+description: Ask for a no-charge sample review using a redacted SOW, MSA, or template excerpt.
+title: "Sample audit request: <company or contract type>"
+labels:
+  - sample-audit
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this only for redacted documents or generic/public template excerpts. Do not post confidential contracts, personal data, credentials, or private client information in a public issue.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      description: Company or team requesting the sample.
+      placeholder: Example RevOps agency, MSP, SaaS implementation team
+    validations:
+      required: true
+  - type: dropdown
+    id: contract_type
+    attributes:
+      label: Contract type
+      options:
+        - Statement of Work (SOW)
+        - Master Services Agreement (MSA)
+        - Order form
+        - Renewal or support terms
+        - Implementation agreement
+        - Managed services agreement
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Business context
+      description: What kind of services, buyers, or deal motion does this agreement support?
+      placeholder: Salesforce implementation, HubSpot onboarding, ERP migration, MSP retainer, custom software project, etc.
+    validations:
+      required: true
+  - type: checkboxes
+    id: concerns
+    attributes:
+      label: Main concerns
+      options:
+        - label: Payment timing or acceptance gates
+        - label: Customer dependencies
+        - label: Scope creep or change orders
+        - label: Renewal, termination, or non-renewal
+        - label: Refunds, service credits, or chargebacks
+        - label: Data/security review blockers
+        - label: IP ownership or reusable work product
+  - type: textarea
+    id: excerpt
+    attributes:
+      label: Redacted excerpt or public-style sample
+      description: Paste only redacted text. Do not include confidential or personal data.
+      placeholder: Paste 1-3 redacted clauses here, or say that you prefer a generic sample first.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I have not posted confidential information, personal data, passwords, or private client documents.
+          required: true

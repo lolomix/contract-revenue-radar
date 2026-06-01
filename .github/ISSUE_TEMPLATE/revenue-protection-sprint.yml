@@ -1,0 +1,58 @@
+name: Revenue Protection Sprint Inquiry
+description: Ask about a fixed-scope $5,000 review for 15-25 redacted templates or SOW variants.
+title: "Revenue Protection Sprint inquiry: <organization>"
+labels:
+  - revenue-protection-sprint
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The Revenue Protection Sprint is a fixed-scope business-risk review for teams with recurring SOWs, MSAs, order forms, implementation agreements, or renewal/support templates. Do not post confidential documents in a public issue.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      placeholder: Example RevOps agency, MSP, implementation partner
+    validations:
+      required: true
+  - type: input
+    id: volume
+    attributes:
+      label: Approximate document/template count
+      placeholder: "Example: 18 SOW variants + 4 MSA/order-form templates"
+    validations:
+      required: true
+  - type: textarea
+    id: deal_motion
+    attributes:
+      label: Deal or delivery motion
+      description: What kinds of projects do these contracts support?
+      placeholder: CRM implementation, ERP migration, managed services, data integration, custom software delivery, etc.
+    validations:
+      required: true
+  - type: checkboxes
+    id: sprint_fit
+    attributes:
+      label: Sprint fit
+      options:
+        - label: We have multiple recurring SOW/MSA/order-form variants.
+        - label: Sales, delivery, finance, or ops need reusable fallback positions.
+        - label: Payment, acceptance, scope, renewal, security, or IP terms regularly require review.
+        - label: We can provide redacted templates/excerpts.
+  - type: textarea
+    id: desired_output
+    attributes:
+      label: Desired output
+      placeholder: Prioritized risk report, clause playbook, fallback positions, sales/ops checklist, review call, etc.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I will not post confidential documents or personal data in this public issue.
+          required: true
