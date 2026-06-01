@@ -1,0 +1,25 @@
+name: Sample Audit Issue Reply
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sample-audit:
+    if: contains(github.event.issue.labels.*.name, 'sample-audit')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate sample audit comment
+        run: python scripts/issue_sample_audit.py "$GITHUB_EVENT_PATH" > sample_audit_comment.md
+      - name: Comment on issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue comment "${{ github.event.issue.number }}" --body-file sample_audit_comment.md

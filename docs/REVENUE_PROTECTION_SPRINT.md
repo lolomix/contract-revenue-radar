@@ -44,6 +44,14 @@ Open a public issue using one of these templates:
 
 Do not post confidential contracts, personal data, or private client documents in GitHub Issues. Use redacted excerpts or public-style samples only.
 
+Sample-audit issues automatically receive a 3-finding response with:
+
+- top revenue-risk findings,
+- exact redacted/public-style excerpts,
+- priority questions,
+- fallback positions,
+- next-step link for the full sprint.
+
 ## Limit
 
 This is business-risk review, not legal advice. Client counsel approves final contract language.

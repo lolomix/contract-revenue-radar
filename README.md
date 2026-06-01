@@ -8,6 +8,7 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 
 - Public repository: https://github.com/lolomix/contract-revenue-radar
 - Public landing page: https://lolomix.github.io/contract-revenue-radar/
+- Revenue Protection Sprint: https://lolomix.github.io/contract-revenue-radar/sprint.html
 - Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 - Qdrant submission snapshot: https://github.com/lolomix/contract-revenue-radar/tree/qdrant-submission-final
@@ -131,6 +132,8 @@ https://github.com/lolomix/contract-revenue-radar/issues/new/choose
 ```
 
 Do not post confidential contracts, personal data, credentials, or private client documents in public issues. Use redacted excerpts or public-style samples only. See `docs/REVENUE_PROTECTION_SPRINT.md`.
+
+Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the $5,000 Revenue Protection Sprint.
 
 ## Submission Compliance Review
 
