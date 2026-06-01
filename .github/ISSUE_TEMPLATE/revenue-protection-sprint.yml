@@ -9,6 +9,8 @@ body:
     attributes:
       value: |
         The Revenue Protection Sprint is a fixed-scope business-risk review for teams with recurring SOWs, MSAs, order forms, implementation agreements, or renewal/support templates. Do not post confidential documents in a public issue.
+
+        Approval packet: https://lolomix.github.io/contract-revenue-radar/approval-packet.html
   - type: input
     id: organization
     attributes:

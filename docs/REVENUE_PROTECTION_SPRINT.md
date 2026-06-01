@@ -42,6 +42,10 @@ Open a public issue using one of these templates:
 - `Request a 3-Finding Sample Audit`
 - `Revenue Protection Sprint Inquiry`
 
+Procurement-ready approval packet:
+
+- https://lolomix.github.io/contract-revenue-radar/approval-packet.html
+
 Do not post confidential contracts, personal data, or private client documents in GitHub Issues. Use redacted excerpts or public-style samples only.
 
 Sample-audit issues automatically receive a 3-finding response with:

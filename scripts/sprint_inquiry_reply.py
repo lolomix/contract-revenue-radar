@@ -9,6 +9,7 @@ from issue_sample_audit import INTAKE_URL, SPRINT_URL, parse_issue_form, truncat
 
 
 SAMPLE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml"
+APPROVAL_PACKET_URL = "https://lolomix.github.io/contract-revenue-radar/approval-packet.html"
 DEMO_URL = (
     "https://github.com/lolomix/contract-revenue-radar/releases/download/"
     "qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4"
@@ -92,6 +93,7 @@ def build_sprint_comment(issue_body: str) -> str:
         "### Useful Links",
         "",
         f"- Sprint scope: {SPRINT_URL}",
+        f"- Approval packet: {APPROVAL_PACKET_URL}",
         f"- Public intake options: {INTAKE_URL}",
         f"- Optional 3-finding sample first: {SAMPLE_URL}",
         f"- Demo video: {DEMO_URL}",

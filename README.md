@@ -133,6 +133,12 @@ https://github.com/lolomix/contract-revenue-radar/issues/new/choose
 
 Do not post confidential contracts, personal data, credentials, or private client documents in public issues. Use redacted excerpts or public-style samples only. See `docs/REVENUE_PROTECTION_SPRINT.md`.
 
+Approval packet for the $5,000 sprint:
+
+```text
+https://lolomix.github.io/contract-revenue-radar/approval-packet.html
+```
+
 Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the $5,000 Revenue Protection Sprint.
 
 Revenue Protection Sprint inquiry issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.

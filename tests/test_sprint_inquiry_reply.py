@@ -49,6 +49,7 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Revenue Protection Sprint Intake Response", comment)
         self.assertIn("$5,000 fixed scope", comment)
         self.assertIn("18 SOW variants", comment)
+        self.assertIn("Approval packet", comment)
         self.assertIn("Approval Language", comment)
         self.assertIn("not legal advice", comment)
 

@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revenue Protection Sprint Approval Packet</title>
+    <meta
+      name="description"
+      content="Procurement-ready approval packet for the $5,000 Revenue Protection Sprint."
+    />
+    <style>
+      :root {
+        --ink: #16201b;
+        --muted: #617068;
+        --line: #d8e2dc;
+        --paper: #f6f8f3;
+        --panel: #ffffff;
+        --green: #16543e;
+        --mint: #e7f2ec;
+        --blue: #245f8d;
+        --gold: #9d6c1c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      header {
+        border-bottom: 1px solid rgba(216, 226, 220, 0.88);
+        background: rgba(246, 248, 243, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav,
+      .hero,
+      main,
+      footer {
+        width: min(1120px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--green);
+      }
+
+      .mark svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .nav-actions,
+      .hero-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 14px;
+        border-radius: 7px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 850;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--green);
+      }
+
+      .hero {
+        padding: 46px 0 30px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 0 11px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--green);
+        font-size: 0.83rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        max-width: 830px;
+        margin: 18px 0 14px;
+        font-size: clamp(2.3rem, 7vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin: 0;
+        color: #37463e;
+        font-size: clamp(1rem, 1.8vw, 1.18rem);
+      }
+
+      .hero-actions {
+        margin-top: 22px;
+      }
+
+      main {
+        padding-bottom: 48px;
+      }
+
+      section {
+        padding: 28px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .item,
+      .memo,
+      .approval {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 18px;
+      }
+
+      .item ul,
+      .memo ul,
+      .approval ul {
+        margin: 10px 0 0;
+        padding-left: 20px;
+      }
+
+      .memo {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .label {
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .approval {
+        border-color: rgba(22, 84, 62, 0.35);
+        background: #fbfdf9;
+      }
+
+      blockquote {
+        margin: 12px 0 0;
+        padding: 14px;
+        border-left: 4px solid var(--green);
+        background: var(--mint);
+        font-weight: 800;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      th {
+        color: var(--green);
+        background: var(--mint);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        padding: 2px 5px;
+        border-radius: 5px;
+        background: #eef3ee;
+      }
+
+      footer {
+        padding: 24px 0 36px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        .grid,
+        .memo {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-actions,
+        .hero-actions {
+          width: 100%;
+        }
+
+        .button {
+          flex: 1 1 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="./">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5V5a2 2 0 0 1 2-2h9l5 5v11.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5Z" />
+              <path d="M14 3v5h5" />
+              <path d="M8 13h8" />
+              <path d="M8 17h5" />
+            </svg>
+          </span>
+          Contract Revenue Radar
+        </a>
+        <div class="nav-actions">
+          <a class="button secondary" href="sprint.html">Sprint</a>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=revenue-protection-sprint.yml">Open Inquiry</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Approval packet - $5,000 fixed scope</span>
+      <h1>Revenue Protection Sprint Approval Packet</h1>
+      <p class="lead">
+        A procurement-ready summary for approving a five-day business-risk review of recurring SOWs, MSAs, order forms, implementation templates, retainers, and managed-services terms.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=revenue-protection-sprint.yml">Start Sprint Inquiry</a>
+        <a class="button secondary" href="https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4">Watch Demo</a>
+      </div>
+    </section>
+
+    <main>
+      <section>
+        <div class="grid">
+          <article class="item">
+            <h3>Price</h3>
+            <p><strong>$5,000 fixed scope</strong></p>
+            <p class="muted">No hourly billing for the defined sprint scope.</p>
+          </article>
+          <article class="item">
+            <h3>Turnaround</h3>
+            <p><strong>5 business days</strong></p>
+            <p class="muted">Starts after document intake and payment/procurement approval.</p>
+          </article>
+          <article class="item">
+            <h3>Document Range</h3>
+            <p><strong>15-25 redacted items</strong></p>
+            <p class="muted">Templates, excerpts, SOWs, MSAs, order forms, addenda, or renewal/support terms.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Decision Memo</h2>
+        <div class="memo">
+          <div class="label">Business Problem</div>
+          <div>Recurring contract terms can delay payment, weaken renewals, expand delivery scope, create credit/refund leakage, or block deals during security/data review.</div>
+        </div>
+        <div class="memo">
+          <div class="label">Recommended Purchase</div>
+          <div>Approve the Revenue Protection Sprint when the team has multiple recurring templates or variants and needs reusable fallback positions for sales, delivery, finance, operations, or legal-review intake.</div>
+        </div>
+        <div class="memo">
+          <div class="label">Expected Output</div>
+          <div>Prioritized risk report, exact excerpts, severity, business impact, fallback positions, clause playbook, sales/ops checklist, and a 60-minute review session.</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Scope</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Included</th>
+              <th>Not Included</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Business-risk review of 15-25 redacted documents, templates, or excerpts.</td>
+              <td>Legal advice, legal representation, or final approval of contract language.</td>
+            </tr>
+            <tr>
+              <td>Payment timing, acceptance, customer dependency, scope, renewal, credit/refund, data/security, and reusable-IP risk review.</td>
+              <td>Jurisdiction-specific legal enforceability review, regulatory advice, or negotiation with the buyer.</td>
+            </tr>
+            <tr>
+              <td>Reusable fallback positions, clause playbook, and sales/ops intake checklist.</td>
+              <td>Processing unredacted personal data or confidential third-party materials in public channels.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Procurement Checklist</h2>
+        <div class="grid">
+          <article class="item">
+            <h3>Billing</h3>
+            <ul>
+              <li>Billing contact and email.</li>
+              <li>Payment method or invoice path.</li>
+              <li>W-9/vendor setup requirement, if any.</li>
+            </ul>
+          </article>
+          <article class="item">
+            <h3>Document Intake</h3>
+            <ul>
+              <li>Private transfer method.</li>
+              <li>Redacted files or excerpts.</li>
+              <li>One business owner for priorities and questions.</li>
+            </ul>
+          </article>
+          <article class="item">
+            <h3>Delivery</h3>
+            <ul>
+              <li>Target delivery date.</li>
+              <li>Review-call contact.</li>
+              <li>Owner for counsel, finance, RevOps, or delivery approval.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Approval Language</h2>
+        <article class="approval">
+          <p>An authorized business contact can approve by replying in the chosen procurement or email path with:</p>
+          <blockquote>Approved. I authorize the $5,000 Revenue Protection Sprint and understand this is business-risk review, not legal advice.</blockquote>
+          <p class="muted">Work starts after approval, payment/procurement path confirmation, and private document intake.</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Security And Privacy Boundary</h2>
+        <p class="muted">
+          Do not post confidential contracts, personal data, credentials, or private client documents in public GitHub Issues. Use only public-style examples or redacted excerpts in public. Private materials should be transferred through a private path agreed after approval.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      Contract Revenue Radar is business-risk review for sales, finance, delivery, and operations teams. Counsel should approve final legal language.
+    </footer>
+  </body>
+</html>
