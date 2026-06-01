@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revenue Review Room</title>
+    <meta name="description" content="Clickable contract revenue-risk review room for redacted SOWs, MSAs, order forms, and service templates." />
+    <style>
+      :root {
+        --ink: #17211c;
+        --muted: #5e6a62;
+        --line: #d9e2dc;
+        --paper: #f6f8f3;
+        --panel: #ffffff;
+        --green: #18543f;
+        --mint: #e8f2ed;
+        --gold: #9a6a1b;
+        --red: #9b4034;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+      a { color: inherit; }
+      header {
+        border-bottom: 1px solid rgba(217, 226, 220, 0.9);
+        background: rgba(246, 248, 243, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(12px);
+      }
+      .nav, main, footer {
+        width: min(1240px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+      .nav {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--green);
+      }
+      .nav-actions, .toolbar, .links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .button, button {
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 12px;
+        border-radius: 7px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 850;
+        cursor: pointer;
+      }
+      .button.secondary, button.secondary {
+        background: transparent;
+        color: var(--green);
+      }
+      main { padding: 22px 0 48px; }
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(360px, 0.9fr) minmax(420px, 1.1fr);
+        gap: 16px;
+        align-items: start;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+      .panel-head {
+        min-height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      h1, h2, h3 { margin: 0; letter-spacing: 0; }
+      h1 { font-size: clamp(1.25rem, 2.5vw, 1.8rem); }
+      h2 { font-size: 1rem; }
+      .subtle { color: var(--muted); font-size: 0.88rem; }
+      .input-wrap { padding: 14px; }
+      textarea {
+        width: 100%;
+        min-height: 540px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        resize: vertical;
+        color: var(--ink);
+        background: #fbfcfa;
+        font: 0.9rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .score-band {
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 12px;
+        padding: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .score {
+        min-height: 136px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: var(--mint);
+        color: var(--green);
+        text-align: center;
+      }
+      .score strong {
+        display: block;
+        font-size: 3.1rem;
+        line-height: 1;
+      }
+      .score span {
+        display: block;
+        margin-top: 4px;
+        font-weight: 850;
+      }
+      .summary {
+        min-height: 136px;
+        display: grid;
+        align-content: center;
+        gap: 8px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      .chip {
+        min-height: 28px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 9px;
+        border-radius: 999px;
+        background: #eef4f0;
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+      .results {
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+      }
+      .finding {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: #fbfcfa;
+      }
+      .finding-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 7px;
+      }
+      .severity {
+        min-width: 84px;
+        text-align: right;
+        color: var(--red);
+        font-weight: 900;
+      }
+      blockquote {
+        margin: 8px 0;
+        padding: 10px;
+        border-left: 4px solid var(--gold);
+        background: #fff9ec;
+        color: #3d3321;
+      }
+      .report {
+        min-height: 210px;
+        padding: 14px;
+        border-top: 1px solid var(--line);
+        background: #fdfefb;
+      }
+      pre {
+        min-height: 180px;
+        margin: 0;
+        overflow: auto;
+        white-space: pre-wrap;
+        color: #233329;
+        font: 0.85rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .aside {
+        display: grid;
+        grid-template-columns: 120px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-top: 1px solid var(--line);
+      }
+      .aside img {
+        width: 120px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+      footer {
+        padding: 22px 0 36px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+      @media (max-width: 920px) {
+        .workspace, .score-band, .aside { grid-template-columns: 1fr; }
+        textarea { min-height: 360px; }
+      }
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+        .nav-actions, .toolbar, .links { width: 100%; }
+        .button, button { flex: 1 1 auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="./">
+          <span class="mark" aria-hidden="true">RR</span>
+          Revenue Review Room
+        </a>
+        <div class="nav-actions">
+          <a class="button secondary" href="sprint.html">Sprint</a>
+          <a class="button secondary" href="approval-packet.html">Approval Packet</a>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml">Request Sample</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="workspace">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h1>Review Room</h1>
+              <div class="subtle">Redacted or public-style text only.</div>
+            </div>
+            <div class="toolbar">
+              <button class="secondary" id="sampleBtn" type="button">Load Sample</button>
+              <button id="analyzeBtn" type="button">Run Review</button>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <textarea id="contractText" spellcheck="false"># Payment Terms
+Customer will pay invoices Net 90 after acceptance by the project owner. Acceptance may be delayed until all internal stakeholders approve the deliverables.
+
+# Services
+Provider will complete implementation support, training, and additional support as reasonably requested by Customer. Reasonable requests connected to rollout are included at no additional charge.
+
+# Renewals and Termination
+The engagement renews month-to-month after launch. Customer may terminate for convenience without cause with 30 days notice.
+
+# Service Levels
+If the service is unavailable for more than four hours in a calendar month, Customer may request service credits against future invoices.
+
+# Data and IP
+Vendor may process personal data and confidential information. Customer reserves audit rights. All deliverables are work made for hire and all intellectual property is assigned to Customer.</textarea>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Revenue-Risk Packet</h2>
+              <div class="subtle" id="packetMeta">Ready</div>
+            </div>
+            <div class="toolbar">
+              <button class="secondary" id="copyBtn" type="button">Copy Packet</button>
+            </div>
+          </div>
+          <div class="score-band">
+            <div class="score">
+              <div>
+                <strong id="scoreValue">0</strong>
+                <span>risk score</span>
+              </div>
+            </div>
+            <div class="summary">
+              <h2 id="summaryTitle">Run a review to generate findings.</h2>
+              <div class="subtle" id="summaryText">The packet will show risk classes, excerpts, business impact, and fallback moves.</div>
+              <div class="chips" id="chips"></div>
+            </div>
+          </div>
+          <div class="results" id="results"></div>
+          <div class="report">
+            <pre id="reportText">No packet generated yet.</pre>
+          </div>
+          <div class="aside">
+            <img src="assets/thumbnail.png" alt="Contract Revenue Radar thumbnail" />
+            <div>
+              <h2>Next step</h2>
+              <p class="subtle">For 15-25 recurring templates, use the fixed-scope Sprint and route the approval packet through finance or operations.</p>
+              <div class="links">
+                <a class="button secondary" href="sprint.html">Sprint</a>
+                <a class="button secondary" href="approval-packet.html">Approval</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Business-risk review only; not legal advice. Do not paste confidential documents or personal data into public channels.
+    </footer>
+
+    <script>
+      const riskPatterns = [
+        { id: "payment_delay", label: "Payment delay", severity: 5, terms: ["net 90", "net 60", "after acceptance", "upon acceptance", "delayed until", "withhold", "sole discretion"], why: "Cash collection can depend on long terms or buyer-controlled acceptance.", action: "Use Net 15/30, milestone billing, or deemed acceptance after a fixed review window." },
+        { id: "scope_creep", label: "Scope creep", severity: 4, terms: ["reasonably requested", "reasonable requests", "included at no additional charge", "unlimited revisions", "all necessary", "as requested"], why: "Vague service language can expand delivery work without expanding fees.", action: "Define included hours, revision limits, change-order triggers, and out-of-scope rates." },
+        { id: "renewal_loss", label: "Renewal loss", severity: 4, terms: ["month-to-month", "terminate for convenience", "without cause", "30 days notice", "non-renew"], why: "Short exit windows or weak renewals can reduce retention and forecastability.", action: "Use annual renewal, longer non-renewal notice, migration fees, or success review before termination." },
+        { id: "refund_credit", label: "Credit/refund exposure", severity: 3, terms: ["service credits", "full refund", "money back", "credit against future invoices", "chargeback"], why: "Broad credit language can erase earned revenue or create uncapped remedies.", action: "Tie credits to measurable SLA misses and cap them to fees paid for the affected period." },
+        { id: "data_security", label: "Data/security blocker", severity: 3, terms: ["personal data", "confidential information", "audit rights", "security incident", "subprocessor", "delete all data"], why: "Data/security obligations can delay signature if ownership and process are unclear.", action: "Prepare an approved security appendix, DPA path, incident process, and owner for review." },
+        { id: "ip_ownership", label: "Reusable IP trap", severity: 4, terms: ["work made for hire", "work for hire", "all intellectual property", "assigned to customer", "assigns all rights", "client owns all work product"], why: "Broad assignment can prevent reuse of tools, methods, templates, and implementation assets.", action: "Carve out pre-existing IP, tools, methods, templates, and reusable components; grant a limited license to deliverables." },
+        { id: "renewal_fee_trap", label: "Renewal fee trap", severity: 3, terms: ["then-current rates", "price increase", "automatically renews", "auto renew", "successive renewal"], why: "Renewal pricing or auto-renewal language can create avoidable churn or disputes.", action: "Require explicit renewal election, price caps, and a clear opt-out window." }
+      ];
+
+      const sampleText = document.getElementById("contractText").value;
+      const textEl = document.getElementById("contractText");
+      const scoreEl = document.getElementById("scoreValue");
+      const metaEl = document.getElementById("packetMeta");
+      const titleEl = document.getElementById("summaryTitle");
+      const summaryEl = document.getElementById("summaryText");
+      const chipsEl = document.getElementById("chips");
+      const resultsEl = document.getElementById("results");
+      const reportEl = document.getElementById("reportText");
+
+      function sentenceFor(text, term) {
+        const clean = text.replace(/\s+/g, " ").trim();
+        const lower = clean.toLowerCase();
+        const index = lower.indexOf(term.toLowerCase());
+        if (index < 0) return clean.slice(0, 220);
+        const start = Math.max(0, clean.lastIndexOf(".", index - 1) + 1);
+        const endIndex = clean.indexOf(".", index + term.length);
+        const end = endIndex > -1 ? endIndex + 1 : Math.min(clean.length, index + 180);
+        return clean.slice(start, end).trim();
+      }
+
+      function analyze() {
+        const text = textEl.value.trim();
+        const lower = text.toLowerCase();
+        const findings = riskPatterns.map((risk) => {
+          const matched = risk.terms.filter((term) => lower.includes(term));
+          return { ...risk, matched, excerpt: matched.length ? sentenceFor(text, matched[0]) : "" };
+        }).filter((risk) => risk.matched.length > 0)
+          .sort((a, b) => b.severity - a.severity || b.matched.length - a.matched.length);
+        const score = Math.min(100, findings.reduce((sum, risk) => sum + risk.severity * (risk.matched.length + 1) * 5, 0));
+        render(findings, score, text);
+      }
+
+      function render(findings, score, text) {
+        scoreEl.textContent = String(score);
+        metaEl.textContent = `${findings.length} findings · ${text.split(/\s+/).filter(Boolean).length} words`;
+        titleEl.textContent = findings.length ? `${findings[0].label} is the top issue.` : "No high-signal terms found.";
+        summaryEl.textContent = findings.length
+          ? "Route the highest-severity items before legal markup and convert recurring issues into fallback positions."
+          : "Use this as a light scan only. A clean result here does not replace review of the full agreement.";
+        chipsEl.innerHTML = findings.slice(0, 5).map((risk) => `<span class="chip">${risk.label}</span>`).join("");
+        resultsEl.innerHTML = findings.map((risk) => `
+          <section class="finding">
+            <div class="finding-top">
+              <h3>${risk.label}</h3>
+              <div class="severity">${risk.severity}/5</div>
+            </div>
+            <div class="subtle">Matched: ${risk.matched.join(", ")}</div>
+            <blockquote>${risk.excerpt}</blockquote>
+            <p><strong>Why:</strong> ${risk.why}</p>
+            <p><strong>Fallback:</strong> ${risk.action}</p>
+          </section>
+        `).join("") || `<section class="finding"><h3>No high-signal terms found</h3><p class="subtle">Try a longer redacted excerpt with payment, renewal, support, credit, security, or IP sections.</p></section>`;
+        const reportLines = [
+          "# Revenue-Risk Review Packet",
+          "",
+          `Risk score: ${score}/100`,
+          `Findings: ${findings.length}`,
+          "",
+          "## Priority Findings",
+          ""
+        ];
+        findings.forEach((risk, index) => {
+          reportLines.push(`${index + 1}. ${risk.label} - severity ${risk.severity}/5`);
+          reportLines.push(`   Matched terms: ${risk.matched.join(", ")}`);
+          reportLines.push(`   Excerpt: ${risk.excerpt}`);
+          reportLines.push(`   Why it matters: ${risk.why}`);
+          reportLines.push(`   Recommended fallback: ${risk.action}`);
+          reportLines.push("");
+        });
+        reportLines.push("## Boundary", "", "Business-risk review only; not legal advice. Counsel should approve final contract language.");
+        reportEl.textContent = reportLines.join("\n");
+      }
+
+      document.getElementById("analyzeBtn").addEventListener("click", analyze);
+      document.getElementById("sampleBtn").addEventListener("click", () => {
+        textEl.value = sampleText;
+        analyze();
+      });
+      document.getElementById("copyBtn").addEventListener("click", () => {
+        navigator.clipboard.writeText(reportEl.textContent);
+      });
+      analyze();
+    </script>
+  </body>
+</html>
