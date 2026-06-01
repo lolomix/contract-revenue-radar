@@ -52,6 +52,14 @@ samples/api_response.json
 - Qwen Cloud: use `/audit` as an Autopilot Agent tool, then let the model ask follow-up business questions and remember accepted fallback positions.
 - MemoryAgent prototype: run `scripts/memory_agent_demo.py` with `samples/clause_memory.json` to show active memory recall by risk type and segment before wiring persistent cloud storage.
 
+Google Rapid Agent deployable assets are included in:
+
+```text
+integrations/google_rapid_agent/
+```
+
+Use `openapi/revenue_terms_agent_openapi.yaml` as the Agent Builder tool schema and `deploy/deploy_cloud_run.sh` to host this API on Cloud Run.
+
 This API is for redacted documents or templates. It is business-risk review, not legal advice.
 
 ## MCP-Style Tool Server

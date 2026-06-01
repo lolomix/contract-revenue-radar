@@ -117,6 +117,7 @@ examples/reports/          Generated example reports
 demo_video/                MP4 demo and thumbnail
 hackathon_submission/      Submission notes and judging brief
 docs/                      Supporting docs
+integrations/              Google Rapid Agent deployment and Agent Builder assets
 ```
 
 ## Business Review Requests
@@ -128,6 +129,24 @@ https://github.com/lolomix/contract-revenue-radar/issues/new/choose
 ```
 
 Do not post confidential contracts, personal data, credentials, or private client documents in public issues. Use redacted excerpts or public-style samples only. See `docs/REVENUE_PROTECTION_SPRINT.md`.
+
+## Google Rapid Agent Adaptation
+
+This repo also includes deployable tool assets for a Google Cloud Rapid Agent submission:
+
+```text
+integrations/google_rapid_agent/
+```
+
+Contents:
+
+- OpenAPI tool schema for Agent Builder.
+- Cloud Run Dockerfile and deploy script.
+- Agent Builder system instructions.
+- MongoDB MCP memory schema for partner-track memory.
+- Local smoke test.
+
+The adaptation keeps Contract Revenue Radar as the audit tool, then lets Gemini/Agent Builder orchestrate audit, memory retrieval, human approval, and saved fallback preferences. See `integrations/google_rapid_agent/DEPLOYMENT_GUIDE.md`.
 
 ## Submission Compliance Review
 
