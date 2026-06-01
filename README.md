@@ -7,6 +7,7 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 ## Demo Links
 
 - Public repository: https://github.com/lolomix/contract-revenue-radar
+- Public landing page: https://lolomix.github.io/contract-revenue-radar/
 - Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 - Request a redacted sample audit: https://github.com/lolomix/contract-revenue-radar/issues/new/choose

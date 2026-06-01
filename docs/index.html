@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contract Revenue Radar</title>
+    <meta
+      name="description"
+      content="Qdrant-powered contract revenue-risk review for SOWs, MSAs, order forms, and implementation agreements."
+    />
+    <style>
+      :root {
+        --ink: #17211c;
+        --muted: #5c665f;
+        --line: #d9e1dc;
+        --paper: #f6f7f3;
+        --panel: #ffffff;
+        --green: #17543d;
+        --blue: #205f8d;
+        --gold: #996515;
+        --red: #8d3f32;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        min-height: 76vh;
+        display: grid;
+        align-items: end;
+        position: relative;
+        background:
+          linear-gradient(90deg, rgba(14, 26, 20, 0.9), rgba(14, 26, 20, 0.42), rgba(14, 26, 20, 0.18)),
+          url("assets/thumbnail.png") center / cover no-repeat;
+        color: #fff;
+      }
+
+      .hero-inner {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 34px 0 56px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 30px;
+        padding: 0 12px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(20, 48, 35, 0.55);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        max-width: 790px;
+        margin: 18px 0 14px;
+        font-size: clamp(2.45rem, 7vw, 5.8rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 690px;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: clamp(1.02rem, 2vw, 1.22rem);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .button.primary {
+        color: #102019;
+        background: #f7d47b;
+      }
+
+      .button.secondary {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      main {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--line);
+        transform: translateY(-24px);
+      }
+
+      .stat {
+        min-height: 110px;
+        padding: 18px;
+        background: var(--panel);
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--green);
+        font-size: 1.7rem;
+        line-height: 1;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      section {
+        padding: 42px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.7rem, 3vw, 2.45rem);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .section-copy {
+        max-width: 560px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .item {
+        min-height: 160px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .item h3 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+      }
+
+      .item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .pricing {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+
+      .price-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 18px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .price-row:last-child {
+        border-bottom: 0;
+      }
+
+      .price {
+        color: var(--blue);
+        font-size: 1.42rem;
+        font-weight: 900;
+      }
+
+      .price-row p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .cta-band {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 24px;
+        border-radius: 8px;
+        background: #183629;
+        color: #fff;
+      }
+
+      .cta-band h2 {
+        font-size: clamp(1.45rem, 3vw, 2rem);
+      }
+
+      .cta-band p {
+        margin: 8px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      footer {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 26px 0 42px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 820px) {
+        .hero {
+          min-height: 82vh;
+          background:
+            linear-gradient(180deg, rgba(14, 26, 20, 0.9), rgba(14, 26, 20, 0.68)),
+            url("assets/thumbnail.png") center / cover no-repeat;
+        }
+
+        .stats,
+        .grid,
+        .split,
+        .cta-band {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          display: block;
+        }
+
+        .section-copy {
+          margin-top: 10px;
+        }
+
+        .price-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Qdrant-powered contract revenue-risk review</div>
+        <h1>Contract Revenue Radar</h1>
+        <p class="lead">
+          Find clauses that delay cash, weaken renewals, expand unpaid work, or transfer reusable IP before the agreement is signed.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/lolomix/contract-revenue-radar/issues/new/choose">Request sample audit</a>
+          <a class="button secondary" href="https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4">Watch demo</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="stats" aria-label="Project facts">
+        <div class="stat"><strong>7</strong><span>revenue-risk classes</span></div>
+        <div class="stat"><strong>9</strong><span>unit tests passing</span></div>
+        <div class="stat"><strong>117s</strong><span>demo video</span></div>
+        <div class="stat"><strong>$5k</strong><span>sprint package</span></div>
+      </div>
+
+      <section>
+        <div class="section-head">
+          <h2>Built for SOWs, MSAs, order forms, and implementation templates.</h2>
+          <p class="section-copy">
+            The tool indexes contract sections, searches for revenue-risk patterns, and returns exact excerpts with severity, business impact, and fallback positions.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="item">
+            <h3>Payment and acceptance</h3>
+            <p>Flags Net 60/90, payment-after-acceptance, withheld payment, and subjective approval gates.</p>
+          </article>
+          <article class="item">
+            <h3>Scope and renewals</h3>
+            <p>Finds vague support obligations, missing change-order boundaries, short termination windows, and renewal traps.</p>
+          </article>
+          <article class="item">
+            <h3>Credits, security, and IP</h3>
+            <p>Surfaces broad service credits, data/security blockers, full IP assignment, and reusable-work ownership risks.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="split">
+          <div>
+            <h2>Output your team can route before legal review.</h2>
+            <p class="section-copy">
+              Every report includes a risk score, matched clauses, priority questions, fallback positions, and a sales/ops checklist. It is business-risk review, not legal advice.
+            </p>
+          </div>
+          <div class="pricing" aria-label="Packages">
+            <div class="price-row">
+              <div class="price">$1.5k</div>
+              <p>Quick audit for up to 5 redacted documents or excerpts.</p>
+            </div>
+            <div class="price-row">
+              <div class="price">$2.5k</div>
+              <p>Audit plus reusable fallback positions for common negotiation issues.</p>
+            </div>
+            <div class="price-row">
+              <div class="price">$5k</div>
+              <p>Revenue Protection Sprint for 15-25 templates with clause playbook and review session.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="cta-band">
+          <div>
+            <h2>Start with a redacted 3-finding sample.</h2>
+            <p>Use a public-style sample or paste only redacted excerpts. Do not post confidential documents in GitHub Issues.</p>
+          </div>
+          <a class="button primary" href="https://github.com/lolomix/contract-revenue-radar/issues/new/choose">Open intake</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Contract Revenue Radar is business-risk review for sales, finance, delivery, and operations teams. Counsel should approve final contract language.
+    </footer>
+  </body>
+</html>
