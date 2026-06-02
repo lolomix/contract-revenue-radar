@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RevOps and MSP SOW Revenue-Risk Review</title>
+    <meta
+      name="description"
+      content="Business-risk review for RevOps agencies, MSPs, implementation partners, SOWs, MSAs, retainers, and managed-services terms."
+    />
+    <style>
+      :root {
+        --ink: #16201b;
+        --muted: #617068;
+        --line: #d8e2dc;
+        --paper: #f6f8f3;
+        --panel: #ffffff;
+        --green: #16543e;
+        --mint: #e7f2ec;
+        --blue: #245f8d;
+        --gold: #9d6c1c;
+        --red: #9b4034;
+        --shadow: 0 22px 58px rgba(15, 44, 31, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.48;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      header {
+        border-bottom: 1px solid rgba(216, 226, 220, 0.88);
+        background: rgba(246, 248, 243, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav,
+      .hero,
+      main,
+      footer {
+        width: min(1120px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--green);
+      }
+
+      .mark svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .nav-actions,
+      .hero-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 14px;
+        border-radius: 7px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 850;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--green);
+      }
+
+      .hero {
+        padding: 46px 0 34px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 0 11px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--green);
+        font-size: 0.83rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 18px 0 14px;
+        font-size: clamp(2.25rem, 6.8vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 0;
+        color: #37463e;
+        font-size: clamp(1rem, 1.8vw, 1.18rem);
+      }
+
+      .hero-actions {
+        margin-top: 22px;
+      }
+
+      .proof {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .proof img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+
+      .proof-body {
+        padding: 15px;
+      }
+
+      .proof-body strong {
+        display: block;
+        color: var(--green);
+        font-size: 1.45rem;
+        line-height: 1;
+      }
+
+      .proof-body span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+
+      main {
+        padding-bottom: 48px;
+      }
+
+      section {
+        padding: 30px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .item,
+      .sample,
+      .cta {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 18px;
+      }
+
+      .item ul,
+      .sample ul {
+        margin: 10px 0 0;
+        padding-left: 20px;
+      }
+
+      .sample {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .label {
+        color: var(--green);
+        font-weight: 900;
+      }
+
+      blockquote {
+        margin: 10px 0;
+        padding: 12px;
+        border-left: 4px solid var(--gold);
+        background: #fbf8ee;
+        color: #38463f;
+      }
+
+      .cta {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        border-color: rgba(22, 84, 62, 0.34);
+        background: #fbfdf9;
+      }
+
+      footer {
+        padding: 24px 0 36px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        header {
+          position: static;
+        }
+
+        .hero,
+        .grid,
+        .sample,
+        .cta {
+          grid-template-columns: 1fr;
+        }
+
+        .proof {
+          max-width: 420px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-actions,
+        .hero-actions {
+          width: 100%;
+        }
+
+        .button {
+          flex: 1 1 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="./">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5V5a2 2 0 0 1 2-2h9l5 5v11.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5Z" />
+              <path d="M14 3v5h5" />
+              <path d="M8 13h8" />
+              <path d="M8 17h5" />
+            </svg>
+          </span>
+          Contract Revenue Radar
+        </a>
+        <div class="nav-actions">
+          <a class="button secondary" href="sprint.html">Sprint</a>
+          <a class="button secondary" href="approval-packet.html">Approval</a>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml">Request Invoice</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">For RevOps, MSP, and implementation SOWs</span>
+        <h1>Find contract terms that delay cash or leak delivery margin.</h1>
+        <p class="lead">
+          Contract Revenue Radar reviews SOWs, MSAs, retainers, managed-services terms, renewals, and addenda for business risks that sales, finance, delivery, and ops can act on before signature.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml">Request 3-Finding Sample</a>
+          <a class="button secondary" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml">Request Invoice</a>
+          <a class="button secondary" href="approval-packet.html">Approval Packet</a>
+        </div>
+      </div>
+      <aside class="proof" aria-label="Revenue-risk review summary">
+        <img src="assets/thumbnail.png" alt="Contract Revenue Radar audit thumbnail" />
+        <div class="proof-body">
+          <strong>$5,000 sprint</strong>
+          <span>15-25 templates or excerpts reviewed in five business days after approval and intake.</span>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section>
+        <h2>Where the review pays for itself</h2>
+        <div class="grid">
+          <article class="item">
+            <h3>RevOps retainers</h3>
+            <p>Monthly hours, rollover, office hours, dashboard support, platform management, and priority queues can hide unbilled work.</p>
+          </article>
+          <article class="item">
+            <h3>Implementation SOWs</h3>
+            <p>Acceptance gates, buyer dependencies, launch support, migration scope, and change-order gaps can delay billing.</p>
+          </article>
+          <article class="item">
+            <h3>Managed services</h3>
+            <p>SLA credits, support boundaries, renewal language, addenda, and security obligations can create recurring margin leakage.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Sample findings</h2>
+        <div class="sample">
+          <div class="label">Payment timing</div>
+          <div>
+            <blockquote>Payment is due Net 60 after Customer acceptance of the monthly services report.</blockquote>
+            <p class="muted">Fallback: invoice-date payment, Net 15/30, milestone billing, or deemed acceptance after a fixed review window.</p>
+          </div>
+        </div>
+        <div class="sample">
+          <div class="label">Support scope</div>
+          <div>
+            <blockquote>Vendor will provide reasonable support and all assistance required for launch.</blockquote>
+            <p class="muted">Fallback: included hours, named support channels, change-order triggers, and out-of-scope rates.</p>
+          </div>
+        </div>
+        <div class="sample">
+          <div class="label">Reusable IP</div>
+          <div>
+            <blockquote>All deliverables and work product are assigned to Customer.</blockquote>
+            <p class="muted">Fallback: retain background IP, methodologies, tools, and generic components while licensing client-specific deliverables.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Two ways to start</h2>
+        <div class="grid">
+          <article class="item">
+            <h3>No-charge sample</h3>
+            <p>Send one redacted SOW/MSA/retainer excerpt or a public-style template. The response returns three findings and next questions.</p>
+            <p><a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml">Request Sample</a></p>
+          </article>
+          <article class="item">
+            <h3>$5,000 Revenue Protection Sprint</h3>
+            <p>Best when there are 15-25 recurring templates or variants and the team needs reusable fallback positions.</p>
+            <p><a class="button" href="sprint.html">View Scope</a></p>
+          </article>
+          <article class="item">
+            <h3>Invoice or approval path</h3>
+            <p>Ready to route the sprint? Open a public-safe request and keep private billing or document details out of GitHub.</p>
+            <p><a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml">Request Invoice</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <article class="cta">
+          <div>
+            <h2>Keep confidential terms private.</h2>
+            <p class="muted">Use public-style examples or redacted excerpts in GitHub Issues. Private document intake is coordinated only after approval. This is business-risk review, not legal advice.</p>
+          </div>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new/choose">Open Intake</a>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Contract Revenue Radar produces source-linked findings, fallback positions, and review briefs for sales, finance, delivery, and operations teams. Counsel should approve final contract language.
+    </footer>
+  </body>
+</html>

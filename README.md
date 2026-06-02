@@ -8,6 +8,7 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 
 - Public repository: https://github.com/lolomix/contract-revenue-radar
 - Public landing page: https://lolomix.github.io/contract-revenue-radar/
+- RevOps/MSP SOW review page: https://lolomix.github.io/contract-revenue-radar/revops-msp.html
 - Revenue Protection Sprint: https://lolomix.github.io/contract-revenue-radar/sprint.html
 - Request Sprint invoice/approval path: https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml
 - Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
