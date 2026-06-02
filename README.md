@@ -9,6 +9,7 @@ It is built for the Qdrant **"Think Outside the Bot" Virtual Hackathon**. It is 
 - Public repository: https://github.com/lolomix/contract-revenue-radar
 - Public landing page: https://lolomix.github.io/contract-revenue-radar/
 - Revenue Protection Sprint: https://lolomix.github.io/contract-revenue-radar/sprint.html
+- Request Sprint invoice/approval path: https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml
 - Demo video: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
 - Release assets: https://github.com/lolomix/contract-revenue-radar/releases/tag/qdrant-submission-2026
 - Qdrant submission snapshot: https://github.com/lolomix/contract-revenue-radar/tree/qdrant-submission-final
@@ -125,7 +126,7 @@ docs/                      Supporting docs
 
 ## Business Review Requests
 
-For a no-charge redacted sample audit or a fixed-scope Revenue Protection Sprint inquiry, use the GitHub issue templates:
+For a no-charge redacted sample audit, a fixed-scope Revenue Protection Sprint inquiry, or a public-safe invoice/approval-path request, use the GitHub issue templates:
 
 ```text
 https://github.com/lolomix/contract-revenue-radar/issues/new/choose
@@ -139,9 +140,15 @@ Approval packet for the $5,000 sprint:
 https://lolomix.github.io/contract-revenue-radar/approval-packet.html
 ```
 
+Direct invoice/approval-path request:
+
+```text
+https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml
+```
+
 Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the $5,000 Revenue Protection Sprint.
 
-Revenue Protection Sprint inquiry issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.
+Revenue Protection Sprint inquiry and invoice-path issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.
 
 ## Submission Compliance Review
 

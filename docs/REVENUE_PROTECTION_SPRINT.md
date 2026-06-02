@@ -41,10 +41,15 @@ Open a public issue using one of these templates:
 
 - `Request a 3-Finding Sample Audit`
 - `Revenue Protection Sprint Inquiry`
+- `Request Sprint Invoice / Approval Path`
 
 Procurement-ready approval packet:
 
 - https://lolomix.github.io/contract-revenue-radar/approval-packet.html
+
+Direct invoice/approval-path request:
+
+- https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml
 
 Do not post confidential contracts, personal data, or private client documents in GitHub Issues. Use redacted excerpts or public-style samples only.
 
@@ -56,9 +61,10 @@ Sample-audit issues automatically receive a 3-finding response with:
 - fallback positions,
 - next-step link for the full sprint.
 
-Sprint inquiry issues automatically receive a scope response with:
+Sprint inquiry and invoice-path issues automatically receive a scope response with:
 
 - fixed-scope package details,
+- invoice/procurement next steps,
 - next steps before work can start,
 - approval language,
 - privacy and document-handling reminders,

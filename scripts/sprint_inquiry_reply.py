@@ -18,6 +18,7 @@ APPROVAL_LANGUAGE = (
     "Approved. I authorize the $5,000 Revenue Protection Sprint and understand "
     "this is business-risk review, not legal advice."
 )
+INVOICE_REQUEST_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml"
 
 
 def checkbox_items(value: str) -> list[str]:
@@ -38,24 +39,41 @@ def build_sprint_comment(issue_body: str) -> str:
     deal_motion = fields.get("Deal or delivery motion", "").strip()
     desired_output = fields.get("Desired output", "").strip()
     fit_items = checkbox_items(fields.get("Sprint fit", ""))
+    requester_role = fields.get("Requester role", "").strip()
+    procurement_path = fields.get("Approval or procurement path", "").strip()
+    preferred_start = fields.get("Preferred start window", "").strip()
+    delivery_priorities = fields.get("Delivery priorities", "").strip()
+    approval_items = checkbox_items(fields.get("Approval readiness", ""))
+    is_invoice_request = bool(procurement_path or preferred_start or delivery_priorities or approval_items)
 
     lines = [
-        "## Revenue Protection Sprint Intake Response",
+        "## Revenue Protection Sprint Invoice Path Response" if is_invoice_request else "## Revenue Protection Sprint Intake Response",
         "",
-        "Thanks for the sprint inquiry. This response confirms the fixed-scope package and the information needed before work can start.",
+        "Thanks for the sprint request. This response confirms the fixed-scope package and the information needed before work can start.",
         "",
         f"- Organization/team: **{organization}**",
     ]
+    if requester_role:
+        lines.append(f"- Requester role: **{truncate(requester_role, 120)}**")
     if volume:
         lines.append(f"- Approximate document/template count: **{truncate(volume, 180)}**")
     if deal_motion:
         lines.append(f"- Deal or delivery motion: {truncate(deal_motion, 260)}")
     if desired_output:
         lines.append(f"- Desired output: {truncate(desired_output, 260)}")
+    if preferred_start:
+        lines.append(f"- Preferred start window: **{truncate(preferred_start, 80)}**")
+    if procurement_path:
+        lines.append(f"- Approval/procurement path: {truncate(procurement_path, 260)}")
+    if delivery_priorities:
+        lines.append(f"- Delivery priorities: {truncate(delivery_priorities, 260)}")
 
     if fit_items:
         lines.extend(["", "### Fit Signals"])
         lines.extend(f"- {item}" for item in fit_items)
+    if approval_items:
+        lines.extend(["", "### Approval Readiness"])
+        lines.extend(f"- {item}" for item in approval_items)
 
     lines.extend([
         "",
@@ -71,6 +89,16 @@ def build_sprint_comment(issue_body: str) -> str:
         "- Target turnaround: 5 business days after document intake and payment/procurement approval.",
         "",
         "If the final scope is only one document or a small set, start with a smaller audit instead of the $5,000 sprint. The sprint is strongest when there are multiple recurring templates or variants.",
+        "",
+        "### Invoice / Approval Path",
+        "",
+        "If this request is ready for invoice or procurement routing, keep private billing details out of this public issue. The next private step is to confirm:",
+        "",
+        "- payer or company name for invoice/vendor setup,",
+        "- role-based billing contact or procurement path,",
+        "- payment method or purchase-order requirement,",
+        "- private document intake path for redacted templates/excerpts,",
+        "- business owner for priorities and review-call scheduling.",
         "",
         "### What To Send Next",
         "",
@@ -94,6 +122,7 @@ def build_sprint_comment(issue_body: str) -> str:
         "",
         f"- Sprint scope: {SPRINT_URL}",
         f"- Approval packet: {APPROVAL_PACKET_URL}",
+        f"- Request invoice/approval path: {INVOICE_REQUEST_URL}",
         f"- Public intake options: {INTAKE_URL}",
         f"- Optional 3-finding sample first: {SAMPLE_URL}",
         f"- Demo video: {DEMO_URL}",
