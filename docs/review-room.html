@@ -250,6 +250,8 @@
         .button, button { flex: 1 1 auto; }
       }
     </style>
+    <script src="assets/novus-pendo-config.js"></script>
+    <script src="assets/novus-pendo-loader.js"></script>
   </head>
   <body>
     <header>
@@ -364,6 +366,12 @@ Vendor may process personal data and confidential information. Customer reserves
       const resultsEl = document.getElementById("results");
       const reportEl = document.getElementById("reportText");
 
+      function trackEvent(name, properties = {}) {
+        if (window.pendo && typeof window.pendo.track === "function") {
+          window.pendo.track(name, properties);
+        }
+      }
+
       function sentenceFor(text, term) {
         const clean = text.replace(/\s+/g, " ").trim();
         const lower = clean.toLowerCase();
@@ -385,6 +393,11 @@ Vendor may process personal data and confidential information. Customer reserves
           .sort((a, b) => b.severity - a.severity || b.matched.length - a.matched.length);
         const score = Math.min(100, findings.reduce((sum, risk) => sum + risk.severity * (risk.matched.length + 1) * 5, 0));
         render(findings, score, text);
+        trackEvent("review_run", {
+          riskScore: score,
+          findings: findings.length,
+          words: text.split(/\s+/).filter(Boolean).length
+        });
       }
 
       function render(findings, score, text) {
@@ -432,9 +445,13 @@ Vendor may process personal data and confidential information. Customer reserves
       document.getElementById("sampleBtn").addEventListener("click", () => {
         textEl.value = sampleText;
         analyze();
+        trackEvent("sample_loaded");
       });
       document.getElementById("copyBtn").addEventListener("click", () => {
         navigator.clipboard.writeText(reportEl.textContent);
+        trackEvent("packet_copied", {
+          characters: reportEl.textContent.length
+        });
       });
       analyze();
     </script>
