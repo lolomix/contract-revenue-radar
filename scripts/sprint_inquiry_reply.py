@@ -283,8 +283,60 @@ def build_b2b_package_comment(issue_body: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_b2b_approval_comment(issue_body: str) -> str:
+    fields = parse_issue_form(issue_body)
+    organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
+    approver_role = fields.get("Approver role", "").strip()
+    payment_route = fields.get("Payment/procurement route", "").strip()
+    submitted_approval = fields.get("Approval text", "").strip()
+    acknowledgement_items = checkbox_items(fields.get("Acknowledgement", ""))
+
+    lines = [
+        "## B2B Business Package Approval Response",
+        "",
+        "Thanks for the public-safe written approval path. This issue can be used as an approval signal, but it is not payment evidence.",
+        "",
+        f"- Organization/team: **{organization}**",
+        "- Approved package: **B2B Business Package ($3,500)**",
+    ]
+    if approver_role:
+        lines.append(f"- Approver role: **{truncate(approver_role, 120)}**")
+    if payment_route:
+        lines.append(f"- Payment/procurement route: **{truncate(payment_route, 160)}**")
+    if submitted_approval:
+        lines.extend(["", "### Submitted Approval Text", "", f"> {truncate(submitted_approval, 500)}"])
+    if acknowledgement_items:
+        lines.extend(["", "### Acknowledgement"])
+        lines.extend(f"- {item}" for item in acknowledgement_items)
+
+    lines.extend([
+        "",
+        "### Next Private Step",
+        "",
+        "Keep payment links, billing details, tax IDs, private client names, credentials, and documents out of this public issue.",
+        "",
+        "The next private step is to confirm one of:",
+        "",
+        "- private payment-link routing,",
+        "- procurement approval timing,",
+        "- vendor setup / purchase-order route,",
+        "- funded platform order.",
+        "",
+        "Close-ready approval text:",
+        "",
+        "> Approved. I authorize the $3,500 B2B Business Package and understand this is business-risk review, not legal advice.",
+        "",
+        "### Boundary",
+        "",
+        "This approval path is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice, and counsel should approve final contract language.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def build_sprint_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
+    if "Approval text" in fields and "Payment/procurement route" in fields:
+        return build_b2b_approval_comment(issue_body)
     if "Approval/payment route" in fields:
         return build_b2b_package_comment(issue_body)
     if "Selected package" in fields:

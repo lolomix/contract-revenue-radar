@@ -179,6 +179,29 @@ I need a private payment-link route after written approval
 - [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
 """
 
+B2B_APPROVAL_BODY = """### Organization / team
+
+Northstar RevOps
+
+### Approver role
+
+Finance owner
+
+### Payment/procurement route
+
+Private payment link after approval
+
+### Approval text
+
+Approved. I authorize the $3,500 B2B Business Package and understand this is business-risk review, not legal advice.
+
+### Acknowledgement
+
+- [X] I understand the B2B Business Package is $3,500 fixed scope.
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+"""
+
 
 class SprintInquiryReplyTests(unittest.TestCase):
     def test_checkbox_items_keeps_checked_only(self):
@@ -252,6 +275,16 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
         self.assertIn("confirmed private payment-link route", comment)
         self.assertIn("Do **not** post private documents", comment)
+
+    def test_b2b_approval_comment_does_not_route_to_revenue_protection_sprint(self):
+        comment = build_sprint_comment(B2B_APPROVAL_BODY)
+
+        self.assertIn("B2B Business Package Approval Response", comment)
+        self.assertIn("approval signal", comment)
+        self.assertIn("B2B Business Package ($3,500)", comment)
+        self.assertIn("Private payment link after approval", comment)
+        self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
+        self.assertNotIn("Revenue Protection Sprint - $5,000 fixed scope", comment)
 
 
 if __name__ == "__main__":
