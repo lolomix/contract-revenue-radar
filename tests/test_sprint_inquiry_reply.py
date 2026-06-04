@@ -67,6 +67,45 @@ SLA credits, payment timing, renewal terms, and support scope.
 - [X] I can approve, route, or introduce the correct person for invoice/procurement approval.
 """
 
+SERVICE_PACKAGE_BODY = """### Organization / team
+
+Example implementation partner
+
+### Selected package
+
+Audit + Negotiation Fallback Pack ($2,500)
+
+### Requester role
+
+Founder
+
+### Approximate document/template count
+
+8 SOWs and order-form excerpts
+
+### Contract or template types
+
+Implementation SOWs and renewal addenda.
+
+### Top risk areas
+
+Acceptance gates, scope creep, and reusable-IP language.
+
+### Approval, payment, or procurement path
+
+Written approval first, then platform-approved payment link.
+
+### Target timeline
+
+3-4 business days
+
+### Intake readiness
+
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+- [X] I can provide redacted templates or excerpts through a private intake path after approval.
+"""
+
 
 class SprintInquiryReplyTests(unittest.TestCase):
     def test_checkbox_items_keeps_checked_only(self):
@@ -93,6 +132,18 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Invoice / Approval Path", comment)
         self.assertIn("Request invoice/approval path", comment)
         self.assertIn("$5,000 fixed scope", comment)
+
+    def test_service_package_comment_contains_paid_package_next_steps(self):
+        comment = build_sprint_comment(SERVICE_PACKAGE_BODY)
+
+        self.assertIn("Paid Service Package Intake Response", comment)
+        self.assertIn("Audit + Negotiation Fallback Pack - $2,500 fixed scope", comment)
+        self.assertIn("Founder", comment)
+        self.assertIn("8 SOWs", comment)
+        self.assertIn("Payment / Approval Path", comment)
+        self.assertIn("platform-approved payment path", comment)
+        self.assertIn("Do **not** post private documents", comment)
+        self.assertIn("Services and packages", comment)
 
 
 if __name__ == "__main__":

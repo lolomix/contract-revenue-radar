@@ -1,0 +1,96 @@
+name: Request Paid Service Package
+description: Start a public-safe intake for a $1,500, $2,500, or $5,000 business-risk review package.
+title: "Service package request: <organization>"
+labels:
+  - service-package-request
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for public-safe package intake. Do not post confidential contracts, personal data, private client names, billing details, tax IDs, or payment credentials in a public issue.
+
+        Private billing and document intake can be coordinated after package, scope, and approval path are confirmed.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      placeholder: Example RevOps agency, MSP, implementation partner
+    validations:
+      required: true
+  - type: dropdown
+    id: selected_package
+    attributes:
+      label: Selected package
+      options:
+        - Revenue Terms Audit ($1,500)
+        - Audit + Negotiation Fallback Pack ($2,500)
+        - Revenue Protection Sprint ($5,000)
+        - Not sure yet
+    validations:
+      required: true
+  - type: input
+    id: requester_role
+    attributes:
+      label: Requester role
+      placeholder: Founder, RevOps lead, delivery lead, finance owner, procurement owner, etc.
+    validations:
+      required: true
+  - type: input
+    id: document_count
+    attributes:
+      label: Approximate document/template count
+      placeholder: "Example: 5 SOWs, 10 MSA/order-form variants, or 25 recurring templates"
+    validations:
+      required: true
+  - type: textarea
+    id: contract_types
+    attributes:
+      label: Contract or template types
+      placeholder: SOWs, MSAs, order forms, retainers, managed-services agreements, implementation templates, support terms, addenda, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: top_risks
+    attributes:
+      label: Top risk areas
+      placeholder: Payment timing, acceptance gates, renewal terms, support scope, service credits, security review, IP ownership, customer dependencies, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: approval_path
+    attributes:
+      label: Approval, payment, or procurement path
+      description: Public-safe summary only. Do not post private billing details or personal data.
+      placeholder: "Example: written approval first, then invoice/vendor setup; or platform-approved payment link required."
+    validations:
+      required: true
+  - type: dropdown
+    id: timeline
+    attributes:
+      label: Target timeline
+      options:
+        - 48 hours
+        - 3-4 business days
+        - 5 business days
+        - Within 30 days
+        - Exploring first
+    validations:
+      required: true
+  - type: checkboxes
+    id: intake_readiness
+    attributes:
+      label: Intake readiness
+      options:
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+          required: true
+        - label: I can provide redacted templates or excerpts through a private intake path after approval.
+        - label: I can approve, route, or introduce the correct person for payment/procurement approval.
+  - type: textarea
+    id: public_notes
+    attributes:
+      label: Public-safe notes
+      description: Optional. Keep this public-safe and non-confidential.
+      placeholder: Anything else needed to qualify the package without private documents or personal data.

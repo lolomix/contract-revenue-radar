@@ -9,7 +9,10 @@ from issue_sample_audit import INTAKE_URL, SPRINT_URL, parse_issue_form, truncat
 
 
 SAMPLE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml"
+SERVICE_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml"
 APPROVAL_PACKET_URL = "https://lolomix.github.io/contract-revenue-radar/approval-packet.html"
+SERVICES_URL = "https://lolomix.github.io/contract-revenue-radar/services.html"
+REVIEW_ROOM_URL = "https://lolomix.github.io/contract-revenue-radar/review-room.html"
 DEMO_URL = (
     "https://github.com/lolomix/contract-revenue-radar/releases/download/"
     "qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4"
@@ -32,8 +35,122 @@ def checkbox_items(value: str) -> list[str]:
     return items
 
 
+PACKAGE_SCOPES = {
+    "Revenue Terms Audit ($1,500)": [
+        "**Revenue Terms Audit - $1,500 fixed scope**",
+        "- Review up to 5 redacted documents or excerpts.",
+        "- Return a revenue-risk report with exact excerpts, severity, business impact, and priority actions.",
+        "- Check payment, acceptance, renewal, scope, credit/refund, security, and reusable-IP risk.",
+        "- Target turnaround: 48 hours after payment, complete intake, and confirmed scope.",
+    ],
+    "Audit + Negotiation Fallback Pack ($2,500)": [
+        "**Audit + Negotiation Fallback Pack - $2,500 fixed scope**",
+        "- Review up to 10 redacted documents or excerpts.",
+        "- Include everything in the audit package.",
+        "- Add fallback positions for counsel review and a sales/ops checklist for recurring terms.",
+        "- Target turnaround: 3-4 business days after payment, complete intake, and confirmed scope.",
+    ],
+    "Revenue Protection Sprint ($5,000)": [
+        "**Revenue Protection Sprint - $5,000 fixed scope**",
+        "- Review 15-25 redacted recurring templates or excerpts.",
+        "- Produce a reusable clause playbook and intake checklist.",
+        "- Include a 60-minute review session for sales, ops, finance, and counsel coordination.",
+        "- Target turnaround: 5 business days after payment/procurement approval and document intake.",
+    ],
+}
+
+
+def build_service_package_comment(issue_body: str) -> str:
+    fields = parse_issue_form(issue_body)
+    organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
+    selected_package = fields.get("Selected package", "Not sure yet").strip() or "Not sure yet"
+    requester_role = fields.get("Requester role", "").strip()
+    document_count = fields.get("Approximate document/template count", "").strip()
+    contract_types = fields.get("Contract or template types", "").strip()
+    top_risks = fields.get("Top risk areas", "").strip()
+    approval_path = fields.get("Approval, payment, or procurement path", "").strip()
+    timeline = fields.get("Target timeline", "").strip()
+    readiness_items = checkbox_items(fields.get("Intake readiness", ""))
+    public_notes = fields.get("Public-safe notes", "").strip()
+
+    lines = [
+        "## Paid Service Package Intake Response",
+        "",
+        "Thanks for the package request. This response confirms the public-safe intake and the next information needed before paid work can start.",
+        "",
+        f"- Organization/team: **{organization}**",
+        f"- Selected package: **{truncate(selected_package, 120)}**",
+    ]
+    if requester_role:
+        lines.append(f"- Requester role: **{truncate(requester_role, 120)}**")
+    if document_count:
+        lines.append(f"- Approximate document/template count: **{truncate(document_count, 180)}**")
+    if contract_types:
+        lines.append(f"- Contract/template types: {truncate(contract_types, 260)}")
+    if top_risks:
+        lines.append(f"- Top risk areas: {truncate(top_risks, 260)}")
+    if approval_path:
+        lines.append(f"- Approval/payment/procurement path: {truncate(approval_path, 260)}")
+    if timeline:
+        lines.append(f"- Target timeline: **{truncate(timeline, 80)}**")
+    if public_notes:
+        lines.append(f"- Public-safe notes: {truncate(public_notes, 260)}")
+
+    if readiness_items:
+        lines.extend(["", "### Intake Readiness"])
+        lines.extend(f"- {item}" for item in readiness_items)
+
+    lines.extend(["", "### Recommended Scope", ""])
+    lines.extend(PACKAGE_SCOPES.get(selected_package, [
+        "**Package fit to confirm**",
+        "- $1,500 audit: up to 5 redacted documents or excerpts.",
+        "- $2,500 audit + fallback pack: up to 10 redacted documents or excerpts plus fallback positions for counsel review.",
+        "- $5,000 Revenue Protection Sprint: 15-25 recurring templates or excerpts plus playbook, checklist, and review session.",
+    ]))
+
+    lines.extend([
+        "",
+        "### Payment / Approval Path",
+        "",
+        "Keep private billing, tax, contract, and payment details out of this public issue. The next private step is to confirm:",
+        "",
+        "- payer or company name for invoice/vendor setup,",
+        "- role-based billing contact or platform-approved payment path,",
+        "- whether W-9, vendor setup, purchase order, or written approval is required,",
+        "- secure/private document intake path for redacted templates or excerpts,",
+        "- business owner for priorities, acceptance of scope, and scheduling.",
+        "",
+        "### What To Send Next",
+        "",
+        "Do **not** post private documents in this public issue. Use a private transfer path for redacted files once the engagement is approved.",
+        "",
+        "Needed next:",
+        "",
+        "- confirm package selection and document count,",
+        "- confirm payment/procurement path,",
+        "- confirm target delivery date,",
+        "- identify whether counsel, finance, delivery ops, RevOps, or founder owns final approval.",
+        "",
+        "### Useful Links",
+        "",
+        f"- Services and packages: {SERVICES_URL}",
+        f"- Review Room: {REVIEW_ROOM_URL}",
+        f"- Approval packet: {APPROVAL_PACKET_URL}",
+        f"- $5,000 invoice/approval path: {INVOICE_REQUEST_URL}",
+        f"- Optional 3-finding sample first: {SAMPLE_URL}",
+        f"- Demo video: {DEMO_URL}",
+        "",
+        "### Boundary",
+        "",
+        "This is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice, and counsel should approve final contract language.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def build_sprint_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
+    if "Selected package" in fields:
+        return build_service_package_comment(issue_body)
     organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
     volume = fields.get("Approximate document/template count", "").strip()
     deal_motion = fields.get("Deal or delivery motion", "").strip()
@@ -121,6 +238,7 @@ def build_sprint_comment(issue_body: str) -> str:
         "### Useful Links",
         "",
         f"- Sprint scope: {SPRINT_URL}",
+        f"- Paid service package intake: {SERVICE_PACKAGE_URL}",
         f"- Approval packet: {APPROVAL_PACKET_URL}",
         f"- Request invoice/approval path: {INVOICE_REQUEST_URL}",
         f"- Public intake options: {INTAKE_URL}",
