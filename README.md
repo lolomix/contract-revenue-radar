@@ -147,6 +147,12 @@ Buyer packet for the $1,500, $2,500, $3,500, and $5,000 package ladder:
 https://lolomix.github.io/contract-revenue-radar/buyer-packet.html
 ```
 
+Public-safe sample deliverable for the $3,500 B2B package:
+
+```text
+https://lolomix.github.io/contract-revenue-radar/b2b-package-sample.html
+```
+
 Direct invoice/approval-path request:
 
 ```text
