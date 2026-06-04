@@ -6,7 +6,7 @@ SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from sprint_inquiry_reply import build_sprint_comment, checkbox_items  # noqa: E402
+from sprint_inquiry_reply import approval_language_for_package, build_sprint_comment, checkbox_items  # noqa: E402
 
 
 ISSUE_BODY = """### Organization / team
@@ -113,6 +113,12 @@ class SprintInquiryReplyTests(unittest.TestCase):
 
         self.assertEqual(items, ["One", "Three"])
 
+    def test_approval_language_for_package_uses_exact_price(self):
+        approval = approval_language_for_package("Audit + Negotiation Fallback Pack ($2,500)")
+
+        self.assertIn("$2,500 Audit + Negotiation Fallback Pack", approval)
+        self.assertIn("business-risk review, not legal advice", approval)
+
     def test_build_sprint_comment_contains_scope_and_approval(self):
         comment = build_sprint_comment(ISSUE_BODY)
 
@@ -141,6 +147,9 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Founder", comment)
         self.assertIn("8 SOWs", comment)
         self.assertIn("Payment / Approval Path", comment)
+        self.assertIn("Close-Ready Approval Text", comment)
+        self.assertIn("Approved. I authorize the $2,500 Audit + Negotiation Fallback Pack", comment)
+        self.assertIn("authorized approver name and role", comment)
         self.assertIn("platform-approved payment path", comment)
         self.assertIn("Do **not** post private documents", comment)
         self.assertIn("Services and packages", comment)

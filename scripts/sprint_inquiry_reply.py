@@ -59,6 +59,27 @@ PACKAGE_SCOPES = {
     ],
 }
 
+PACKAGE_PRICES = {
+    "Revenue Terms Audit ($1,500)": "$1,500",
+    "Audit + Negotiation Fallback Pack ($2,500)": "$2,500",
+    "Revenue Protection Sprint ($5,000)": "$5,000",
+}
+
+PACKAGE_NAMES = {
+    "Revenue Terms Audit ($1,500)": "Revenue Terms Audit",
+    "Audit + Negotiation Fallback Pack ($2,500)": "Audit + Negotiation Fallback Pack",
+    "Revenue Protection Sprint ($5,000)": "Revenue Protection Sprint",
+}
+
+
+def approval_language_for_package(selected_package: str) -> str:
+    price = PACKAGE_PRICES.get(selected_package, "selected")
+    package_name = PACKAGE_NAMES.get(selected_package, "Contract Revenue Radar package")
+    return (
+        f"Approved. I authorize the {price} {package_name} and understand "
+        "this is business-risk review, not legal advice."
+    )
+
 
 def build_service_package_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
@@ -119,6 +140,20 @@ def build_service_package_comment(issue_body: str) -> str:
         "- whether W-9, vendor setup, purchase order, or written approval is required,",
         "- secure/private document intake path for redacted templates or excerpts,",
         "- business owner for priorities, acceptance of scope, and scheduling.",
+        "",
+        "### Close-Ready Approval Text",
+        "",
+        "An authorized business contact can approve the selected package privately, through procurement, or through a platform-approved order path with:",
+        "",
+        f"> {approval_language_for_package(selected_package)}",
+        "",
+        "Minimum private details needed to issue invoice/payment instructions:",
+        "",
+        "- authorized approver name and role,",
+        "- payer or company name,",
+        "- billing/procurement contact or approved marketplace path,",
+        "- selected package and target start date,",
+        "- document intake method for redacted files.",
         "",
         "### What To Send Next",
         "",
