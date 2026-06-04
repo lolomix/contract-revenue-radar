@@ -50,6 +50,13 @@ PACKAGE_SCOPES = {
         "- Add fallback positions for counsel review and a sales/ops checklist for recurring terms.",
         "- Target turnaround: 3-4 business days after payment, complete intake, and confirmed scope.",
     ],
+    "B2B Business Package ($3,500)": [
+        "**B2B Business Package - $3,500 fixed scope**",
+        "- Review up to 15 redacted documents or recurring template excerpts.",
+        "- Return a prioritized revenue-risk report plus reusable fallback positions.",
+        "- Produce a buyer-safe summary for sales, delivery, finance, and counsel review.",
+        "- Target turnaround: 4 business days after payment, complete intake, and confirmed scope.",
+    ],
     "Revenue Protection Sprint ($5,000)": [
         "**Revenue Protection Sprint - $5,000 fixed scope**",
         "- Review 15-25 redacted recurring templates or excerpts.",
@@ -62,12 +69,14 @@ PACKAGE_SCOPES = {
 PACKAGE_PRICES = {
     "Revenue Terms Audit ($1,500)": "$1,500",
     "Audit + Negotiation Fallback Pack ($2,500)": "$2,500",
+    "B2B Business Package ($3,500)": "$3,500",
     "Revenue Protection Sprint ($5,000)": "$5,000",
 }
 
 PACKAGE_NAMES = {
     "Revenue Terms Audit ($1,500)": "Revenue Terms Audit",
     "Audit + Negotiation Fallback Pack ($2,500)": "Audit + Negotiation Fallback Pack",
+    "B2B Business Package ($3,500)": "B2B Business Package",
     "Revenue Protection Sprint ($5,000)": "Revenue Protection Sprint",
 }
 
@@ -126,6 +135,7 @@ def build_service_package_comment(issue_body: str) -> str:
         "**Package fit to confirm**",
         "- $1,500 audit: up to 5 redacted documents or excerpts.",
         "- $2,500 audit + fallback pack: up to 10 redacted documents or excerpts plus fallback positions for counsel review.",
+        "- $3,500 B2B Business Package: up to 15 recurring templates or excerpts plus prioritized fallback positions.",
         "- $5,000 Revenue Protection Sprint: 15-25 recurring templates or excerpts plus playbook, checklist, and review session.",
     ]))
 
@@ -136,7 +146,7 @@ def build_service_package_comment(issue_body: str) -> str:
         "Keep private billing, tax, contract, and payment details out of this public issue. The next private step is to confirm:",
         "",
         "- payer or company name for invoice/vendor setup,",
-        "- role-based billing contact or platform-approved payment path,",
+        "- role-based billing contact, platform-approved payment path, or confirmed private payment-link route,",
         "- whether W-9, vendor setup, purchase order, or written approval is required,",
         "- secure/private document intake path for redacted templates or excerpts,",
         "- business owner for priorities, acceptance of scope, and scheduling.",
@@ -151,7 +161,7 @@ def build_service_package_comment(issue_body: str) -> str:
         "",
         "- authorized approver name and role,",
         "- payer or company name,",
-        "- billing/procurement contact or approved marketplace path,",
+        "- billing/procurement contact, approved marketplace path, or confirmed private payment-link route,",
         "- selected package and target start date,",
         "- document intake method for redacted files.",
         "",

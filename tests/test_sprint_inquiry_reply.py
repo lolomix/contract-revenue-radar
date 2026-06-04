@@ -106,6 +106,44 @@ Written approval first, then platform-approved payment link.
 - [X] I can provide redacted templates or excerpts through a private intake path after approval.
 """
 
+B2B_PACKAGE_BODY = """### Organization / team
+
+Example RevOps MSP
+
+### Selected package
+
+B2B Business Package ($3,500)
+
+### Requester role
+
+Delivery lead
+
+### Approximate document/template count
+
+12 MSA, SOW, and renewal excerpts
+
+### Contract or template types
+
+Managed-services SOWs, implementation addenda, and renewal terms.
+
+### Top risk areas
+
+Payment timing, SLA credits, support scope, and renewal leakage.
+
+### Approval, payment, or procurement path
+
+Private payment-link route after written approval.
+
+### Target timeline
+
+3-4 business days
+
+### Intake readiness
+
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+"""
+
 
 class SprintInquiryReplyTests(unittest.TestCase):
     def test_checkbox_items_keeps_checked_only(self):
@@ -117,6 +155,12 @@ class SprintInquiryReplyTests(unittest.TestCase):
         approval = approval_language_for_package("Audit + Negotiation Fallback Pack ($2,500)")
 
         self.assertIn("$2,500 Audit + Negotiation Fallback Pack", approval)
+        self.assertIn("business-risk review, not legal advice", approval)
+
+    def test_approval_language_for_b2b_package_uses_exact_price(self):
+        approval = approval_language_for_package("B2B Business Package ($3,500)")
+
+        self.assertIn("$3,500 B2B Business Package", approval)
         self.assertIn("business-risk review, not legal advice", approval)
 
     def test_build_sprint_comment_contains_scope_and_approval(self):
@@ -153,6 +197,15 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("platform-approved payment path", comment)
         self.assertIn("Do **not** post private documents", comment)
         self.assertIn("Services and packages", comment)
+
+    def test_b2b_service_package_comment_contains_3500_scope(self):
+        comment = build_sprint_comment(B2B_PACKAGE_BODY)
+
+        self.assertIn("B2B Business Package - $3,500 fixed scope", comment)
+        self.assertIn("12 MSA, SOW", comment)
+        self.assertIn("Private payment-link route", comment)
+        self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
+        self.assertIn("confirmed private payment-link route", comment)
 
 
 if __name__ == "__main__":

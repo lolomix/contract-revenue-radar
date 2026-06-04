@@ -1,5 +1,5 @@
 name: Request Paid Service Package
-description: Start a public-safe intake for a $1,500, $2,500, or $5,000 business-risk review package.
+description: Start a public-safe intake for a $1,500, $2,500, $3,500, or $5,000 business-risk review package.
 title: "Service package request: <organization>"
 labels:
   - service-package-request
@@ -25,6 +25,7 @@ body:
       options:
         - Revenue Terms Audit ($1,500)
         - Audit + Negotiation Fallback Pack ($2,500)
+        - B2B Business Package ($3,500)
         - Revenue Protection Sprint ($5,000)
         - Not sure yet
     validations:

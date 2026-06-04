@@ -127,7 +127,7 @@ docs/                      Supporting docs
 
 ## Business Review Requests
 
-For a no-charge redacted sample audit, a fixed-scope Revenue Protection Sprint inquiry, or a public-safe invoice/approval-path request, use the GitHub issue templates:
+For a no-charge redacted sample audit, a fixed-scope paid package inquiry, or a public-safe invoice/approval-path request, use the GitHub issue templates:
 
 ```text
 https://github.com/lolomix/contract-revenue-radar/issues/new/choose
@@ -135,10 +135,10 @@ https://github.com/lolomix/contract-revenue-radar/issues/new/choose
 
 Do not post confidential contracts, personal data, credentials, or private client documents in public issues. Use redacted excerpts or public-style samples only. See `docs/REVENUE_PROTECTION_SPRINT.md`.
 
-Approval packet for the $5,000 sprint:
+Buyer packet for the $1,500, $2,500, $3,500, and $5,000 package ladder:
 
 ```text
-https://lolomix.github.io/contract-revenue-radar/approval-packet.html
+https://lolomix.github.io/contract-revenue-radar/buyer-packet.html
 ```
 
 Direct invoice/approval-path request:
@@ -147,9 +147,9 @@ Direct invoice/approval-path request:
 https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml
 ```
 
-Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the $5,000 Revenue Protection Sprint.
+Sample-audit issues trigger an automated 3-finding response using the local fallback backend. The response includes top findings, priority questions, fallback positions, and a link to the paid package path.
 
-Revenue Protection Sprint inquiry and invoice-path issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.
+Paid package, Revenue Protection Sprint, and invoice-path issues trigger an automated scope response with package details, next steps, approval language, and privacy/payment-prep reminders.
 
 ## Submission Compliance Review
 
