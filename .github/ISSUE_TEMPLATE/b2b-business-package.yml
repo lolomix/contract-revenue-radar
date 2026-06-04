@@ -1,0 +1,94 @@
+name: Request B2B Business Package
+description: Start public-safe intake for the fixed-scope $3,500 B2B Business Package.
+title: "B2B package request: <organization>"
+labels:
+  - b2b-business-package
+  - service-package-request
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for the fixed-scope $3,500 B2B Business Package.
+
+        Keep this public issue safe: do not post confidential contracts, personal data, private client names, billing details, tax IDs, payment credentials, or unredacted documents.
+
+        Private payment-link routing and document intake can be coordinated after scope and approval path are confirmed.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      placeholder: Example RevOps agency, MSP, implementation partner, SaaS services team
+    validations:
+      required: true
+  - type: input
+    id: requester_role
+    attributes:
+      label: Requester role
+      placeholder: Founder, delivery lead, RevOps lead, finance owner, procurement owner, etc.
+    validations:
+      required: true
+  - type: input
+    id: document_count
+    attributes:
+      label: Approximate document/template count
+      placeholder: "Example: 12 SOW/MSA/order-form variants or recurring template excerpts"
+    validations:
+      required: true
+  - type: textarea
+    id: contract_types
+    attributes:
+      label: Contract or template types
+      placeholder: Managed-services SOWs, implementation addenda, retainers, support terms, renewal terms, order forms, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: top_risks
+    attributes:
+      label: Top risk areas
+      placeholder: Payment timing, acceptance gates, SLA credits, support scope, renewal terms, security review, IP ownership, customer dependencies, etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: approval_route
+    attributes:
+      label: Approval/payment route
+      options:
+        - I can approve or route the $3,500 package
+        - I need finance/procurement approval first
+        - I need a private payment-link route after written approval
+        - I need vendor setup or purchase-order routing
+        - I am qualifying fit first
+    validations:
+      required: true
+  - type: dropdown
+    id: target_timeline
+    attributes:
+      label: Target timeline
+      options:
+        - 4 business days after payment/intake
+        - This week
+        - Within 2 weeks
+        - Within 30 days
+        - Exploring first
+    validations:
+      required: true
+  - type: checkboxes
+    id: intake_readiness
+    attributes:
+      label: Intake readiness
+      options:
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I understand the B2B Business Package is $3,500 fixed scope.
+          required: true
+        - label: I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+          required: true
+        - label: I can provide redacted templates or excerpts through a private intake path after approval.
+        - label: I can approve, route, or introduce the correct person for payment/procurement approval.
+  - type: textarea
+    id: public_notes
+    attributes:
+      label: Public-safe notes
+      description: Optional. Keep this public-safe and non-confidential.
+      placeholder: Anything else needed to confirm package fit without private documents or personal data.

@@ -144,6 +144,41 @@ Private payment-link route after written approval.
 - [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
 """
 
+B2B_DEDICATED_BODY = """### Organization / team
+
+Example B2B services team
+
+### Requester role
+
+Finance owner
+
+### Approximate document/template count
+
+14 SOW and renewal excerpts
+
+### Contract or template types
+
+Recurring services SOWs and order forms.
+
+### Top risk areas
+
+Payment timing, acceptance gates, and scope boundaries.
+
+### Approval/payment route
+
+I need a private payment-link route after written approval
+
+### Target timeline
+
+4 business days after payment/intake
+
+### Intake readiness
+
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I understand the B2B Business Package is $3,500 fixed scope.
+- [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+"""
+
 
 class SprintInquiryReplyTests(unittest.TestCase):
     def test_checkbox_items_keeps_checked_only(self):
@@ -206,6 +241,17 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Private payment-link route", comment)
         self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
         self.assertIn("confirmed private payment-link route", comment)
+
+    def test_dedicated_b2b_package_comment_closes_to_private_payment_route(self):
+        comment = build_sprint_comment(B2B_DEDICATED_BODY)
+
+        self.assertIn("B2B Business Package Intake Response", comment)
+        self.assertIn("$3,500 B2B Business Package request", comment)
+        self.assertIn("14 SOW", comment)
+        self.assertIn("Close-ready approval text", comment)
+        self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
+        self.assertIn("confirmed private payment-link route", comment)
+        self.assertIn("Do **not** post private documents", comment)
 
 
 if __name__ == "__main__":

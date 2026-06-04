@@ -10,6 +10,7 @@ from issue_sample_audit import INTAKE_URL, SPRINT_URL, parse_issue_form, truncat
 
 SAMPLE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml"
 SERVICE_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml"
+B2B_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=b2b-business-package.yml"
 APPROVAL_PACKET_URL = "https://lolomix.github.io/contract-revenue-radar/approval-packet.html"
 SERVICES_URL = "https://lolomix.github.io/contract-revenue-radar/services.html"
 REVIEW_ROOM_URL = "https://lolomix.github.io/contract-revenue-radar/review-room.html"
@@ -192,8 +193,100 @@ def build_service_package_comment(issue_body: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_b2b_package_comment(issue_body: str) -> str:
+    fields = parse_issue_form(issue_body)
+    organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
+    requester_role = fields.get("Requester role", "").strip()
+    document_count = fields.get("Approximate document/template count", "").strip()
+    contract_types = fields.get("Contract or template types", "").strip()
+    top_risks = fields.get("Top risk areas", "").strip()
+    approval_route = fields.get("Approval/payment route", "").strip()
+    timeline = fields.get("Target timeline", "").strip()
+    readiness_items = checkbox_items(fields.get("Intake readiness", ""))
+    public_notes = fields.get("Public-safe notes", "").strip()
+
+    lines = [
+        "## B2B Business Package Intake Response",
+        "",
+        "Thanks for the $3,500 B2B Business Package request. This confirms the public-safe intake and the next steps before paid work can start.",
+        "",
+        f"- Organization/team: **{organization}**",
+        "- Selected package: **B2B Business Package ($3,500)**",
+    ]
+    if requester_role:
+        lines.append(f"- Requester role: **{truncate(requester_role, 120)}**")
+    if document_count:
+        lines.append(f"- Approximate document/template count: **{truncate(document_count, 180)}**")
+    if contract_types:
+        lines.append(f"- Contract/template types: {truncate(contract_types, 260)}")
+    if top_risks:
+        lines.append(f"- Top risk areas: {truncate(top_risks, 260)}")
+    if approval_route:
+        lines.append(f"- Approval/payment route: **{truncate(approval_route, 160)}**")
+    if timeline:
+        lines.append(f"- Target timeline: **{truncate(timeline, 80)}**")
+    if public_notes:
+        lines.append(f"- Public-safe notes: {truncate(public_notes, 260)}")
+
+    if readiness_items:
+        lines.extend(["", "### Intake Readiness"])
+        lines.extend(f"- {item}" for item in readiness_items)
+
+    lines.extend([
+        "",
+        "### Fixed Scope",
+        "",
+        "**B2B Business Package - $3,500 fixed scope**",
+        "",
+        "- Review up to 15 redacted documents or recurring template excerpts.",
+        "- Flag payment timing, acceptance, customer dependency, support scope, renewal, credit/refund, data/security, and reusable-IP risks.",
+        "- Return a prioritized revenue-risk report with exact excerpts and recommended fallback positions.",
+        "- Produce a buyer-safe summary for sales, delivery, finance, and counsel review.",
+        "- Target turnaround: 4 business days after payment, complete intake, and confirmed scope.",
+        "",
+        "### Approval / Payment Path",
+        "",
+        "Keep private billing, tax, contract, and payment details out of this public issue. The next private step is to confirm the authorized approver and payment/procurement route.",
+        "",
+        "Close-ready approval text:",
+        "",
+        "> Approved. I authorize the $3,500 B2B Business Package and understand this is business-risk review, not legal advice.",
+        "",
+        "Minimum private details needed after approval:",
+        "",
+        "- authorized approver name and role,",
+        "- payer or company name,",
+        "- billing/procurement contact, approved marketplace path, or confirmed private payment-link route,",
+        "- target start date,",
+        "- private intake method for redacted files.",
+        "",
+        "### What To Send Next",
+        "",
+        "Do **not** post private documents in this public issue. Once approved, use a private transfer path for redacted files.",
+        "",
+        "- confirm whether the selected route is payment link, procurement approval, vendor setup, or funded platform order,",
+        "- confirm target delivery date,",
+        "- identify whether counsel, finance, delivery ops, RevOps, or founder owns final approval.",
+        "",
+        "### Useful Links",
+        "",
+        f"- Services and packages: {SERVICES_URL}",
+        f"- Buyer packet: https://lolomix.github.io/contract-revenue-radar/buyer-packet.html",
+        f"- Review Room: {REVIEW_ROOM_URL}",
+        f"- Optional 3-finding sample first: {SAMPLE_URL}",
+        f"- Demo video: {DEMO_URL}",
+        "",
+        "### Boundary",
+        "",
+        "This is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice, and counsel should approve final contract language.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def build_sprint_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
+    if "Approval/payment route" in fields:
+        return build_b2b_package_comment(issue_body)
     if "Selected package" in fields:
         return build_service_package_comment(issue_body)
     organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
