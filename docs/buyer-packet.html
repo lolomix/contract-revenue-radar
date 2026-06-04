@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contract Revenue Radar Buyer Packet</title>
+    <meta name="description" content="Buyer packet, package terms, approval language, and procurement checklist for Contract Revenue Radar paid services." />
+    <style>
+      :root { --ink:#17211c; --muted:#5e6a62; --line:#d9e2dc; --paper:#f6f8f3; --panel:#fff; --green:#18543f; --mint:#e8f2ed; }
+      * { box-sizing:border-box; }
+      body { margin:0; color:var(--ink); background:var(--paper); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; }
+      a { color:inherit; }
+      header { border-bottom:1px solid rgba(217,226,220,.9); background:rgba(246,248,243,.96); position:sticky; top:0; z-index:5; backdrop-filter:blur(12px); }
+      .nav,.hero,main,footer { width:min(1120px,calc(100% - 36px)); margin:0 auto; }
+      .nav { min-height:62px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+      .brand { display:inline-flex; align-items:center; gap:9px; text-decoration:none; font-weight:900; }
+      .mark { width:34px; height:34px; border-radius:8px; display:grid; place-items:center; color:#fff; background:var(--green); }
+      .nav-actions,.hero-actions { display:flex; gap:8px; flex-wrap:wrap; }
+      .button { min-height:40px; display:inline-flex; align-items:center; justify-content:center; padding:0 14px; border-radius:7px; border:1px solid var(--green); background:var(--green); color:#fff; text-decoration:none; font-size:.92rem; font-weight:850; }
+      .button.secondary { background:transparent; color:var(--green); }
+      .hero { padding:46px 0 30px; }
+      .eyebrow { display:inline-flex; min-height:30px; align-items:center; padding:0 11px; border-radius:999px; background:var(--mint); color:var(--green); font-size:.83rem; font-weight:900; }
+      h1,h2,h3 { margin:0; letter-spacing:0; }
+      h1 { max-width:860px; margin:18px 0 14px; font-size:clamp(2.2rem,6vw,4.8rem); line-height:.98; }
+      h2 { font-size:clamp(1.45rem,2.7vw,2.15rem); line-height:1.1; }
+      h3 { font-size:1rem; }
+      .lead { max-width:760px; margin:0; color:#38463f; font-size:clamp(1rem,1.7vw,1.18rem); }
+      .hero-actions { margin-top:22px; }
+      main { padding-bottom:48px; }
+      section { padding:30px 0; border-top:1px solid var(--line); }
+      .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+      .split { display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,.78fr); gap:12px; }
+      .panel,.package,.approval { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:18px; }
+      .package { display:grid; gap:10px; }
+      .price { color:var(--green); font-size:2rem; font-weight:950; }
+      .muted { color:var(--muted); }
+      ul { margin:10px 0 0; padding-left:20px; color:#2d3a33; }
+      li + li { margin-top:8px; }
+      .approval { border-color:rgba(24,84,63,.42); background:#fbfdf9; }
+      pre { white-space:pre-wrap; margin:12px 0 0; padding:14px; border-radius:8px; border:1px solid var(--line); background:#f1f5ef; color:#203129; font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+      .steps { display:grid; gap:10px; }
+      .step { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; }
+      .num { width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:#fff; background:var(--green); font-weight:900; }
+      footer { padding:26px 0 36px; color:var(--muted); border-top:1px solid var(--line); }
+      @media (max-width:900px) { .nav { align-items:flex-start; flex-direction:column; padding:12px 0; } .grid,.split { grid-template-columns:1fr; } .nav-actions,.hero-actions { width:100%; } .button { flex:1 1 auto; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="./"><span class="mark" aria-hidden="true">RR</span>Contract Revenue Radar</a>
+        <div class="nav-actions">
+          <a class="button secondary" href="services.html">Services</a>
+          <a class="button secondary" href="approval-packet.html">Approval</a>
+          <a class="button secondary" href="review-room.html">Review Room</a>
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml">Request Package</a>
+        </div>
+      </nav>
+    </header>
+    <section class="hero">
+      <span class="eyebrow">Buyer packet</span>
+      <h1>Everything needed to route a paid contract revenue-risk review.</h1>
+      <p class="lead">Package scope, start requirements, approval language, procurement checklist, and privacy boundaries for teams reviewing redacted SOWs, MSAs, order forms, retainers, and managed-services templates.</p>
+      <div class="hero-actions">
+        <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml">Start Paid Intake</a>
+        <a class="button secondary" href="services.html">View Packages</a>
+        <a class="button secondary" href="review-room.html">Try Review Room</a>
+      </div>
+    </section>
+    <main>
+      <section>
+        <h2>Package Terms</h2>
+        <div class="grid">
+          <article class="package">
+            <h3>Revenue Terms Audit</h3>
+            <div class="price">$1,500</div>
+            <ul>
+              <li>Up to 5 redacted documents or excerpts.</li>
+              <li>Revenue-risk report with exact excerpts, severity, business impact, and priority actions.</li>
+              <li>48-hour target after payment, complete intake, and confirmed scope.</li>
+            </ul>
+          </article>
+          <article class="package">
+            <h3>Audit + Negotiation Fallback Pack</h3>
+            <div class="price">$2,500</div>
+            <ul>
+              <li>Up to 10 redacted documents or excerpts.</li>
+              <li>Everything in the audit package.</li>
+              <li>Fallback positions for counsel review and a reusable sales/ops checklist.</li>
+              <li>3-4 business-day target after payment, complete intake, and confirmed scope.</li>
+            </ul>
+          </article>
+          <article class="package">
+            <h3>Revenue Protection Sprint</h3>
+            <div class="price">$5,000</div>
+            <ul>
+              <li>15-25 redacted recurring templates or excerpts.</li>
+              <li>Reusable clause playbook and intake checklist.</li>
+              <li>60-minute review session for sales, operations, finance, and counsel coordination.</li>
+              <li>5-business-day target after payment/procurement approval and document intake.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <section>
+        <div class="split">
+          <article class="panel">
+            <h2>Start Requirements</h2>
+            <ul>
+              <li>Written approval from an authorized business contact.</li>
+              <li>Payment, funded platform order, or accepted written payment/procurement terms.</li>
+              <li>Private intake path for redacted documents or excerpts.</li>
+              <li>Selected package, target start date, and business priorities.</li>
+              <li>One owner for questions and review-call scheduling.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h2>Not Included</h2>
+            <ul>
+              <li>Legal advice, legal representation, or final contract approval.</li>
+              <li>Guarantees of savings, recovery, negotiation outcome, or enforceability.</li>
+              <li>Processing confidential contracts in public GitHub issues.</li>
+              <li>Jurisdiction-specific legal review.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h2>Approval Language</h2>
+        <div class="grid">
+          <article class="approval">
+            <h3>$1,500 Audit</h3>
+            <pre>Approved. I authorize the $1,500 Revenue Terms Audit and understand this is business-risk review, not legal advice.</pre>
+          </article>
+          <article class="approval">
+            <h3>$2,500 Fallback Pack</h3>
+            <pre>Approved. I authorize the $2,500 Audit + Negotiation Fallback Pack and understand this is business-risk review, not legal advice.</pre>
+          </article>
+          <article class="approval">
+            <h3>$5,000 Sprint</h3>
+            <pre>Approved. I authorize the $5,000 Revenue Protection Sprint and understand this is business-risk review, not legal advice.</pre>
+          </article>
+        </div>
+      </section>
+      <section>
+        <div class="split">
+          <article class="panel">
+            <h2>Procurement Checklist</h2>
+            <ul>
+              <li>Authorized approver name and role.</li>
+              <li>Payer or company name for invoice/vendor setup.</li>
+              <li>Billing/procurement contact or approved marketplace path.</li>
+              <li>Payment method, purchase-order requirement, or funded platform order.</li>
+              <li>Private transfer method for redacted files.</li>
+              <li>Target delivery date and review-call contact.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h2>Privacy Boundary</h2>
+            <p class="muted">Do not post confidential contracts, personal data, credentials, private client names, billing details, tax IDs, or payment credentials in public GitHub issues. Public issues should contain only public-style summaries or redacted excerpts.</p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h2>Buyer Flow</h2>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div><strong>Open paid intake.</strong><br /><span class="muted">Select the package and describe document count, contract types, top risks, timeline, and approval path.</span></div></div>
+          <div class="step"><div class="num">2</div><div><strong>Confirm approval privately.</strong><br /><span class="muted">Use the exact approval language and route payment or procurement without posting private details publicly.</span></div></div>
+          <div class="step"><div class="num">3</div><div><strong>Start after clearance.</strong><br /><span class="muted">Work begins after payment, funded order, or accepted written payment/procurement terms and private document intake.</span></div></div>
+        </div>
+        <div class="hero-actions">
+          <a class="button" href="https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml">Start Paid Intake</a>
+          <a class="button secondary" href="approval-packet.html">Sprint Approval Packet</a>
+        </div>
+      </section>
+    </main>
+    <footer>Contract Revenue Radar is business-risk review and workflow support. It is not legal advice.</footer>
+  </body>
+</html>
