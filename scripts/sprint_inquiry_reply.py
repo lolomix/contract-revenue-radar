@@ -11,6 +11,7 @@ from issue_sample_audit import INTAKE_URL, SPRINT_URL, parse_issue_form, truncat
 SAMPLE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=free-sample-audit.yml"
 SERVICE_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=service-package-request.yml"
 B2B_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=b2b-business-package.yml"
+PAID_REVIEW_START_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=paid-review-start.yml"
 APPROVAL_PACKET_URL = "https://lolomix.github.io/contract-revenue-radar/approval-packet.html"
 SERVICES_URL = "https://lolomix.github.io/contract-revenue-radar/services.html"
 REVIEW_ROOM_URL = "https://lolomix.github.io/contract-revenue-radar/review-room.html"
@@ -333,8 +334,75 @@ def build_b2b_approval_comment(issue_body: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_paid_review_start_comment(issue_body: str) -> str:
+    fields = parse_issue_form(issue_body)
+    organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
+    selected_package = fields.get("Paid review package", "Not sure - recommend the right scope").strip()
+    requester_role = fields.get("Requester / approver role", "").strip()
+    document_count = fields.get("Approximate document/template count", "").strip()
+    top_risks = fields.get("Top risk areas", "").strip()
+    route = fields.get("Payment/procurement route", "").strip()
+    target_start = fields.get("Target start window", "").strip()
+    acknowledgement = checkbox_items(fields.get("Acknowledgement", ""))
+
+    lines = [
+        "## Paid Review Start Response",
+        "",
+        "Thanks for opening a paid review start request. This is the public-safe routing step before private payment/procurement and document intake.",
+        "",
+        f"- Organization/team: **{organization}**",
+        f"- Requested package: **{truncate(selected_package, 120)}**",
+    ]
+    if requester_role:
+        lines.append(f"- Requester/approver role: **{truncate(requester_role, 120)}**")
+    if document_count:
+        lines.append(f"- Approximate document/template count: **{truncate(document_count, 180)}**")
+    if top_risks:
+        lines.append(f"- Top risk areas: {truncate(top_risks, 260)}")
+    if route:
+        lines.append(f"- Payment/procurement route: **{truncate(route, 180)}**")
+    if target_start:
+        lines.append(f"- Target start window: **{truncate(target_start, 100)}**")
+    if acknowledgement:
+        lines.extend(["", "### Acknowledgement"])
+        lines.extend(f"- {item}" for item in acknowledgement)
+
+    lines.extend([
+        "",
+        "### Recommended Next Step",
+        "",
+        "Use a private route for payment/procurement and redacted document intake. Keep this public issue limited to scope, package, timeline, and role-based routing.",
+        "",
+        "Close-ready approval text for the selected package:",
+        "",
+        f"> {approval_language_for_package(selected_package)}",
+        "",
+        "Private details needed next:",
+        "",
+        "- authorized approver name and role,",
+        "- payer or company name,",
+        "- billing/procurement contact or approved payment route,",
+        "- private intake method for redacted files,",
+        "- target start date and delivery owner.",
+        "",
+        "### Useful Links",
+        "",
+        f"- Buyer packet: https://lolomix.github.io/contract-revenue-radar/buyer-packet.html",
+        f"- Services: {SERVICES_URL}",
+        f"- Sample deliverable: https://lolomix.github.io/contract-revenue-radar/b2b-package-sample.html",
+        f"- Approval packet: {APPROVAL_PACKET_URL}",
+        "",
+        "### Boundary",
+        "",
+        "This is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice, and counsel should approve final contract language.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def build_sprint_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
+    if "Paid review package" in fields:
+        return build_paid_review_start_comment(issue_body)
     if "Approval text" in fields and "Payment/procurement route" in fields:
         return build_b2b_approval_comment(issue_body)
     if "Approval/payment route" in fields:

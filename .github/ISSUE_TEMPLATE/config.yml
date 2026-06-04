@@ -6,6 +6,9 @@ contact_links:
   - name: Approve B2B Business Package
     url: https://github.com/lolomix/contract-revenue-radar/issues/new?template=b2b-package-approval.yml
     about: Public-safe written approval for the fixed-scope $3,500 B2B Business Package.
+  - name: Start Paid Review
+    url: https://github.com/lolomix/contract-revenue-radar/issues/new?template=paid-review-start.yml
+    about: Public-safe request when your team is ready to route a paid review.
   - name: Watch the demo video
     url: https://github.com/lolomix/contract-revenue-radar/releases/download/qdrant-submission-2026/contract_revenue_radar_qdrant_demo_final.mp4
     about: View the Qdrant hackathon demo before opening an inquiry.

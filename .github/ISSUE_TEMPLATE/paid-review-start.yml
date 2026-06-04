@@ -1,0 +1,84 @@
+name: Start Paid Review
+description: Public-safe start request when your team is ready to route a paid Contract Revenue Radar review.
+title: "Paid review start: <organization>"
+labels:
+  - b2b-paid-start
+  - b2b-business-package
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when your team is ready to route a paid review and needs the next private payment/procurement and document-intake step.
+
+        Do not post confidential contracts, payment credentials, tax IDs, private client names, or personal data in this public issue.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      placeholder: Example RevOps Services Team
+    validations:
+      required: true
+  - type: dropdown
+    id: paid_review_package
+    attributes:
+      label: Paid review package
+      options:
+        - B2B Business Package ($3,500)
+        - Revenue Terms Audit ($1,500)
+        - Audit + Negotiation Fallback Pack ($2,500)
+        - Revenue Protection Sprint ($5,000)
+        - Not sure - recommend the right scope
+    validations:
+      required: true
+  - type: input
+    id: requester_role
+    attributes:
+      label: Requester / approver role
+      placeholder: Founder, finance owner, delivery lead, RevOps lead
+    validations:
+      required: true
+  - type: input
+    id: document_count
+    attributes:
+      label: Approximate document/template count
+      placeholder: 8 SOWs, 4 MSAs, 3 renewal templates
+    validations:
+      required: true
+  - type: textarea
+    id: top_risks
+    attributes:
+      label: Top risk areas
+      placeholder: Payment timing, acceptance gates, support scope, renewal leakage, credits, data/security, reusable IP.
+    validations:
+      required: true
+  - type: dropdown
+    id: payment_procurement_route
+    attributes:
+      label: Payment/procurement route
+      options:
+        - Private payment link after written approval
+        - Invoice or vendor setup required
+        - Purchase order or procurement approval required
+        - Funded platform order
+        - Need to confirm internally
+    validations:
+      required: true
+  - type: input
+    id: target_start
+    attributes:
+      label: Target start window
+      placeholder: This week, next week, after procurement approval
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I will not post confidential documents, payment credentials, private client details, personal data, or tax IDs in this public issue.
+          required: true
+        - label: I can approve, route, or introduce the correct person for payment/procurement approval.
+          required: true

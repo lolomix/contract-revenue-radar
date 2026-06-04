@@ -139,6 +139,12 @@ Direct B2B Business Package intake:
 https://github.com/lolomix/contract-revenue-radar/issues/new?template=b2b-business-package.yml
 ```
 
+Ready to route a paid review:
+
+```text
+https://github.com/lolomix/contract-revenue-radar/issues/new?template=paid-review-start.yml
+```
+
 Do not post confidential contracts, personal data, credentials, or private client documents in public issues. Use redacted excerpts or public-style samples only. See `docs/REVENUE_PROTECTION_SPRINT.md`.
 
 Buyer packet for the $1,500, $2,500, $3,500, and $5,000 package ladder:

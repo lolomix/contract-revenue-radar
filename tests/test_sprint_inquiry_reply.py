@@ -202,6 +202,41 @@ Approved. I authorize the $3,500 B2B Business Package and understand this is bus
 - [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
 """
 
+PAID_REVIEW_START_BODY = """### Organization / team
+
+Northstar Services
+
+### Paid review package
+
+B2B Business Package ($3,500)
+
+### Requester / approver role
+
+Founder
+
+### Approximate document/template count
+
+11 SOW and renewal templates
+
+### Top risk areas
+
+Payment timing and support scope.
+
+### Payment/procurement route
+
+Private payment link after written approval
+
+### Target start window
+
+This week
+
+### Acknowledgement
+
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I will not post confidential documents, payment credentials, private client details, personal data, or tax IDs in this public issue.
+- [X] I can approve, route, or introduce the correct person for payment/procurement approval.
+"""
+
 
 class SprintInquiryReplyTests(unittest.TestCase):
     def test_checkbox_items_keeps_checked_only(self):
@@ -284,6 +319,17 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("B2B Business Package ($3,500)", comment)
         self.assertIn("Private payment link after approval", comment)
         self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
+        self.assertNotIn("Revenue Protection Sprint - $5,000 fixed scope", comment)
+
+    def test_paid_review_start_comment_routes_to_private_close_path(self):
+        comment = build_sprint_comment(PAID_REVIEW_START_BODY)
+
+        self.assertIn("Paid Review Start Response", comment)
+        self.assertIn("Northstar Services", comment)
+        self.assertIn("B2B Business Package ($3,500)", comment)
+        self.assertIn("Private payment link after written approval", comment)
+        self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
+        self.assertIn("private payment/procurement and document intake", comment)
         self.assertNotIn("Revenue Protection Sprint - $5,000 fixed scope", comment)
 
 
