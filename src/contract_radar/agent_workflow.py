@@ -89,7 +89,7 @@ def build_agent_brief(report: AuditReport) -> AgentBrief:
 
 def render_agent_brief(brief: AgentBrief) -> str:
     lines = [
-        "# Revenue Terms Agent Brief",
+        "# Revenue Risk Agent Brief",
         "",
         "## Executive Summary",
         "",

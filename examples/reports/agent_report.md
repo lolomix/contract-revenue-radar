@@ -58,7 +58,7 @@
 
 > ... he service is unavailable for more than four hours in a calendar month, Customer may request service credits against future invoices.
 
-# Revenue Terms Agent Brief
+# Revenue Risk Agent Brief
 
 ## Executive Summary
 

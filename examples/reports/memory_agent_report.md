@@ -12,7 +12,7 @@
 - ip_ownership_background_ip (ip_ownership, all segments, approved by Legal Operations; source: Standard professional-services fallback): Vendor retains all pre-existing IP, tools, frameworks, templates, methods, and reusable components; customer receives a limited license to project deliverables.
 - renewal_fee_cap_3pct (renewal_fee_trap, all segments, approved by Revenue Operations; expires 2026-12-31; source: Approved renewal clause playbook): Renewal requires written election and any annual increase is capped at the lesser of CPI or 3%.
 
-# Revenue Terms Agent Brief
+# Revenue Risk Agent Brief
 
 ## Executive Summary
 

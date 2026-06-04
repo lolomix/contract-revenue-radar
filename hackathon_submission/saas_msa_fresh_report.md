@@ -94,7 +94,7 @@
 
 > ... in the twelve months preceding the claim. Customer's sole remedies for SLA failures are the service credits described above.
 
-# Revenue Terms Agent Brief
+# Revenue Risk Agent Brief
 
 ## Executive Summary
 

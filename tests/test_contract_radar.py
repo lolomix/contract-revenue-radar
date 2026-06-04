@@ -82,7 +82,7 @@ class ContractRadarTests(unittest.TestCase):
         brief = build_agent_brief(report)
         markdown = render_agent_brief(brief)
 
-        self.assertIn("Revenue Terms Agent Brief", markdown)
+        self.assertIn("Revenue Risk Agent Brief", markdown)
         self.assertIn("Fallback Positions", markdown)
         self.assertIn("Sales/Ops Checklist", markdown)
         self.assertGreater(len(brief.fallback_positions), 0)
@@ -110,7 +110,7 @@ class ContractRadarTests(unittest.TestCase):
         self.assertIn("Revenue Terms Memory Agent Report", markdown)
         self.assertIn("payment_delay_saas_net15", markdown)
         self.assertIn("Net 15 from invoice date", markdown)
-        self.assertIn("Revenue Terms Agent Brief", markdown)
+        self.assertIn("Revenue Risk Agent Brief", markdown)
 
     def test_mcp_tool_call_returns_structured_audit(self):
         payload = {

@@ -36,6 +36,6 @@ This submission is 100% reproducible offline with fallback.
 ## Contact / Links
 - Demo video: see VIDEO_LINK.txt (upload to Loom/YouTube before submit)
 - Full repo to be pushed to GitHub (see `FINAL_SUMMARY_AND_CHECKLIST.md` and `../GITHUB_PUBLISHING_CHECKLIST.md`)
-- Monetization: sell as $1.5k–$5k Revenue Terms Audits
+- Business impact: fast source-linked review for agencies, MSPs, RevOps, and implementation teams
 
 **This wins because it is useful, original, complete, and ships with real revenue potential.**

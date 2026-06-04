@@ -1,6 +1,6 @@
 # Contract Revenue Radar Agent API
 
-This is a no-framework local API for Google Cloud/Qwen-style demos. The repo also includes a local MemoryAgent prototype for approved fallback recall.
+This is a no-framework local API for the Contract Revenue Radar Qdrant workflow. The repo also includes a local approved-fallback recall prototype.
 
 ## Run
 
@@ -46,19 +46,10 @@ Verified sample response:
 samples/api_response.json
 ```
 
-## Hackathon Adaptation
+## Local Agent Workflow
 
-- Google Cloud Rapid Agent: wrap `/audit` as the contract-audit tool in a Gemini/Agent Builder workflow.
-- Qwen Cloud: use `/audit` as an Autopilot Agent tool, then let the model ask follow-up business questions and remember accepted fallback positions.
-- MemoryAgent prototype: run `scripts/memory_agent_demo.py` with `samples/clause_memory.json` to show active memory recall by risk type and segment before wiring persistent cloud storage.
-
-Google Rapid Agent deployable assets are included in:
-
-```text
-integrations/google_rapid_agent/
-```
-
-Use `openapi/revenue_terms_agent_openapi.yaml` as the Agent Builder tool schema and `deploy/deploy_cloud_run.sh` to host this API on Cloud Run.
+- `/audit` returns structured contract-risk findings for local automation and review tools.
+- `scripts/memory_agent_demo.py` can be run with `samples/clause_memory.json` to show approved fallback recall by risk type and segment.
 
 This API is for redacted documents or templates. It is business-risk review, not legal advice.
 
@@ -82,7 +73,7 @@ Supported methods:
 - `tools/list`
 - `tools/call`
 
-The tool returns structured audit data, an agent brief, and a Markdown report. This is intentionally dependency-light so it can be wrapped by Google Cloud Agent Builder, a partner MCP server flow, or a Qwen-style Autopilot Agent without changing the core audit engine.
+The tool returns structured audit data, an agent brief, and a Markdown report. It is intentionally dependency-light so it can be called by local automation without changing the core audit engine.
 
 ## May 30 2026 Updates (Final Submission Session)
 - Now exposes 7 risk classes (added IP ownership trap + auto-renewal fee escalation).
