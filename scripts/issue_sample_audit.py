@@ -20,6 +20,9 @@ from contract_radar.core import ContractRadar  # noqa: E402
 SAMPLE_PATH = ROOT / "samples" / "acme_services_agreement.md"
 SPRINT_URL = "https://lolomix.github.io/contract-revenue-radar/sprint.html"
 INTAKE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new/choose"
+B2B_PACKAGE_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=b2b-business-package.yml"
+PAID_REVIEW_START_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=paid-review-start.yml"
+SERVICES_URL = "https://lolomix.github.io/contract-revenue-radar/services.html"
 GENERIC_TRIGGERS = ("generic", "public-style", "public style", "sample first")
 
 
@@ -69,6 +72,23 @@ def truncate(text: str, limit: int = 320) -> str:
     return compact[: limit - 4].rstrip() + " ..."
 
 
+def package_recommendation(risk_score: int, finding_count: int) -> tuple[str, str]:
+    if risk_score >= 70 or finding_count >= 5:
+        return (
+            "B2B Business Package or Revenue Protection Sprint",
+            "The sample shows enough revenue-risk density to justify a paid review if there are multiple recurring templates or SOW variants.",
+        )
+    if risk_score >= 40 or finding_count >= 3:
+        return (
+            "Audit + Negotiation Fallback Pack",
+            "The sample shows several actionable risks. A paid pack is useful when the team needs fallback positions for counsel review.",
+        )
+    return (
+        "Revenue Terms Audit",
+        "The sample is lower density. Start with the smallest paid audit if the full document set has similar language.",
+    )
+
+
 def build_sample_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
     excerpt, used_generic = select_excerpt(fields)
@@ -84,6 +104,7 @@ def build_sample_comment(issue_body: str) -> str:
 
     brief = build_agent_brief(report)
     top_findings = report.findings[:3]
+    recommended_package, recommendation_reason = package_recommendation(report.risk_score, len(report.findings))
 
     lines = [
         "## Automated 3-Finding Sample Audit",
@@ -126,6 +147,15 @@ def build_sample_comment(issue_body: str) -> str:
 
     lines.extend([
         "",
+        "### Package Recommendation",
+        "",
+        f"Recommended next scope: **{recommended_package}**.",
+        "",
+        recommendation_reason,
+        "",
+        "Close-ready approval language for a paid review can be routed privately, through procurement, or through a platform-approved order path. Keep billing, tax, payment, and private document details out of this public issue.",
+        "",
+        "",
         "### Priority Questions",
     ])
     for question in brief.priority_questions[:5]:
@@ -142,7 +172,13 @@ def build_sample_comment(issue_body: str) -> str:
         "",
         "### Next Step",
         "",
-        f"If this sample is useful and you have 15-25 recurring SOWs/MSAs/order forms/templates, review the fixed-scope $5,000 Revenue Protection Sprint: {SPRINT_URL}",
+        f"Compare paid package scopes: {SERVICES_URL}",
+        "",
+        f"If this sample is useful and you have up to 15 recurring templates or excerpts, request the $3,500 B2B Business Package: {B2B_PACKAGE_URL}",
+        "",
+        f"If you are ready to route payment/procurement for any paid review, open a public-safe Start Paid Review request: {PAID_REVIEW_START_URL}",
+        "",
+        f"If you have 15-25 recurring SOWs/MSAs/order forms/templates, review the fixed-scope $5,000 Revenue Protection Sprint: {SPRINT_URL}",
         "",
         f"To request a broader sprint without posting private documents, use the intake page and describe the template count and deal motion only: {INTAKE_URL}",
         "",

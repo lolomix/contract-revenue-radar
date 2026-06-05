@@ -7,7 +7,7 @@ SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from issue_sample_audit import build_sample_comment, parse_issue_form  # noqa: E402
+from issue_sample_audit import build_sample_comment, package_recommendation, parse_issue_form  # noqa: E402
 
 
 ISSUE_BODY = """### Organization / team
@@ -51,8 +51,16 @@ class IssueSampleAuditTests(unittest.TestCase):
         self.assertIn("Automated 3-Finding Sample Audit", comment)
         self.assertIn("Payment delay", comment)
         self.assertIn("Revenue risk score", comment)
+        self.assertIn("Package Recommendation", comment)
+        self.assertIn("B2B Business Package", comment)
+        self.assertIn("Start Paid Review", comment)
         self.assertIn("Revenue Protection Sprint", comment)
         self.assertIn("not legal advice", comment)
+
+    def test_package_recommendation_uses_risk_density(self):
+        self.assertEqual(package_recommendation(80, 2)[0], "B2B Business Package or Revenue Protection Sprint")
+        self.assertEqual(package_recommendation(45, 3)[0], "Audit + Negotiation Fallback Pack")
+        self.assertEqual(package_recommendation(10, 1)[0], "Revenue Terms Audit")
 
 
 if __name__ == "__main__":
