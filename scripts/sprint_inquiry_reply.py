@@ -24,6 +24,7 @@ APPROVAL_LANGUAGE = (
     "this is business-risk review, not legal advice."
 )
 INVOICE_REQUEST_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-invoice-request.yml"
+SPRINT_APPROVAL_URL = "https://github.com/lolomix/contract-revenue-radar/issues/new?template=sprint-approval.yml"
 
 
 def checkbox_items(value: str) -> list[str]:
@@ -334,6 +335,64 @@ def build_b2b_approval_comment(issue_body: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_sprint_approval_comment(issue_body: str) -> str:
+    fields = parse_issue_form(issue_body)
+    organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
+    approver_role = fields.get("Approver role", "").strip()
+    document_count = fields.get("Approximate document/template count", "").strip()
+    payment_route = fields.get("Payment/procurement route", "").strip()
+    sprint_priorities = fields.get("Sprint priorities", "").strip()
+    submitted_approval = fields.get("Sprint approval text", "").strip()
+    acknowledgement_items = checkbox_items(fields.get("Acknowledgement", ""))
+
+    lines = [
+        "## Revenue Protection Sprint Approval Response",
+        "",
+        "Thanks for the public-safe written approval path. This issue can be used as an approval signal, but it is not payment evidence.",
+        "",
+        f"- Organization/team: **{organization}**",
+        "- Approved package: **Revenue Protection Sprint ($5,000)**",
+    ]
+    if approver_role:
+        lines.append(f"- Approver role: **{truncate(approver_role, 120)}**")
+    if document_count:
+        lines.append(f"- Approximate document/template count: **{truncate(document_count, 180)}**")
+    if payment_route:
+        lines.append(f"- Payment/procurement route: **{truncate(payment_route, 160)}**")
+    if sprint_priorities:
+        lines.append(f"- Sprint priorities: {truncate(sprint_priorities, 260)}")
+    if submitted_approval:
+        lines.extend(["", "### Submitted Sprint Approval Text", "", f"> {truncate(submitted_approval, 500)}"])
+    if acknowledgement_items:
+        lines.extend(["", "### Acknowledgement"])
+        lines.extend(f"- {item}" for item in acknowledgement_items)
+
+    lines.extend([
+        "",
+        "### Next Private Step",
+        "",
+        "Keep payment links, billing details, tax IDs, private client names, credentials, and documents out of this public issue.",
+        "",
+        "The next private step is to confirm one of:",
+        "",
+        "- private payment-link routing,",
+        "- procurement approval timing,",
+        "- vendor setup / purchase-order route,",
+        "- funded platform order.",
+        "",
+        "Close-ready approval text:",
+        "",
+        f"> {APPROVAL_LANGUAGE}",
+        "",
+        "Work starts after payment, funded order, or accepted payment/procurement terms, plus confirmed private intake for redacted files.",
+        "",
+        "### Boundary",
+        "",
+        "This approval path is business-risk review for sales, finance, delivery, and operations teams. It is not legal advice, and counsel should approve final contract language.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def build_paid_review_start_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
     organization = fields.get("Organization / team", "Requested organization").strip() or "Requested organization"
@@ -403,6 +462,8 @@ def build_sprint_comment(issue_body: str) -> str:
     fields = parse_issue_form(issue_body)
     if "Paid review package" in fields:
         return build_paid_review_start_comment(issue_body)
+    if "Sprint approval text" in fields:
+        return build_sprint_approval_comment(issue_body)
     if "Approval text" in fields and "Payment/procurement route" in fields:
         return build_b2b_approval_comment(issue_body)
     if "Approval/payment route" in fields:
@@ -498,6 +559,7 @@ def build_sprint_comment(issue_body: str) -> str:
         f"- Sprint scope: {SPRINT_URL}",
         f"- Paid service package intake: {SERVICE_PACKAGE_URL}",
         f"- Approval packet: {APPROVAL_PACKET_URL}",
+        f"- Approve sprint: {SPRINT_APPROVAL_URL}",
         f"- Request invoice/approval path: {INVOICE_REQUEST_URL}",
         f"- Public intake options: {INTAKE_URL}",
         f"- Optional 3-finding sample first: {SAMPLE_URL}",

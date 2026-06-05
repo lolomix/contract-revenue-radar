@@ -1,0 +1,77 @@
+name: Approve Revenue Protection Sprint
+description: Public-safe written approval for the fixed-scope $5,000 Revenue Protection Sprint.
+title: "Sprint approval: <organization>"
+labels:
+  - revenue-protection-sprint
+  - sprint-approval
+  - business-inquiry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this only for public-safe written approval of the $5,000 Revenue Protection Sprint.
+
+        Do not post confidential contracts, personal data, private client names, billing details, tax IDs, payment credentials, or unredacted documents.
+
+        Payment-link routing, billing details, and document intake must be coordinated privately after approval.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization / team
+      placeholder: Example RevOps agency, MSP, implementation partner
+    validations:
+      required: true
+  - type: input
+    id: approver_role
+    attributes:
+      label: Approver role
+      placeholder: Founder, finance owner, procurement owner, delivery lead, etc.
+    validations:
+      required: true
+  - type: input
+    id: document_count
+    attributes:
+      label: Approximate document/template count
+      placeholder: "Example: 18 SOW variants + 5 MSA/order-form templates"
+    validations:
+      required: true
+  - type: dropdown
+    id: payment_route
+    attributes:
+      label: Payment/procurement route
+      options:
+        - Private payment link after approval
+        - Procurement approval before payment
+        - Vendor setup or purchase order required
+        - Funded platform order
+    validations:
+      required: true
+  - type: textarea
+    id: sprint_priorities
+    attributes:
+      label: Sprint priorities
+      description: Public-safe summary only. Do not post confidential clauses.
+      placeholder: Payment timing, acceptance gates, renewal terms, support scope, service credits, security review, IP ownership, sales/ops playbook, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: sprint_approval_text
+    attributes:
+      label: Sprint approval text
+      description: Paste the exact approval sentence below.
+      value: Approved. I authorize the $5,000 Revenue Protection Sprint and understand this is business-risk review, not legal advice.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand the Revenue Protection Sprint is $5,000 fixed scope.
+          required: true
+        - label: I understand this is business-risk review, not legal advice.
+          required: true
+        - label: I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+          required: true
+        - label: I can approve, route, or introduce the correct person for payment/procurement approval.
+          required: true

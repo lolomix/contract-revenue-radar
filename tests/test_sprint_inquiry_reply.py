@@ -202,6 +202,38 @@ Approved. I authorize the $3,500 B2B Business Package and understand this is bus
 - [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
 """
 
+SPRINT_APPROVAL_BODY = """### Organization / team
+
+Northstar Services
+
+### Approver role
+
+Founder
+
+### Approximate document/template count
+
+22 SOW and MSA variants
+
+### Payment/procurement route
+
+Private payment link after approval
+
+### Sprint priorities
+
+Payment timing, acceptance gates, support scope, and renewal leakage.
+
+### Sprint approval text
+
+Approved. I authorize the $5,000 Revenue Protection Sprint and understand this is business-risk review, not legal advice.
+
+### Acknowledgement
+
+- [X] I understand the Revenue Protection Sprint is $5,000 fixed scope.
+- [X] I understand this is business-risk review, not legal advice.
+- [X] I will not post confidential documents, personal data, private client details, tax IDs, or payment credentials in this public issue.
+- [X] I can approve, route, or introduce the correct person for payment/procurement approval.
+"""
+
 PAID_REVIEW_START_BODY = """### Organization / team
 
 Northstar Services
@@ -320,6 +352,18 @@ class SprintInquiryReplyTests(unittest.TestCase):
         self.assertIn("Private payment link after approval", comment)
         self.assertIn("Approved. I authorize the $3,500 B2B Business Package", comment)
         self.assertNotIn("Revenue Protection Sprint - $5,000 fixed scope", comment)
+
+    def test_sprint_approval_comment_routes_to_5000_private_close_path(self):
+        comment = build_sprint_comment(SPRINT_APPROVAL_BODY)
+
+        self.assertIn("Revenue Protection Sprint Approval Response", comment)
+        self.assertIn("approval signal", comment)
+        self.assertIn("Revenue Protection Sprint ($5,000)", comment)
+        self.assertIn("22 SOW and MSA variants", comment)
+        self.assertIn("Private payment link after approval", comment)
+        self.assertIn("Approved. I authorize the $5,000 Revenue Protection Sprint", comment)
+        self.assertIn("accepted payment/procurement terms", comment)
+        self.assertNotIn("B2B Business Package Approval Response", comment)
 
     def test_paid_review_start_comment_routes_to_private_close_path(self):
         comment = build_sprint_comment(PAID_REVIEW_START_BODY)
